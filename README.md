@@ -39,7 +39,7 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
   * Open the menu
   * Select the Vehicle from the list
 
-# Other
+# Other:
 If you like this please check out some of my other stuff like
 * [esx_hospital](https://github.com/HumanTree92/esx_hospital)
 * [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
@@ -50,7 +50,7 @@ If you like this please check out some of my other stuff like
 * [esx_panicbutton](https://github.com/HumanTree92/esx_panicbutton)
 * [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
 
-# Visit Velociti Entertainment
+# Visit Velociti Entertainment:
 * [TS3](http://www.velocitientertainment.com/ts3/)
 * [Discord](https://discord.gg/azEY2kU)
 * [Website](www.velocitientertainment.com/)
@@ -67,7 +67,7 @@ If you like this please check out some of my other stuff like
 
 # Legal
 ### License
-esx_vehicleshop - vehicle shop for ESX
+esx_advancedgarage - Advanced Garage for ESX Servers.
 
 Copyright (C) 2011-2018 Velociti Entertainment
 
