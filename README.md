@@ -23,6 +23,10 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 * Doesn't work well when using the Car Dealer Job.
 * When storing a vehicle that you don't own the vehicle still disappears but isn't put in the garage. This will be FIXED!!!
 
+# WIP:
+* Only able to store vehicles that you own
+* Any other stuff that is needed...
+
 # How to Use:
 * To Store a Vehicle in the Garage:
   * Pull into the Red Marker
