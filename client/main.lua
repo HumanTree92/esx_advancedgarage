@@ -136,7 +136,8 @@ end
 -- List Owned Cars Menu
 function ListOwnedCarsMenu()
 	local elements = {
-		{label = _U('spacer1'), value = 'spacer'}
+		{label = _U('spacer3')},
+		{label = _U('spacer1')}
 	}
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedCars', function(ownedCars)
@@ -144,19 +145,34 @@ function ListOwnedCarsMenu()
 			ESX.ShowNotification(_U('garage_nocars'))
 		else
 			for _,v in pairs(ownedCars) do
-				local hashVehicule = v.vehicle.model
-				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-				local vehicleName  = GetLabelText(aheadVehName)
-				local labelvehicle
-				local plate = v.plate
-				
-				if v.stored then
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('garage')..' |'
+				if Config.UseVehicleNamesLua == true then
+					local hashVehicule = v.vehicle.model
+					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetLabelText(aheadVehName)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				else
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('pound')..' |'
+					local hashVehicule = v.vehicle.model
+					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				end
-				
-				table.insert(elements, {label = labelvehicle, value = v})
 			end
 		end
 		
@@ -180,7 +196,8 @@ end
 -- List Owned Boats Menu
 function ListOwnedBoatsMenu()
 	local elements = {
-		{label = _U('spacer1'), value = 'spacer'}
+		{label = _U('spacer3')},
+		{label = _U('spacer1')}
 	}
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedBoats', function(ownedBoats)
@@ -188,19 +205,34 @@ function ListOwnedBoatsMenu()
 			ESX.ShowNotification(_U('garage_noboats'))
 		else
 			for _,v in pairs(ownedBoats) do
-				local hashVehicule = v.vehicle.model
-				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-				local vehicleName  = GetLabelText(aheadVehName)
-				local labelvehicle
-				local plate = v.plate
-				
-				if v.stored then
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('garage')..' |'
+				if Config.UseVehicleNamesLua == true then
+					local hashVehicule = v.vehicle.model
+					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetLabelText(aheadVehName)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				else
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('pound')..' |'
+					local hashVehicule = v.vehicle.model
+					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				end
-				
-				table.insert(elements, {label = labelvehicle, value = v})
 			end
 		end
 		
@@ -224,7 +256,8 @@ end
 -- List Owned Aircrafts Menu
 function ListOwnedAircraftsMenu()
 	local elements = {
-		{label = _U('spacer1'), value = 'spacer'}
+		{label = _U('spacer3')},
+		{label = _U('spacer1')}
 	}
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedAircrafts', function(ownedAircrafts)
@@ -232,19 +265,34 @@ function ListOwnedAircraftsMenu()
 			ESX.ShowNotification(_U('garage_noaircrafts'))
 		else
 			for _,v in pairs(ownedAircrafts) do
-				local hashVehicule = v.vehicle.model
-				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-				local vehicleName  = GetLabelText(aheadVehName)
-				local labelvehicle
-				local plate = v.plate
-				
-				if v.stored then
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('garage')..' |'
+				if Config.UseVehicleNamesLua == true then
+					local hashVehicule = v.vehicle.model
+					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local vehicleName  = GetLabelText(aheadVehName)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				else
-					labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('pound')..' |'
+					local hashVehicule = v.vehicle.model
+					local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+					local labelvehicle
+					local plate = v.plate
+					
+					if v.stored then
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					else
+						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+					end
+					
+					table.insert(elements, {label = labelvehicle, value = v})
 				end
-				
-				table.insert(elements, {label = labelvehicle, value = v})
 			end
 		end
 		
@@ -364,15 +412,26 @@ function ReturnOwnedCarsMenu()
 		}
 		
 		for _,v in pairs(ownedCars) do
-			local hashVehicule = v.model
-			local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-			local vehicleName = GetLabelText(aheadVehName)
-    		local labelvehicle
-			local plate = v.plate
-			
-			labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
-			
-			table.insert(elements, {label = labelvehicle , value = v})
+			if Config.UseVehicleNamesLua == true then
+				local hashVehicule = v.model
+				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetLabelText(aheadVehName)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			else
+				local hashVehicule = v.model
+				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			end
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_car', {
@@ -402,15 +461,26 @@ function ReturnOwnedBoatsMenu()
 		}
 		
 		for _,v in pairs(ownedBoats) do
-			local hashVehicule = v.model
-			local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-			local vehicleName = GetLabelText(aheadVehName)
-    		local labelvehicle
-			local plate = v.plate
-			
-			labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
-			
-			table.insert(elements, {label = labelvehicle , value = v})
+			if Config.UseVehicleNamesLua == true then
+				local hashVehicule = v.model
+				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetLabelText(aheadVehName)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			else
+				local hashVehicule = v.model
+				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			end
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_boat', {
@@ -440,15 +510,26 @@ function ReturnOwnedAircraftsMenu()
 		}
 		
 		for _,v in pairs(ownedAircrafts) do
-			local hashVehicule = v.model
-			local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
-			local vehicleName = GetLabelText(aheadVehName)
-    		local labelvehicle
-			local plate = v.plate
-			
-			labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
-			
-			table.insert(elements, {label = labelvehicle , value = v})
+			if Config.UseVehicleNamesLua == true then
+				local hashVehicule = v.model
+				local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local vehicleName  = GetLabelText(aheadVehName)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			else
+				local hashVehicule = v.model
+				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
+				local labelvehicle
+				local plate = v.plate
+				
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				
+				table.insert(elements, {label = labelvehicle, value = v})
+			end
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_aircraft', {

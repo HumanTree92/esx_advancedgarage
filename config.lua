@@ -10,7 +10,23 @@ Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price
 Config.UseCarGarages        = true -- Allows use of Car Garages
 Config.UseBoatGarages       = true -- Allows use of Boat Garages
 Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages
-Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages WIP!!!
+Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages
+
+Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage
+Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles
+
+--[[
+***** How to Setup a vehicle_names.lua for Custom Addon Vehicles *****
+* Create a vehicle_names.lua & past the below Code
+function AddTextEntry(key, value)
+	Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), key, value)
+end
+
+Citizen.CreateThread(function()
+	--Example 1: AddTextEntry('SPAWN_NAME_HERE', 'VEHICLE_NAME_HERE')
+	--Example 2: AddTextEntry('f350', '2013 Ford F350')
+end)
+]]
 
 Config.MarkerType   = 1
 Config.DrawDistance = 100.0

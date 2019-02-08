@@ -39,54 +39,96 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(source, cb)
 	local ownedAircrafts = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
-		['@owner']  = GetPlayerIdentifiers(source)[1],
-		['@Type']   = 'aircraft',
-		['@job']    = '',
-		['@stored'] = true
-	}, function(data)
-		for _,v in pairs(data) do
-			local vehicle = json.decode(v.vehicle)
-			table.insert(ownedAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate})
-		end
-		cb(ownedAircrafts)
-	end)
+	if Config.DontShowPoundCarsInGarage == true then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'aircraft',
+			['@job']    = '',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedAircrafts)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'aircraft',
+			['@job']    = ''
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedAircrafts)
+		end)
+	end
 end)
 
 -- Fetch Owned Boats
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, cb)
 	local ownedBoats = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
-		['@owner']  = GetPlayerIdentifiers(source)[1],
-		['@Type']   = 'boat',
-		['@job']    = '',
-		['@stored'] = true
-	}, function(data)
-		for _,v in pairs(data) do
-			local vehicle = json.decode(v.vehicle)
-			table.insert(ownedBoats, {vehicle = vehicle, stored = v.stored, plate = v.plate})
-		end
-		cb(ownedBoats)
-	end)
+	if Config.DontShowPoundCarsInGarage == true then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'boat',
+			['@job']    = '',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedBoats, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedBoats)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'boat',
+			['@job']    = ''
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedBoats, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedBoats)
+		end)
+	end
 end)
 
 -- Fetch Owned Cars
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, cb)
 	local ownedCars = {}
-
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
-		['@owner']  = GetPlayerIdentifiers(source)[1],
-		['@Type']   = 'car',
-		['@job']    = '',
-		['@stored'] = true
-	}, function(data)
-		for _,v in pairs(data) do
-			local vehicle = json.decode(v.vehicle)
-			table.insert(ownedCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
-		end
-		cb(ownedCars)
-	end)
+	
+	if Config.DontShowPoundCarsInGarage == true then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'car',
+			['@job']    = '',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedCars)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+			['@owner']  = GetPlayerIdentifiers(source)[1],
+			['@Type']   = 'car',
+			['@job']    = ''
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedCars)
+		end)
+	end
 end)
 
 ----------------------------------------------------------------------------------------------------
