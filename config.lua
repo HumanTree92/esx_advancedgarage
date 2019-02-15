@@ -1,20 +1,3 @@
-Config = {}
-
-Config.Locale     = 'en'
-Config.DamageMult = 5 -- Higher Number = Higher Repair Price
-
-Config.CarPoundPrice      = 1000 -- Car Pound Price
-Config.BoatPoundPrice     = 1500 -- Boat Pound Price
-Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price
-
-Config.UseCarGarages        = true -- Allows use of Car Garages
-Config.UseBoatGarages       = true -- Allows use of Boat Garages
-Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages
-Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages
-
-Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage
-Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles
-
 --[[
 ***** How to Setup a vehicle_names.lua for Custom Addon Vehicles *****
 * Create a vehicle_names.lua & past the below Code
@@ -27,6 +10,27 @@ Citizen.CreateThread(function()
 	--Example 2: AddTextEntry('f350', '2013 Ford F350')
 end)
 ]]
+
+Config = {}
+
+Config.Locale     = 'en'
+
+Config.KickPossibleCheaters = true -- If true it will kick the player that tries store a vehicle that they changed the Hash or Plate.
+
+Config.UseDamageMult = false -- If true it costs more to store a Broken Vehicle.
+Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
+
+Config.CarPoundPrice      = 1000 -- Car Pound Price
+Config.BoatPoundPrice     = 1500 -- Boat Pound Price
+Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price
+
+Config.UseCarGarages        = true -- Allows use of Car Garages
+Config.UseBoatGarages       = true -- Allows use of Boat Garages
+Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages
+Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages
+
+Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage
+Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles
 
 Config.MarkerType   = 1
 Config.DrawDistance = 100.0

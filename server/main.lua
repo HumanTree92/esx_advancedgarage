@@ -136,38 +136,44 @@ end)
 -- Store Vehicles
 ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, cb, vehicleProps)
 	local ownedCars = {}
+	local vehplate = vehicleProps.plate:match("^%s*(.-)%s*$")
+	local vehiclemodel = vehicleProps.model
+	local xPlayer = ESX.GetPlayerFromId(source)
 	
-	MySQL.Async.execute('UPDATE owned_vehicles SET vehicle = @vehicle WHERE owner = @owner AND plate = @plate', {
-		['@owner']  = GetPlayerIdentifiers(source)[1],
-		['@vehicle'] = json.encode(vehicleProps),
-		['@plate']  = vehicleProps.plate
-	}, function (rowsChanged)
-		if rowsChanged == 0 then
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND @plate = plate', {
+		['@owner'] = xPlayer.identifier,
+		['@plate'] = vehicleProps.plate
+	}, function (result)
+		if result[1] ~= nil then
+			local originalvehprops = json.decode(result[1].vehicle)
+			if originalvehprops.model == vehiclemodel then
+				MySQL.Async.execute('UPDATE owned_vehicles SET vehicle = @vehicle WHERE owner = @owner AND plate = @plate', {
+					['@owner']  = GetPlayerIdentifiers(source)[1],
+					['@vehicle'] = json.encode(vehicleProps),
+					['@plate']  = vehicleProps.plate
+				}, function (rowsChanged)
+					if rowsChanged == 0 then
+						print(('esx_advancedgarage: %s attempted to store an vehicle they don\'t own!'):format(GetPlayerIdentifiers(source)[1]))
+					end
+					cb(rowsChanged)
+					cb(true)
+				end)
+			else
+				if Config.KickPossibleCheaters == true then
+					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
+					DropPlayer(source, 'You have been Kicked from the Server for Possible Garage Cheating!!!')
+					cb(false)
+				else
+					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
+					cb(false)
+				end
+			end
+		else
 			print(('esx_advancedgarage: %s attempted to store an vehicle they don\'t own!'):format(GetPlayerIdentifiers(source)[1]))
+			cb(false)
 		end
-		cb(rowsChanged)
 	end)
 end)
-
---[[
-ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, cb, vehicleProps)
-	local ownedCars = {}
-	*local vehprop = json.encode(vehicleProps)
-	
-	MySQL.Async.execute('UPDATE owned_vehicles SET vehicle = @vehprop WHERE owner = @owner AND plate = @plate', {
-		['@owner']  = GetPlayerIdentifiers(source)[1],
-		*['@vehprop'] = vehprop,
-		['@plate']  = plate
-		--['@stored'] = true
-	}, function (rowsChanged)
-		--if rowsChanged == 0 then
-			--print(('esx_advancedgarage: %s attempted to store an vehicle they don\'t own!'):format(GetPlayerIdentifiers(source)[1]))
-		--end
-
-		cb(rowsChanged)
-	end)
-end)
-]]--
 
 ----------------------------------------------------------------------------------------------------
 
