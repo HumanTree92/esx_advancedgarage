@@ -3,6 +3,14 @@ Advanced Garage system for ESX Servers
 
 This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boats, & Aircrafts. This Garage Script only takes into account the Vehicles Purchased in the Car/Boat/Aircraft Shop or any other Shop that sells Vehicles. Players can also go to the Pound to retrieve their Vehicle if its lost or Destroyed for a Fee. During a reboot all Vehicles go back to the Garage.
 
+# Features:
+* Unable to Store Vehicles you don't own.
+* Ability to Kick people who try to Cheat using the Garage.
+* Private Property Garages.
+* Vehicle Impound
+* Aircraft, Boat, & Car Garage.
+* Aircraft, Boat, & Car Impound.
+
 # Requirements:
 * Required:
   * [esx_vehicleshop](https://github.com/ESX-Org/esx_vehicleshop)
@@ -21,10 +29,8 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 * It is Possible to Duplicate Vehicles but do note that if said Person Duplicates a Vehicle & takes 1 of them & sell thems the other one is useless & can NOT be stored or sold.
 * When buying an Apartment or Private House in order for the Garage to show you MUST relog from the SERVER & come back. If you buy an apartment & it doesn't show up make sure you relog.
 * Doesn't work well when using the Car Dealer Job.
-* When storing a vehicle that you don't own the vehicle still disappears but isn't put in the garage. This will be FIXED!!!
 
 # WIP:
-* Only able to store vehicles that you own
 * Any other stuff that is needed...
 
 # How to Use:
