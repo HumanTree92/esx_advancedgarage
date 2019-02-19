@@ -16,6 +16,7 @@ Config = {}
 Config.Locale     = 'en'
 
 Config.KickPossibleCheaters = true -- If true it will kick the player that tries store a vehicle that they changed the Hash or Plate.
+Config.UseCustomKickMessage = true -- If KickPossibleCheaters is true you can set a Custom Kick Message in the locales.
 
 Config.UseDamageMult = false -- If true it costs more to store a Broken Vehicle.
 Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
@@ -24,10 +25,14 @@ Config.CarPoundPrice      = 1000 -- Car Pound Price
 Config.BoatPoundPrice     = 1500 -- Boat Pound Price
 Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price
 
+Config.PolicingPoundPrice  = 500 -- Policing Pound Price
+Config.AmbulancePoundPrice = 500 -- Ambulance Pound Price
+
 Config.UseCarGarages        = true -- Allows use of Car Garages
 Config.UseBoatGarages       = true -- Allows use of Boat Garages
 Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages
 Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages
+Config.UseJobCarGarages     = true -- Allows use of Job Garages
 
 Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage
 Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles
@@ -56,6 +61,13 @@ Config.BlipPound = {
 	Scale = 1.0
 }
 
+Config.BlipJobPound = {
+	Sprite = 67,
+	Color = 49,
+	Display = 2,
+	Scale = 1.0
+}
+
 Config.PointMarker = {
 	r = 0, g = 255, b = 0,     -- Green Color
 	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
@@ -67,10 +79,52 @@ Config.DeleteMarker = {
 }
 
 Config.PoundMarker = {
-	r = 0, g = 0, b = 100, -- Blue Color
+	r = 0, g = 0, b = 100,     -- Blue Color
 	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
 }
 
+Config.JobPoundMarker = {
+	r = 255, g = 0, b = 0,     -- Red Color
+	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
+}
+
+-- Start of Jobs
+
+Config.PolicePounds = {
+	Pound_LosSantos = {
+		PoundPoint = { x = 374.42, y = -1620.68, z = 28.29 },
+		SpawnPoint = { x = 391.74, y = -1619.0, z = 28.29, h = 318.34 }
+	},
+	
+	Pound_Sandy = {
+		PoundPoint = { x = 1646.01, y = 3812.06, z = 37.65 },
+		SpawnPoint = { x = 1627.84, y = 3788.45, z = 33.77, h = 308.53 }
+	},
+	
+	Pound_Paleto = {
+		PoundPoint = { x = -223.6, y = 6243.37, z = 30.49 },
+		SpawnPoint = { x = -230.88, y = 6255.89, z = 30.49, h = 136.5 }
+	}
+}
+
+Config.AmbulancePounds = {
+	Pound_LosSantos = {
+		PoundPoint = { x = 374.42, y = -1620.68, z = 28.29 },
+		SpawnPoint = { x = 391.74, y = -1619.0, z = 28.29, h = 318.34 }
+	},
+	
+	Pound_Sandy = {
+		PoundPoint = { x = 1646.01, y = 3812.06, z = 37.65 },
+		SpawnPoint = { x = 1627.84, y = 3788.45, z = 33.77, h = 308.53 }
+	},
+	
+	Pound_Paleto = {
+		PoundPoint = { x = -223.6, y = 6243.37, z = 30.49 },
+		SpawnPoint = { x = -230.88, y = 6255.89, z = 30.49, h = 136.5 }
+	}
+}
+
+-- End of Jobs
 -- Start of Cars
 
 Config.CarGarages = {
@@ -101,7 +155,7 @@ Config.CarGarages = {
 	Garage_RaceTrack = {
 		GaragePoint = { x = 1212.32, y = 339.94, z = 80.99 },
 		SpawnPoint = { x = 1199.02, y = 330.92, z = 80.99, h = 144.86 },
-		DeletePoint = { x = 1215.85, y = 329.72, z = 80.99 }
+		DeletePoint = { x = 1207.9, y = 343.8, z = 80.99 }
 	}
 }
 
@@ -117,8 +171,8 @@ Config.CarPounds = {
 	},
 	
 	Pound_Paleto = {
-		PoundPoint = { x = -185.187, y = 6272.027, z = 30.580 },
-		SpawnPoint = { x = -199.160, y = 6274.180, z = 30.580, h = 316.36 }
+		PoundPoint = { x = -234.82, y = 6198.65, z = 30.94 },
+		SpawnPoint = { x = -230.08, y = 6190.24, z = 30.49, h = 140.24 }
 	}
 }
 

@@ -5,11 +5,12 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 
 # Features:
 * Unable to Store Vehicles you don't own.
-* Ability to Kick people who try to Cheat using the Garage.
+* Ability to Kick people who try to Cheat using the Garage & Set Custom Kick Message.
 * Private Property Garages.
 * Vehicle Impound
 * Aircraft, Boat, & Car Garage.
 * Aircraft, Boat, & Car Impound.
+* Police & Ambulance Impound.
 
 # Requirements:
 * Required:

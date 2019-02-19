@@ -160,9 +160,15 @@ ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, 
 				end)
 			else
 				if Config.KickPossibleCheaters == true then
-					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
-					DropPlayer(source, 'You have been Kicked from the Server for Possible Garage Cheating!!!')
-					cb(false)
+					if Config.UseCustomKickMessage == true then
+						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
+						DropPlayer(source, _U('custom_kick'))
+						cb(false)
+					else
+						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
+						DropPlayer(source, 'You have been Kicked from the Server for Possible Garage Cheating!!!')
+						cb(false)
+					end
 				else
 					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: '..vehiclemodel..'. Original Vehicle: '..originalvehprops.model):format(GetPlayerIdentifiers(source)[1]))
 					cb(false)
@@ -231,6 +237,40 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedCars', function(source
 	end)
 end)
 
+-- Fetch Pounded Policing Vehicles
+ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', function(source, cb)
+	local ownedPolicingCars = {}
+
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND stored = @stored', {
+		['@owner'] = GetPlayerIdentifiers(source)[1],
+		['@job']    = 'police',
+		['@stored'] = false
+	}, function(data) 
+		for _,v in pairs(data) do
+			local vehicle = json.decode(v.vehicle)
+			table.insert(ownedPolicingCars, vehicle)
+		end
+		cb(ownedPolicingCars)
+	end)
+end)
+
+-- Fetch Pounded Ambulance Vehicles
+ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', function(source, cb)
+	local ownedAmbulanceCars = {}
+
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND stored = @stored', {
+		['@owner'] = GetPlayerIdentifiers(source)[1],
+		['@job']    = 'ambulance',
+		['@stored'] = false
+	}, function(data) 
+		for _,v in pairs(data) do
+			local vehicle = json.decode(v.vehicle)
+			table.insert(ownedAmbulanceCars, vehicle)
+		end
+		cb(ownedAmbulanceCars)
+	end)
+end)
+
 ----------------------------------------------------------------------------------------------------
 
 -- Check Money for Pounded Aircrafts
@@ -263,6 +303,26 @@ ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyCars', function(source,
 	end
 end)
 
+-- Check Money for Pounded Policing
+ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyPolicing', function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.get('money') >= Config.PolicingPoundPrice then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
+-- Check Money for Pounded Ambulance
+ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.get('money') >= Config.AmbulancePoundPrice then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
 -- Pay for Pounded Aircrafts
 RegisterServerEvent('esx_advancedgarage:payAircraft')
 AddEventHandler('esx_advancedgarage:payAircraft', function()
@@ -285,6 +345,22 @@ AddEventHandler('esx_advancedgarage:payCar', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.CarPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.CarPoundPrice)
+end)
+
+-- Pay for Pounded Policing
+RegisterServerEvent('esx_advancedgarage:payPolicing')
+AddEventHandler('esx_advancedgarage:payPolicing', function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.removeMoney(Config.PolicingPoundPrice)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicingPoundPrice)
+end)
+
+-- Pay for Pounded Ambulance
+RegisterServerEvent('esx_advancedgarage:payAmbulance')
+AddEventHandler('esx_advancedgarage:payAmbulance', function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.removeMoney(Config.AmbulancePoundPrice)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AmbulancePoundPrice)
 end)
 
 ----------------------------------------------------------------------------------------------------

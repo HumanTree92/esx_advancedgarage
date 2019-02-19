@@ -1,8 +1,11 @@
 Locales['en'] = {
 	-- Global
+	['custom_kick'] = 'You have been Kicked from the Server for Possible Cheating!!!',
 	['blip_garage'] = 'Garage | Public',
 	['blip_garage_private'] = 'Garage | Private',
 	['blip_pound'] = 'Garage | Pound',
+	['blip_police_pound'] = 'Garage | Policing Pound',
+	['blip_ambulance_pound'] = 'Garage | Ambulance Pound',
 	['garage'] = 'Garage',
 	['loc_garage'] = 'Parked in Garage',
 	['loc_pound'] = 'At the Impound',
@@ -24,21 +27,32 @@ Locales['en'] = {
 	['no_vehicle_to_enter'] = 'There is no Vehicle to store in the Garage.',
 	['vehicle_in_garage'] = 'Your Vehicle is stored in the Garage.',
 	-- Cars
+	['garage_cars'] = 'Car Garage',
+	['pound_cars'] = 'Car Pound',
 	['list_owned_cars'] = 'List Owned Cars.',
 	['store_owned_cars'] = 'Store Owned Car in Garage.',
 	['return_owned_cars'] = 'Return Owned Cars.',
 	['garage_nocars'] = 'You dont own any Cars!',
 	['car_is_impounded'] = 'Your Car is at the Impound.',
 	-- Boats
+	['garage_boats'] = 'Boat Garage',
+	['pound_boats'] = 'Boat Pound',
 	['list_owned_boats'] = 'List Owned Boats.',
 	['store_owned_boats'] = 'Store Owned Boat in Garage.',
 	['return_owned_boats'] = 'Return Owned Boat.',
 	['garage_noboats'] = 'You dont own any Boats!',
 	['boat_is_impounded'] = 'Your Boat is at the Impound.',
 	-- Aircrafts
+	['garage_aircrafts'] = 'Aircraft Garage',
+	['pound_aircrafts'] = 'Aircraft Pound',
 	['list_owned_aircrafts'] = 'List Owned Aircrafts.',
 	['store_owned_aircrafts'] = 'Store Owned Aircraft in Garage.',
 	['return_owned_aircrafts'] = 'Return Owned Aircraft.',
 	['garage_noaircrafts'] = 'You dont own any Aircrafts!',
 	['aircraft_is_impounded'] = 'Your Aircraft is at the Impound.',
+	-- Jobs
+	['pound_police'] = 'Police Pound',
+	['pound_ambulance'] = 'Ambulance Pound',
+	['return_owned_policing'] = 'Return Owned Policing Vehicles.',
+	['return_owned_ambulance'] = 'Return Owned Ambulance Vehicles.',
 }
