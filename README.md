@@ -52,12 +52,15 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 
 # Other:
 If you like this please check out some of my other stuff like
-* [esx_hospital](https://github.com/HumanTree92/esx_hospital)
-* [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
+* [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
 * [esx_aircraftshop](https://github.com/HumanTree92/esx_aircraftshop)
 * [esx_boatshop](https://github.com/HumanTree92/esx_boatshop)
 * [esx_truckshop](https://github.com/HumanTree92/esx_truckshop)
-* [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
+* [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
+* [esx_licenseshop](https://github.com/HumanTree92/esx_licenseshop)
+* [esx_plasticsurgery](https://github.com/HumanTree92/esx_plasticsurgery)
+* [esx_vehiclespawner](https://github.com/HumanTree92/esx_vehiclespawner)
+* [esx_hospital](https://github.com/HumanTree92/esx_hospital)
 * [esx_panicbutton](https://github.com/HumanTree92/esx_panicbutton)
 * [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
 
@@ -80,7 +83,7 @@ If you like this please check out some of my other stuff like
 ### License
 esx_advancedgarage - Advanced Garage for ESX Servers.
 
-Copyright (C) 2011-2018 Velociti Entertainment
+Copyright (C) 2011-2019 Velociti Entertainment
 
 This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
 
