@@ -155,7 +155,6 @@ ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, 
 					if rowsChanged == 0 then
 						print(('esx_advancedgarage: %s attempted to store an vehicle they don\'t own!'):format(GetPlayerIdentifiers(source)[1]))
 					end
-					cb(rowsChanged)
 					cb(true)
 				end)
 			else
