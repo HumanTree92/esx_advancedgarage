@@ -21,21 +21,26 @@ Config.UseCustomKickMessage = true -- If KickPossibleCheaters is true you can se
 Config.UseDamageMult = false -- If true it costs more to store a Broken Vehicle.
 Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
 
-Config.CarPoundPrice      = 1000 -- Car Pound Price
-Config.BoatPoundPrice     = 1500 -- Boat Pound Price
-Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price
+Config.CarPoundPrice      = 1000 -- Car Pound Price.
+Config.BoatPoundPrice     = 1500 -- Boat Pound Price.
+Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price.
 
-Config.PolicingPoundPrice  = 500 -- Policing Pound Price
-Config.AmbulancePoundPrice = 500 -- Ambulance Pound Price
+Config.PolicingPoundPrice  = 500 -- Policing Pound Price.
+Config.AmbulancePoundPrice = 500 -- Ambulance Pound Price.
 
-Config.UseCarGarages        = true -- Allows use of Car Garages
-Config.UseBoatGarages       = true -- Allows use of Boat Garages
-Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages
-Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages
-Config.UseJobCarGarages     = true -- Allows use of Job Garages
+Config.UseCarGarages        = true -- Allows use of Car Garages.
+Config.UseBoatGarages       = true -- Allows use of Boat Garages.
+Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages.
+Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages.
+Config.UseJobCarGarages     = true -- Allows use of Job Garages.
 
-Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage
-Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles
+Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage.
+Config.ShowVehicleLocation = false -- If set to true it will show the Location of the Vehicle in the Pound/Garage in the Garage menu.
+Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles.
+
+Config.ShowSpacer1 = true -- If true it shows Spacer 1 in the List.
+Config.ShowSpacer2 = false -- If true it shows Spacer 2 in the List | Don't use if spacer3 is set to true.
+Config.ShowSpacer3 = true -- If true it shows Spacer 3 in the List | Don't use if Spacer2 is set to true.
 
 Config.MarkerType   = 1
 Config.DrawDistance = 100.0

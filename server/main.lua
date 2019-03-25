@@ -8,7 +8,7 @@ MySQL.ready(function()
 end)
 
 function ParkVehicles()
-	MySQL.Async.execute('UPDATE owned_vehicles SET stored = true WHERE stored = @stored', {
+	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = true WHERE `stored` = @stored', {
 		['@stored']      = false
 	}, function (rowsChanged)
 		if rowsChanged > 0 then

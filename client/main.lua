@@ -140,10 +140,19 @@ end
 
 -- List Owned Cars Menu
 function ListOwnedCarsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowSpacer1 == true then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowSpacer2 == true then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowSpacer3 == true then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedCars', function(ownedCars)
 		if #ownedCars == 0 then
@@ -157,10 +166,18 @@ function ListOwnedCarsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -170,10 +187,18 @@ function ListOwnedCarsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -200,10 +225,19 @@ end
 
 -- List Owned Boats Menu
 function ListOwnedBoatsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowSpacer1 == true then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowSpacer2 == true then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowSpacer3 == true then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedBoats', function(ownedBoats)
 		if #ownedBoats == 0 then
@@ -217,10 +251,18 @@ function ListOwnedBoatsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -230,10 +272,18 @@ function ListOwnedBoatsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -260,10 +310,19 @@ end
 
 -- List Owned Aircrafts Menu
 function ListOwnedAircraftsMenu()
-	local elements = {
-		{label = _U('spacer3')},
-		{label = _U('spacer1')}
-	}
+	local elements = {}
+	
+	if Config.ShowSpacer1 == true then
+		table.insert(elements, {label = _U('spacer1')})
+	end
+	
+	if Config.ShowSpacer2 == true then
+		table.insert(elements, {label = _U('spacer2')})
+	end
+	
+	if Config.ShowSpacer3 == true then
+		table.insert(elements, {label = _U('spacer3')})
+	end
 	
 	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedAircrafts', function(ownedAircrafts)
 		if #ownedAircrafts == 0 then
@@ -277,10 +336,18 @@ function ListOwnedAircraftsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -290,10 +357,18 @@ function ListOwnedAircraftsMenu()
 					local labelvehicle
 					local plate = v.plate
 					
-					if v.stored then
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+					if Config.ShowVehicleLocation == true then
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_garage')..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						end
 					else
-						labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('loc_pound')..' |'
+						if v.stored then
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						else
+							labelvehicle = '| '..plate..' | '..vehicleName..' |'
+						end
 					end
 					
 					table.insert(elements, {label = labelvehicle, value = v})
@@ -515,9 +590,15 @@ end
 -- Pound Owned Aircrafts Menu
 function ReturnOwnedAircraftsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedAircrafts', function(ownedAircrafts)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowSpacer2 == true then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowSpacer3 == true then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedAircrafts) do
 			if Config.UseVehicleNamesLua == true then
@@ -564,9 +645,15 @@ end
 -- Pound Owned Policing Menu
 function ReturnOwnedPolicingMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', function(ownedPolicingCars)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowSpacer2 == true then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowSpacer3 == true then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedPolicingCars) do
 			if Config.UseVehicleNamesLua == true then
@@ -613,9 +700,15 @@ end
 -- Pound Owned Ambulance Menu
 function ReturnOwnedAmbulanceMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', function(ownedAmbulanceCars)
-		local elements = {
-			--{label = _U('spacer2'), value = 'spacer'}
-		}
+		local elements = {}
+		
+		if Config.ShowSpacer2 == true then
+			table.insert(elements, {label = _U('spacer2')})
+		end
+		
+		if Config.ShowSpacer3 == true then
+			table.insert(elements, {label = _U('spacer3')})
+		end
 		
 		for _,v in pairs(ownedAmbulanceCars) do
 			if Config.UseVehicleNamesLua == true then
@@ -878,6 +971,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
+		
 		if canSleep then
             Citizen.Wait(500)
         end
@@ -1025,7 +1119,7 @@ Citizen.CreateThread(function()
 			hasAlreadyEnteredMarker = false
 			TriggerEvent('esx_advancedgarage:hasExitedMarker', LastZone)
 		end
-
+		
 		if not isInMarker then
             Citizen.Wait(500)
         end

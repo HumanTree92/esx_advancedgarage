@@ -1,6 +1,6 @@
 Locales['en'] = {
 	-- Global
-	['custom_kick'] = 'You have been Kicked from the Server for Possible Cheating!!!',
+	['custom_kick'] = 'I am the Developer of esx_advancedgarage & I don\'t like Cheaters. So you have been Kicked from the Server for Possible Cheating!!!',
 	['blip_garage'] = 'Garage | Public',
 	['blip_garage_private'] = 'Garage | Private',
 	['blip_pound'] = 'Garage | Pound',
@@ -14,9 +14,9 @@ Locales['en'] = {
 	['press_to_enter'] = 'Press ~INPUT_PICKUP~ to take Vehicle out of Garage.',
 	['press_to_delete'] = 'Press ~INPUT_PICKUP~ to store Vehicle in the Garage.',
 	['press_to_impound'] = 'Press ~INPUT_PICKUP~ to access the Impound.',
-	['spacer1'] = '| Plate | Vehicle Name | Location |',
-	['spacer2'] = '| Plate | Vehicle Name |',
-	['spacer3'] = 'If Vehicle is NOT here Check Impound!!!',
+	['spacer1'] = 'If Vehicle is NOT here Check Impound!!!',
+	['spacer2'] = '| Plate | Vehicle Name | Location |',
+	['spacer3'] = '| Plate | Vehicle Name |',
 	['you_paid'] = 'You paid $',
 	['not_enough_money'] = 'You do not have enough money!',
 	['return_vehicle'] = 'Store Vehicle.',
