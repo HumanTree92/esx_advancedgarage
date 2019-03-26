@@ -9,7 +9,7 @@ end)
 
 function ParkVehicles()
 	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = true WHERE `stored` = @stored', {
-		['@stored']      = false
+		['@stored'] = false
 	}, function (rowsChanged)
 		if rowsChanged > 0 then
 			print(('esx_advancedgarage: %s vehicle(s) have been stored!'):format(rowsChanged))
