@@ -12,6 +12,7 @@ Keys = {
 
 ESX    = nil
 
+local carInWorld 				= {}
 local PlayerData = {}
 local JobBlips = {}
 local HasAlreadyEnteredMarker = false
@@ -492,6 +493,8 @@ end
 -- Pound Owned Cars Menu
 function ReturnOwnedCarsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedCars', function(ownedCars)
+		
+
 		local elements = {
 			--{label = _U('spacer2'), value = 'spacer'}
 		}
@@ -503,19 +506,35 @@ function ReturnOwnedCarsMenu()
 				local vehicleName  = GetLabelText(aheadVehName)
 				local labelvehicle
 				local plate = v.plate
+				local isSpawned = 0
 				
 				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 				
-				table.insert(elements, {label = labelvehicle, value = v})
 			else
 				local hashVehicule = v.model
 				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			end
 		end
 		
@@ -553,18 +572,34 @@ function ReturnOwnedBoatsMenu()
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			else
 				local hashVehicule = v.model
 				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			end
 		end
 		
@@ -608,18 +643,34 @@ function ReturnOwnedAircraftsMenu()
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			else
 				local hashVehicule = v.model
 				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			end
 		end
 		
@@ -663,18 +714,34 @@ function ReturnOwnedPolicingMenu()
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			else
 				local hashVehicule = v.model
 				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			end
 		end
 		
@@ -718,18 +785,34 @@ function ReturnOwnedAmbulanceMenu()
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			else
 				local hashVehicule = v.model
 				local vehicleName = GetDisplayNameFromVehicleModel(hashVehicule)
 				local labelvehicle
 				local plate = v.plate
 				
-				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				local isSpawned = 0
 				
-				table.insert(elements, {label = labelvehicle, value = v})
+				labelvehicle = '| '..plate..' | '..vehicleName..' | '.._U('return')..' |'
+				for k,v in pairs (carInWorld) do
+					if v.plate == plate then
+						isSpawned = 1
+					end
+				end
+				if isSpawned == 0 then
+					table.insert(elements, {label = labelvehicle, value = v})
+				end
 			end
 		end
 		
@@ -784,6 +867,11 @@ end
 -- Put Away Vehicles
 function putaway(vehicle, vehicleProps)
 	ESX.Game.DeleteVehicle(vehicle)
+	for k,v in pairs (carInWorld) do
+		if v.plate == vehicleProps.plate then
+			table.remove(carInWorld, k)
+		end
+	end
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
@@ -798,6 +886,8 @@ function SpawnVehicle(vehicle, plate)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
+		local carplate = GetVehicleNumberPlateText(callback_vehicle)
+		table.insert(carInWorld, {vehicleentity = callback_vehicle, plate = carplate})
 	end)
 	
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
@@ -813,7 +903,11 @@ function SpawnPoundedVehicle(vehicle, plate)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
+		local carplate = GetVehicleNumberPlateText(callback_vehicle)
+		table.insert(carInWorld, {vehicleentity = callback_vehicle, plate = carplate})
 	end)
+	
+	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
 -- Entered Marker
