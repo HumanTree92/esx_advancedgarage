@@ -1,4 +1,4 @@
-ESX                = nil
+ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
@@ -10,7 +10,7 @@ end)
 function ParkVehicles()
 	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = true WHERE `stored` = @stored', {
 		['@stored'] = false
-	}, function (rowsChanged)
+	}, function(rowsChanged)
 		if rowsChanged > 0 then
 			print(('esx_advancedgarage: %s vehicle(s) have been stored!'):format(rowsChanged))
 		end
@@ -33,14 +33,12 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedProperties', function(sou
 	end)
 end)
 
-----------------------------------------------------------------------------------------------------
-
 -- Fetch Owned Aircrafts
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(source, cb)
 	local ownedAircrafts = {}
 
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'aircraft',
 			['@job']    = '',
@@ -72,7 +70,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 	local ownedBoats = {}
 
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'boat',
 			['@job']    = '',
@@ -104,7 +102,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 	local ownedCars = {}
 	
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'car',
 			['@job']    = '',
@@ -130,8 +128,6 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 		end)
 	end
 end)
-
-----------------------------------------------------------------------------------------------------
 
 -- Store Vehicles
 ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, cb, vehicleProps)
@@ -180,13 +176,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, 
 	end)
 end)
 
-----------------------------------------------------------------------------------------------------
-
 -- Fetch Pounded Aircrafts
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAircrafts', function(source, cb)
 	local ownedAircrafts = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'aircraft',
 		['@job']    = '',
@@ -204,7 +198,7 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedBoats', function(source, cb)
 	local ownedBoats = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'boat',
 		['@job']    = '',
@@ -222,7 +216,7 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedCars', function(source, cb)
 	local ownedCars = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND stored = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'car',
 		['@job']    = '',
@@ -240,7 +234,7 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', function(source, cb)
 	local ownedPolicingCars = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND stored = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND `stored` = @stored', {
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@job']    = 'police',
 		['@stored'] = false
@@ -257,7 +251,7 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', function(source, cb)
 	local ownedAmbulanceCars = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND stored = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND `stored` = @stored', {
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@job']    = 'ambulance',
 		['@stored'] = false
@@ -269,8 +263,6 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', functi
 		cb(ownedAmbulanceCars)
 	end)
 end)
-
-----------------------------------------------------------------------------------------------------
 
 -- Check Money for Pounded Aircrafts
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(source, cb)
@@ -362,8 +354,6 @@ AddEventHandler('esx_advancedgarage:payAmbulance', function()
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AmbulancePoundPrice)
 end)
 
-----------------------------------------------------------------------------------------------------
-
 -- Pay to Return Broken Vehicles
 RegisterServerEvent('esx_advancedgarage:payhealth')
 AddEventHandler('esx_advancedgarage:payhealth', function(price)
@@ -377,7 +367,7 @@ RegisterServerEvent('esx_advancedgarage:setVehicleState')
 AddEventHandler('esx_advancedgarage:setVehicleState', function(plate, state)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.execute('UPDATE owned_vehicles SET stored = @stored WHERE plate = @plate', {
+	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE plate = @plate', {
 		['@stored'] = state,
 		['@plate'] = plate
 	}, function(rowsChanged)
@@ -386,4 +376,3 @@ AddEventHandler('esx_advancedgarage:setVehicleState', function(plate, state)
 		end
 	end)
 end)
-
