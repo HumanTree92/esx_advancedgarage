@@ -1,6 +1,6 @@
 Locales['en'] = {
 	-- Global
-	['custom_kick'] = 'I am the Developer of esx_advancedgarage & I don\'t like Cheaters. So you have been Kicked from the Server for Possible Cheating!!!',
+	['custom_kick'] = 'INPUT CUSTOM KICK MESSAGE',
 	['blip_garage'] = 'Garage | Public',
 	['blip_garage_private'] = 'Garage | Private',
 	['blip_pound'] = 'Garage | Pound',
