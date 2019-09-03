@@ -3,6 +3,7 @@ Advanced Garage system for ESX Servers
 
 This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boats, & Aircrafts. This Garage Script only takes into account the Vehicles Purchased in the Car/Boat/Aircraft Shop or any other Shop that sells Vehicles. Players can also go to the Pound to retrieve their Vehicle if its lost or Destroyed for a Fee. During a reboot all Vehicles go back to the Garage.
 
+# Look in the Wiki before submitting Issues. Failure to abide this will result in Block.
 * [Added Wiki that has the Common Problems Fixed](https://github.com/HumanTree92/esx_advancedgarage/wiki/Bugs,-Questions,-Etc.)
 
 # Features:
@@ -17,6 +18,7 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 # Requirements:
 * Required:
   * [esx_vehicleshop](https://github.com/ESX-Org/esx_vehicleshop)
+  * [esx_property](https://github.com/ESX-Org/esx_property)
 * Optional:
   * [esx_aircraftshop](https://github.com/HumanTree92/esx_aircraftshop)
   * [esx_boatshop](https://github.com/HumanTree92/esx_boatshop)
