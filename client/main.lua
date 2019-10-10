@@ -57,6 +57,10 @@ AddEventHandler('esx:setJob', function(job)
 	refreshBlips()
 end)
 
+--[[
+FIX by 221256790493495296
+]]--
+
 local function has_value (tab, val)
 	for index, value in ipairs(tab) do
 		if value == val then
@@ -97,6 +101,7 @@ function OpenMenuGarage(PointType)
 	end
 	
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'garage_menu', {
+		css = 'garage',
 		title    = _U('garage'),
 		align    = 'top-left',
 		elements = elements
@@ -158,6 +163,7 @@ function ListOwnedCarsMenu()
 					local aheadVehName = GetDisplayNameFromVehicleModel(hashVehicule)
 					local vehicleName  = GetLabelText(aheadVehName)
 					local plate        = v.plate
+					local vehDamage	   = math.floor(v.vehicle.health/0.00)
 					local labelvehicle
 					
 					if Config.ShowVehicleLocation then
@@ -201,6 +207,7 @@ function ListOwnedCarsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'spawn_owned_car', {
+			css = 'garage',
 			title    = _U('garage_cars'),
 			align    = 'top-left',
 			elements = elements
@@ -217,7 +224,7 @@ function ListOwnedCarsMenu()
 	end)
 end
 
--- List Owned Boats Menu
+-- Elenco menu barche possedute
 function ListOwnedBoatsMenu()
 	local elements = {}
 	
@@ -286,6 +293,7 @@ function ListOwnedBoatsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'spawn_owned_boat', {
+			css = 'garage',
 			title    = _U('garage_boats'),
 			align    = 'top-left',
 			elements = elements
@@ -302,7 +310,7 @@ function ListOwnedBoatsMenu()
 	end)
 end
 
--- List Owned Aircrafts Menu
+
 function ListOwnedAircraftsMenu()
 	local elements = {}
 	
@@ -371,6 +379,7 @@ function ListOwnedAircraftsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'spawn_owned_aircraft', {
+			css = 'garage',
 			title    = _U('garage_aircrafts'),
 			align    = 'top-left',
 			elements = elements
@@ -387,7 +396,7 @@ function ListOwnedAircraftsMenu()
 	end)
 end
 
--- Store Owned Cars Menu
+
 function StoreOwnedCarsMenu()
 	local playerPed  = GetPlayerPed(-1)
 	if IsPedInAnyVehicle(playerPed,  false) then
@@ -398,7 +407,7 @@ function StoreOwnedCarsMenu()
 		local current 	   = GetPlayersLastVehicle(GetPlayerPed(-1), true)
 		local engineHealth = GetVehicleEngineHealth(current)
 		local plate        = vehicleProps.plate
-		
+		-- fix store 
 		ESX.TriggerServerCallback('esx_advancedgarage:storeVehicle', function(valid)
 			if valid then
 				if engineHealth < 990 then
@@ -421,7 +430,7 @@ function StoreOwnedCarsMenu()
 	end
 end
 
--- Store Owned Boats Menu
+
 function StoreOwnedBoatsMenu()
 	local playerPed  = GetPlayerPed(-1)
 	if IsPedInAnyVehicle(playerPed,  false) then
@@ -455,7 +464,7 @@ function StoreOwnedBoatsMenu()
 	end
 end
 
--- Store Owned Aircrafts Menu
+
 function StoreOwnedAircraftsMenu()
 	local playerPed  = GetPlayerPed(-1)
 	if IsPedInAnyVehicle(playerPed,  false) then
@@ -489,7 +498,7 @@ function StoreOwnedAircraftsMenu()
 	end
 end
 
--- Pound Owned Cars Menu
+-- Menu Pound Owned Cars
 function ReturnOwnedCarsMenu()
 	ESX.TriggerServerCallback('esx_advancedgarage:getOutOwnedCars', function(ownedCars)
 		local elements = {}
@@ -526,6 +535,7 @@ function ReturnOwnedCarsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_car', {
+			css = 'garage',
 			title    = _U('pound_cars'),
 			align    = 'top-left',
 			elements = elements
@@ -581,6 +591,7 @@ function ReturnOwnedBoatsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_boat', {
+			css = 'garage',
 			title    = _U('pound_boats'),
 			align    = 'top-left',
 			elements = elements
@@ -636,6 +647,7 @@ function ReturnOwnedAircraftsMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_aircraft', {
+			css = 'garage',
 			title    = _U('pound_aircrafts'),
 			align    = 'top-left',
 			elements = elements
@@ -691,6 +703,7 @@ function ReturnOwnedPolicingMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_policing', {
+			css = 'garage',
 			title    = _U('pound_police'),
 			align    = 'top-left',
 			elements = elements
@@ -746,6 +759,7 @@ function ReturnOwnedAmbulanceMenu()
 		end
 		
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'return_owned_ambulance', {
+			css = 'garage',
 			title    = _U('pound_ambulance'),
 			align    = 'top-left',
 			elements = elements
@@ -764,7 +778,7 @@ function ReturnOwnedAmbulanceMenu()
 	end)
 end
 
--- Repair Vehicles
+-- Veicoli di riparazione
 function reparation(apprasial, vehicle, vehicleProps)
 	ESX.UI.Menu.CloseAll()
 	
@@ -774,6 +788,7 @@ function reparation(apprasial, vehicle, vehicleProps)
 	}
 	
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'delete_menu', {
+		css = 'garage',
 		title    = _U('damaged_vehicle'),
 		align    = 'top-left',
 		elements = elements
@@ -782,6 +797,12 @@ function reparation(apprasial, vehicle, vehicleProps)
 		
 		if data.current.value == 'yes' then
 			TriggerServerEvent('esx_advancedgarage:payhealth', apprasial)
+			
+			SetVehicleFixed(vehicle)
+			SetVehicleDeformationFixed(vehicle)
+			SetVehicleUndriveable(vehicle, false)
+			SetVehicleEngineOn(vehicle, true, true)
+			
 			putaway(vehicle, vehicleProps)
 		elseif data.current.value == 'no' then
 			ESX.ShowNotification(_U('visit_mechanic'))
@@ -791,14 +812,14 @@ function reparation(apprasial, vehicle, vehicleProps)
 	end)
 end
 
--- Put Away Vehicles
+
 function putaway(vehicle, vehicleProps)
 	ESX.Game.DeleteVehicle(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
 
--- Spawn Cars
+
 function SpawnVehicle(vehicle, plate)
 	ESX.Game.SpawnVehicle(vehicle.model, {
 		x = this_Garage.SpawnPoint.x,
@@ -828,7 +849,7 @@ function SpawnPoundedVehicle(vehicle, plate)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
--- Entered Marker
+
 AddEventHandler('esx_advancedgarage:hasEnteredMarker', function(zone)
 	if zone == 'car_garage_point' then
 		CurrentAction     = 'car_garage_point'
