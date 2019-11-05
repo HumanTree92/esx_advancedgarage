@@ -320,6 +320,10 @@ AddEventHandler('esx_advancedgarage:payAircraft', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.AircraftPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AircraftPoundPrice)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(Config.AircraftPoundPrice)
+	end)
 end)
 
 -- Pay for Pounded Boats
@@ -328,6 +332,10 @@ AddEventHandler('esx_advancedgarage:payBoat', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.BoatPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.BoatPoundPrice)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(Config.BoatPoundPrice)
+	end)
 end)
 
 -- Pay for Pounded Cars
@@ -336,6 +344,10 @@ AddEventHandler('esx_advancedgarage:payCar', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.CarPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.CarPoundPrice)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(Config.CarPoundPrice)
+	end)
 end)
 
 -- Pay for Pounded Policing
@@ -344,6 +356,10 @@ AddEventHandler('esx_advancedgarage:payPolicing', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.PolicingPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicingPoundPrice)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(Config.PolicingPoundPrice)
+	end)
 end)
 
 -- Pay for Pounded Ambulance
@@ -352,6 +368,10 @@ AddEventHandler('esx_advancedgarage:payAmbulance', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.AmbulancePoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AmbulancePoundPrice)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(Config.AmbulancePoundPrice)
+	end)
 end)
 
 -- Pay to Return Broken Vehicles
@@ -360,6 +380,10 @@ AddEventHandler('esx_advancedgarage:payhealth', function(price)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(price)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. price)
+	
+	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mecano', function(account)
+		account.addMoney(price)
+	end)
 end)
 
 -- Modify State of Vehicles

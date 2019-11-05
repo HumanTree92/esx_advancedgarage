@@ -404,13 +404,13 @@ function StoreOwnedCarsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.CarPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.CarPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -438,13 +438,13 @@ function StoreOwnedBoatsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.BoatPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -472,13 +472,13 @@ function StoreOwnedAircraftsMenu()
 				if engineHealth < 990 then
 					if Config.UseDamageMult then
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice*Config.DamageMult)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					else
 						local apprasial = math.floor((1000 - engineHealth)/1000*Config.AircraftPoundPrice)
-						reparation(apprasial, vehicle, vehicleProps)
+						RepairVehicle(apprasial, vehicle, vehicleProps)
 					end
 				else
-					putaway(vehicle, vehicleProps)
+					StoreVehicle(vehicle, vehicleProps)
 				end	
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
@@ -765,7 +765,7 @@ function ReturnOwnedAmbulanceMenu()
 end
 
 -- Repair Vehicles
-function reparation(apprasial, vehicle, vehicleProps)
+function RepairVehicle(apprasial, vehicle, vehicleProps)
 	ESX.UI.Menu.CloseAll()
 	
 	local elements = {
@@ -782,7 +782,9 @@ function reparation(apprasial, vehicle, vehicleProps)
 		
 		if data.current.value == 'yes' then
 			TriggerServerEvent('esx_advancedgarage:payhealth', apprasial)
-			putaway(vehicle, vehicleProps)
+			vehicleProps.bodyHealth = 1000.0 -- must be a decimal value!!!
+			vehicleProps.engineHealth = 1000
+			StoreVehicle(vehicle, vehicleProps)
 		elseif data.current.value == 'no' then
 			ESX.ShowNotification(_U('visit_mechanic'))
 		end
@@ -791,14 +793,14 @@ function reparation(apprasial, vehicle, vehicleProps)
 	end)
 end
 
--- Put Away Vehicles
-function putaway(vehicle, vehicleProps)
+-- Store Vehicles
+function StoreVehicle(vehicle, vehicleProps)
 	ESX.Game.DeleteVehicle(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
 
--- Spawn Cars
+-- Spawn Vehicles
 function SpawnVehicle(vehicle, plate)
 	ESX.Game.SpawnVehicle(vehicle.model, {
 		x = this_Garage.SpawnPoint.x,
@@ -813,7 +815,7 @@ function SpawnVehicle(vehicle, plate)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
--- Spawn Pound Cars
+-- Spawn Pound Vehicles
 function SpawnPoundedVehicle(vehicle, plate)
 	ESX.Game.SpawnVehicle(vehicle.model, {
 		x = this_Garage.SpawnPoint.x,
