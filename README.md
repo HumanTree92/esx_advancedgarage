@@ -71,7 +71,7 @@ If you like this please check out some of my other stuff like
 * [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
 
 # Visit Velociti Entertainment:
-* [TS3](ts3.velocitientertainment.com)
+* TS3 - ts3.velocitientertainment.com
 * [Discord](http://discord.velocitientertainment.com)
 * [Website](http://velocitientertainment.com/)
 * [Forums](http://velocitientertainment.com/forum)
