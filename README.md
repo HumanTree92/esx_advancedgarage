@@ -88,7 +88,7 @@ If you like this please check out some of my other stuff like
 ### License
 esx_advancedgarage - Advanced Garage for ESX Servers.
 
-Copyright (C) 2011-2019 Velociti Entertainment
+Copyright (C) 2011-2020 Velociti Entertainment
 
 This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
 
