@@ -20,22 +20,24 @@ Config.UseCustomKickMessage = true -- If KickPossibleCheaters is true you can se
 Config.UseDamageMult = false -- If true it costs more to store a Broken Vehicle.
 Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
 
-Config.CarPoundPrice      = 300 -- Car Pound Price.
-Config.BoatPoundPrice     = 500 -- Boat Pound Price.
+Config.CarPoundPrice = 300 -- Car Pound Price.
+Config.BoatPoundPrice = 500 -- Boat Pound Price.
 Config.AircraftPoundPrice = 2500 -- Aircraft Pound Price.
 
-Config.PolicingPoundPrice  = 80 -- Policing Pound Price.
+Config.PolicingPoundPrice = 80 -- Policing Pound Price.
 Config.AmbulancePoundPrice = 80 -- Ambulance Pound Price.
 
-Config.UseCarGarages        = true -- Allows use of Car Garages.
-Config.UseBoatGarages       = true -- Allows use of Boat Garages.
-Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages.
+Config.ParkVehicles = false -- If true it will Park all Vehicles when Server/Script is Restarted.
+
+Config.UseCarGarages = true -- Allows use of Car Garages.
+Config.UseBoatGarages = true -- Allows use of Boat Garages.
+Config.UseAircraftGarages = true -- Allows use of Aircraft Garages.
 Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages.
-Config.UseJobCarGarages     = true -- Allows use of Job Garages.
+Config.UseJobCarGarages = true -- Allows use of Job Garages.
 
 Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage.
-Config.ShowVehicleLocation       = false -- If set to true it will show the Location of the Vehicle in the Pound/Garage in the Garage menu.
-Config.UseVehicleNamesLua        = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles.
+Config.ShowVehicleLocation = false -- If set to true it will show the Location of the Vehicle in the Pound/Garage in the Garage menu.
+Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles.
 
 Config.ShowGarageSpacer1 = true -- If true it shows Spacer 1 in the List.
 Config.ShowGarageSpacer2 = false -- If true it shows Spacer 2 in the List | Don't use if spacer3 is set to true.

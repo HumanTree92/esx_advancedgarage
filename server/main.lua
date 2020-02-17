@@ -4,7 +4,11 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 -- Make sure all Vehicles are Stored on restart
 MySQL.ready(function()
-	ParkVehicles()
+	if Config.ParkVehicles then
+		ParkVehicles()
+	else
+		print('esx_advancedgarage: Parking Vehicles on restart is currently set to false.')
+	end
 end)
 
 function ParkVehicles()
@@ -19,8 +23,7 @@ end
 
 -- Get Owned Properties
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedProperties', function(source, cb)
-	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source)
+	local xPlayer = ESX.GetPlayerFromId(source)
 	local properties = {}
 
 	MySQL.Async.fetchAll('SELECT * FROM owned_properties WHERE owner = @owner', {
@@ -38,10 +41,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(sour
 	local ownedAircrafts = {}
 
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'aircraft',
-			['@job']    = '',
+			['@job']    = 'civ',
 			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
@@ -51,10 +54,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(sour
 			cb(ownedAircrafts)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'aircraft',
-			['@job']    = ''
+			['@job']    = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -70,10 +73,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 	local ownedBoats = {}
 
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'boat',
-			['@job']    = '',
+			['@job']    = 'civ',
 			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
@@ -83,10 +86,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 			cb(ownedBoats)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'boat',
-			['@job']    = ''
+			['@job']    = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -100,12 +103,12 @@ end)
 -- Fetch Owned Cars
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, cb)
 	local ownedCars = {}
-	
+
 	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'car',
-			['@job']    = '',
+			['@job']    = 'civ',
 			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
@@ -115,10 +118,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 			cb(ownedCars)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', {
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner']  = GetPlayerIdentifiers(source)[1],
 			['@Type']   = 'car',
-			['@job']    = ''
+			['@job']    = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -135,7 +138,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, 
 	local vehplate = vehicleProps.plate:match("^%s*(.-)%s*$")
 	local vehiclemodel = vehicleProps.model
 	local xPlayer = ESX.GetPlayerFromId(source)
-	
+
 	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND @plate = plate', {
 		['@owner'] = xPlayer.identifier,
 		['@plate'] = vehicleProps.plate
@@ -180,10 +183,10 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAircrafts', function(source, cb)
 	local ownedAircrafts = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'aircraft',
-		['@job']    = '',
+		['@job']    = 'civ',
 		['@stored'] = false
 	}, function(data) 
 		for _,v in pairs(data) do
@@ -198,10 +201,10 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedBoats', function(source, cb)
 	local ownedBoats = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'boat',
-		['@job']    = '',
+		['@job']    = 'civ',
 		['@stored'] = false
 	}, function(data) 
 		for _,v in pairs(data) do
@@ -216,10 +219,10 @@ end)
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedCars', function(source, cb)
 	local ownedCars = {}
 
-	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 		['@owner'] = GetPlayerIdentifiers(source)[1],
 		['@Type']   = 'car',
-		['@job']    = '',
+		['@job']    = 'civ',
 		['@stored'] = false
 	}, function(data) 
 		for _,v in pairs(data) do
@@ -320,7 +323,7 @@ AddEventHandler('esx_advancedgarage:payAircraft', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.AircraftPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AircraftPoundPrice)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(Config.AircraftPoundPrice)
 	end)
@@ -332,7 +335,7 @@ AddEventHandler('esx_advancedgarage:payBoat', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.BoatPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.BoatPoundPrice)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(Config.BoatPoundPrice)
 	end)
@@ -344,7 +347,7 @@ AddEventHandler('esx_advancedgarage:payCar', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.CarPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.CarPoundPrice)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(Config.CarPoundPrice)
 	end)
@@ -356,7 +359,7 @@ AddEventHandler('esx_advancedgarage:payPolicing', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.PolicingPoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicingPoundPrice)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(Config.PolicingPoundPrice)
 	end)
@@ -368,7 +371,7 @@ AddEventHandler('esx_advancedgarage:payAmbulance', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(Config.AmbulancePoundPrice)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AmbulancePoundPrice)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(Config.AmbulancePoundPrice)
 	end)
@@ -380,7 +383,7 @@ AddEventHandler('esx_advancedgarage:payhealth', function(price)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	xPlayer.removeMoney(price)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. price)
-	
+
 	TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 		account.addMoney(price)
 	end)

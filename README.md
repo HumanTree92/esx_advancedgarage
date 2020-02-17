@@ -17,16 +17,14 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 
 # Requirements:
 * Required:
-  * [esx_vehicleshop](https://github.com/ESX-Org/esx_vehicleshop)
   * [esx_property](https://github.com/ESX-Org/esx_property)
 * Optional:
-  * [esx_aircraftshop](https://github.com/HumanTree92/esx_aircraftshop)
-  * [esx_boatshop](https://github.com/HumanTree92/esx_boatshop)
-  * [esx_truckshop](https://github.com/HumanTree92/esx_truckshop)
+  * [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
 
 # Download & Installation:
 1) Download the .zip.
 2) Extract the .zip or Open the .zip.
+3) Import the `esx_vehicleshop_fix.sql` into your database if using with esx_vehicleshop or edit your Database & change your job to NOT NULL & DEFAULT civ
 3) Place `esx_advancedgarage` in your ESX Directory
 4) Add `start esx_advancedgarage` to your server.cfg
 
@@ -56,19 +54,24 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
   * Open the menu
   * Select the Vehicle from the list
 
-# Other:
+# Other Scripts:
 If you like this please check out some of my other stuff like
 * [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
+* [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
+* [esx_advancedhospital](https://github.com/HumanTree92/esx_advancedhospital)
+* [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
+* [esx_licenseshop](https://github.com/HumanTree92/esx_licenseshop)
+* [esx_vehiclespawner](https://github.com/HumanTree92/esx_vehiclespawner)
+* [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
+
+# Archived Scripts:
+Scripts that will no longer be Maintained.
 * [esx_aircraftshop](https://github.com/HumanTree92/esx_aircraftshop)
 * [esx_boatshop](https://github.com/HumanTree92/esx_boatshop)
 * [esx_truckshop](https://github.com/HumanTree92/esx_truckshop)
-* [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
-* [esx_licenseshop](https://github.com/HumanTree92/esx_licenseshop)
 * [esx_plasticsurgery](https://github.com/HumanTree92/esx_plasticsurgery)
-* [esx_vehiclespawner](https://github.com/HumanTree92/esx_vehiclespawner)
 * [esx_hospital](https://github.com/HumanTree92/esx_hospital)
 * [esx_panicbutton](https://github.com/HumanTree92/esx_panicbutton)
-* [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
 
 # Visit Velociti Entertainment:
 * TS3 - ts3.velocitientertainment.com

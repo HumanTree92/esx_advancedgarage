@@ -1,5 +1,3 @@
--- Optional Properties created by Velociti Entertainment
-
 USE `essentialmode`;
 
 INSERT INTO `properties` (`id`, `name`, `label`, `entering`, `exit`, `inside`, `outside`, `ipls`, `gateway`, `is_single`, `is_room`, `is_gateway`, `room_menu`, `price`) VALUES
