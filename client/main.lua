@@ -1,15 +1,7 @@
-ESX = nil
-
-local PlayerData              = {}
-local JobBlips                = {}
+local CurrentActionData, PlayerData, JobBlips, userProperties, this_Garage, privateBlips = {}, {}, {}, {}, {}, {}
 local HasAlreadyEnteredMarker = false
-local LastZone                = nil
-local CurrentAction           = nil
-local CurrentActionMsg        = ''
-local CurrentActionData       = {}
-local userProperties          = {}
-local this_Garage             = {}
-local privateBlips            = {}
+local LastZone, CurrentAction, CurrentActionMsg
+ESX = nil
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -1115,7 +1107,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if CurrentAction ~= nil then
+		if CurrentAction then
 			ESX.ShowHelpNotification(CurrentActionMsg)
 
 			if IsControlJustReleased(0, 38) then
