@@ -1,15 +1,9 @@
 ESX = nil
 
-local PlayerData              = {}
-local JobBlips                = {}
+local PlayerData, JobBlips, CurrentActionData, userProperties, this_Garage, privateBlips  = {}, {}, {}, {}, {}, {}, {}
 local HasAlreadyEnteredMarker = false
-local LastZone                = nil
-local CurrentAction           = nil
-local CurrentActionMsg        = ''
-local CurrentActionData       = {}
-local userProperties          = {}
-local this_Garage             = {}
-local privateBlips            = {}
+local LastZone, CurrentAction
+local CurrentActionMsg = ''
 
 Citizen.CreateThread(function()
 	while ESX == nil do
