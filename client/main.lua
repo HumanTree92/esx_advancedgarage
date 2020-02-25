@@ -789,6 +789,12 @@ function SpawnVehicle(vehicle, plate)
 	}, this_Garage.SpawnPoint.h, function(callback_vehicle)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
+		SetVehicleFixed(callback_vehicle)
+		SetVehicleDeformationFixed(callback_vehicle)
+		SetVehicleUndriveable(callback_vehicle, false)
+		SetVehicleEngineOn(callback_vehicle, true, true)
+		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
+		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 
@@ -804,6 +810,12 @@ function SpawnPoundedVehicle(vehicle, plate)
 	}, this_Garage.SpawnPoint.h, function(callback_vehicle)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
+		SetVehicleFixed(callback_vehicle)
+		SetVehicleDeformationFixed(callback_vehicle)
+		SetVehicleUndriveable(callback_vehicle, false)
+		SetVehicleEngineOn(callback_vehicle, true, true)
+		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
+		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 

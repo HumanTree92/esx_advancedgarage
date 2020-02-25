@@ -14,37 +14,37 @@ end)
 Config = {}
 Config.Locale = 'en'
 
-Config.KickPossibleCheaters = true -- If true it will kick the player that tries store a vehicle that they changed the Hash or Plate.
-Config.UseCustomKickMessage = true -- If KickPossibleCheaters is true you can set a Custom Kick Message in the locales.
+Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
+Config.UseCustomKickMessage = true -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
 
-Config.UseDamageMult = false -- If true it costs more to store a Broken Vehicle.
+Config.UseDamageMult = false -- true = Costs more to Store a Broken/Damaged Vehicle.
 Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
 
-Config.CarPoundPrice = 300 -- Car Pound Price.
-Config.BoatPoundPrice = 500 -- Boat Pound Price.
-Config.AircraftPoundPrice = 2500 -- Aircraft Pound Price.
+Config.AircraftPoundPrice = 2500 -- How much it Costs to get Vehicle from Aircraft Pound.
+Config.BoatPoundPrice = 500 -- How much it Costs to get Vehicle from Boat Pound.
+Config.CarPoundPrice = 300 -- How much it Costs to get Vehicle from Car Pound.
+Config.PolicingPoundPrice = 80 -- How much it Costs to get Vehicle from Policing Pound.
+Config.AmbulancePoundPrice = 80 -- How much it Costs to get Vehicle from Ambulance Pound.
 
-Config.PolicingPoundPrice = 80 -- Policing Pound Price.
-Config.AmbulancePoundPrice = 80 -- Ambulance Pound Price.
+Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
 
-Config.ParkVehicles = false -- If true it will Park all Vehicles when Server/Script is Restarted.
+Config.UseAircraftGarages = true -- true = Allows use of Aircraft Garages.
+Config.UseBoatGarages = true -- true = Allows use of Boat Garages.
+Config.UseCarGarages = true -- true = Allows use of Car Garages.
+Config.UsePrivateCarGarages = true -- true = Allows use of Private Car Garages.
+Config.UseJobCarGarages = true -- true = Allows use of Job Garages.
 
-Config.UseCarGarages = true -- Allows use of Car Garages.
-Config.UseBoatGarages = true -- Allows use of Boat Garages.
-Config.UseAircraftGarages = true -- Allows use of Aircraft Garages.
-Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages.
-Config.UseJobCarGarages = true -- Allows use of Job Garages.
+Config.GiveSocietyMoney = false -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
+Config.DontShowPoundCarsInGarage = true -- true = Won't show Impounded Vehicles in Garage.
+Config.ShowVehicleLocation = false -- true = Will show Location of the Vehicle in the Garage Menu.
+Config.UseVehicleNamesLua = true -- true = Use a vehicle_names.lua for Addon Vehicles.
 
-Config.DontShowPoundCarsInGarage = true -- If set to true it won't show Cars at the Pound in the Garage.
-Config.ShowVehicleLocation = false -- If set to true it will show the Location of the Vehicle in the Pound/Garage in the Garage menu.
-Config.UseVehicleNamesLua = true -- Must setup a vehicle_names.lua for Custom Addon Vehicles.
+Config.ShowGarageSpacer1 = true -- true = Shows spacer1 in Garage Menu.
+Config.ShowGarageSpacer2 = false -- true = Shows spacer2 in Garage Menu. Note: Don't use if "Config.ShowGarageSpacer3 = true".
+Config.ShowGarageSpacer3 = true -- true = Shows spacer3 in Garage Menu. Note: Don't use if "Config.ShowGarageSpacer2 = true".
 
-Config.ShowGarageSpacer1 = true -- If true it shows Spacer 1 in the List.
-Config.ShowGarageSpacer2 = false -- If true it shows Spacer 2 in the List | Don't use if spacer3 is set to true.
-Config.ShowGarageSpacer3 = true -- If true it shows Spacer 3 in the List | Don't use if Spacer2 is set to true.
-
-Config.ShowPoundSpacer2 = false -- If true it shows Spacer 2 in the List | Don't use if spacer3 is set to true.
-Config.ShowPoundSpacer3 = true -- If true it shows Spacer 3 in the List | Don't use if Spacer2 is set to true.
+Config.ShowPoundSpacer2 = false -- true = Shows spacer2 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer3 = true".
+Config.ShowPoundSpacer3 = true -- true = Shows spacer3 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer2 = true".
 
 Config.MarkerType   = 1
 Config.DrawDistance = 100.0

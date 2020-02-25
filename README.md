@@ -20,6 +20,7 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
   * [esx_property](https://github.com/ESX-Org/esx_property)
 * Optional:
   * [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
+  * [esx_mechanicjob](https://github.com/ESX-Org/esx_mechanicjob)
 
 # Download & Installation:
 1) Download the .zip.
