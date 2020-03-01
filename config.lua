@@ -1,16 +1,3 @@
---[[
-***** How to Setup a vehicle_names.lua for Custom Addon Vehicles *****
-* Create a vehicle_names.lua & past the below Code
-function AddTextEntry(key, value)
-	Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), key, value)
-end
-
-Citizen.CreateThread(function()
-	--Example 1: AddTextEntry('SPAWN_NAME_HERE', 'VEHICLE_NAME_HERE')
-	--Example 2: AddTextEntry('f350', '2013 Ford F350')
-end)
-]]
-
 Config = {}
 Config.Locale = 'en'
 
@@ -47,7 +34,7 @@ Config.ShowPoundSpacer2 = false -- true = Shows spacer2 in Pound Menu. Note: Don
 Config.ShowPoundSpacer3 = true -- true = Shows spacer3 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer2 = true".
 
 Config.MarkerType   = 1
-Config.DrawDistance = 100.0
+Config.DrawDistance = 100
 
 Config.BlipGarage = {
 	Sprite = 290,
