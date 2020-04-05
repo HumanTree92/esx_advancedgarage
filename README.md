@@ -33,7 +33,6 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 # KNOWN BUGS:
 * There is a Limit on how many Vehicles that can be in each garage. For me it was 36 Vehicles in the Car Garage but after that i couldn't pull anymore out. You can still buy more Boats & Planes if the Car Garage is at 36.
 * It is Possible to Duplicate Vehicles but do note that if said Person Duplicates a Vehicle & takes 1 of them & sell thems the other one is useless & can NOT be stored or sold.
-* When buying an Apartment or Private House in order for the Garage to show you MUST relog from the SERVER & come back. If you buy an apartment & it doesn't show up make sure you relog.
 * Doesn't work well when using the Car Dealer Job.
 * If you are having problems with the SQL from esx_vehicleshop try the SQL from here. If a problem with the SQL from here try esx_vehicleshop SQL. If still having problems please submit an issue.
 

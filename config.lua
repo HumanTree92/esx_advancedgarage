@@ -1,6 +1,22 @@
 Config = {}
 Config.Locale = 'en'
 
+Config.DrawDistance = 100
+Config.UseCommand = true -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
+
+Config.PointMarker = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0} -- Green Color / Standard Size Circle.
+Config.DeleteMarker = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0} -- Red Color / Big Size Circle.
+Config.PoundMarker = {Type = 1, r = 0, g = 0, b = 100, x = 1.5, y = 1.5, z = 1.0} -- Blue Color / Standard Size Circle.
+Config.JPoundMarker = {Type = 1, r = 255, g = 0, b = 0, x = 1.5, y = 1.5, z = 1.0} -- Red Color / Standard Size Circle.
+
+Config.GarageBlip = {Sprite = 290, Color = 38, Display = 2, Scale = 1.0} -- Public Garage Blip.
+Config.PGarageBlip = {Sprite = 290, Color = 53, Display = 2, Scale = 1.0} -- Private Garage Blip.
+Config.PoundBlip = {Sprite = 67, Color = 64, Display = 2, Scale = 1.0} -- Pound Blip.
+Config.JPoundBlip = {Sprite = 67, Color = 49, Display = 2, Scale = 1.0} -- Job Pound Blip.
+
+Config.PoundWait = 5 -- How many Minutes someone must wait before Opening Pound Menu Again.
+Config.JPoundWait = 2.5 -- How many Minutes someone must wait before Opening Job Pound Menu Again.
+
 Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
 Config.UseCustomKickMessage = true -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
 
@@ -14,6 +30,8 @@ Config.PolicingPoundPrice = 80 -- How much it Costs to get Vehicle from Policing
 Config.AmbulancePoundPrice = 80 -- How much it Costs to get Vehicle from Ambulance Pound.
 
 Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
+Config.UseBlips = true -- true = Uses Blips | false = Does Opposite.
+Config.UseJobBlips = true -- true = Uses Job Blips | false = Does Opposite.
 
 Config.UseAircraftGarages = true -- true = Allows use of Aircraft Garages.
 Config.UseBoatGarages = true -- true = Allows use of Boat Garages.
@@ -33,705 +51,753 @@ Config.ShowGarageSpacer3 = true -- true = Shows spacer3 in Garage Menu. Note: Do
 Config.ShowPoundSpacer2 = false -- true = Shows spacer2 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer3 = true".
 Config.ShowPoundSpacer3 = true -- true = Shows spacer3 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer2 = true".
 
-Config.MarkerType   = 1
-Config.DrawDistance = 100
-
-Config.BlipGarage = {
-	Sprite = 290,
-	Color = 38,
-	Display = 2,
-	Scale = 1.0
-}
-
-Config.BlipGaragePrivate = {
-	Sprite = 290,
-	Color = 53,
-	Display = 2,
-	Scale = 1.0
-}
-
-Config.BlipPound = {
-	Sprite = 67,
-	Color = 64,
-	Display = 2,
-	Scale = 1.0
-}
-
-Config.BlipJobPound = {
-	Sprite = 67,
-	Color = 49,
-	Display = 2,
-	Scale = 1.0
-}
-
-Config.PointMarker = {
-	r = 0, g = 255, b = 0,     -- Green Color
-	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
-}
-
-Config.DeleteMarker = {
-	r = 255, g = 0, b = 0,     -- Red Color
-	x = 5.0, y = 5.0, z = 1.0  -- Big Size Circle
-}
-
-Config.PoundMarker = {
-	r = 0, g = 0, b = 100,     -- Blue Color
-	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
-}
-
-Config.JobPoundMarker = {
-	r = 255, g = 0, b = 0,     -- Red Color
-	x = 1.5, y = 1.5, z = 1.0  -- Standard Size Circle
-}
-
 -- Start of Jobs
+Config.AmbulancePounds = {
+	Los_Santos = {
+		Marker = vector3(374.42, -1620.68, 28.29),
+		Spawner = vector3(391.74, -1619.0, 28.29),
+		Heading = 318.34
+	},
+	Sandy_Shores = {
+		Marker = vector3(1646.01, 3812.06, 37.65),
+		Spawner = vector3(1627.84, 3788.45, 33.77),
+		Heading = 308.53
+	},
+	Paleto_Bay = {
+		Marker = vector3(-223.6, 6243.37, 30.49),
+		Spawner = vector3(-230.88, 6255.89, 30.49),
+		Heading = 136.5
+	}
+}
 
 Config.PolicePounds = {
-	Pound_LosSantos = {
-		PoundPoint = { x = 374.42, y = -1620.68, z = 28.29 },
-		SpawnPoint = { x = 391.74, y = -1619.0, z = 28.29, h = 318.34 }
+	Los_Santos = {
+		Marker = vector3(374.42, -1620.68, 28.29),
+		Spawner = vector3(391.74, -1619.0, 28.29),
+		Heading = 318.34
 	},
-	Pound_Sandy = {
-		PoundPoint = { x = 1646.01, y = 3812.06, z = 37.65 },
-		SpawnPoint = { x = 1627.84, y = 3788.45, z = 33.77, h = 308.53 }
+	Sandy_Shores = {
+		Marker = vector3(1646.01, 3812.06, 37.65),
+		Spawner = vector3(1627.84, 3788.45, 33.77),
+		Heading = 308.53
 	},
-	Pound_Paleto = {
-		PoundPoint = { x = -223.6, y = 6243.37, z = 30.49 },
-		SpawnPoint = { x = -230.88, y = 6255.89, z = 30.49, h = 136.5 }
+	Paleto_Bay = {
+		Marker = vector3(-223.6, 6243.37, 30.49),
+		Spawner = vector3(-230.88, 6255.89, 30.49),
+		Heading = 136.5
 	}
 }
-
-Config.AmbulancePounds = {
-	Pound_LosSantos = {
-		PoundPoint = { x = 374.42, y = -1620.68, z = 28.29 },
-		SpawnPoint = { x = 391.74, y = -1619.0, z = 28.29, h = 318.34 }
-	},
-	Pound_Sandy = {
-		PoundPoint = { x = 1646.01, y = 3812.06, z = 37.65 },
-		SpawnPoint = { x = 1627.84, y = 3788.45, z = 33.77, h = 308.53 }
-	},
-	Pound_Paleto = {
-		PoundPoint = { x = -223.6, y = 6243.37, z = 30.49 },
-		SpawnPoint = { x = -230.88, y = 6255.89, z = 30.49, h = 136.5 }
-	}
-}
-
 -- End of Jobs
--- Start of Cars
 
-Config.CarGarages = {
-	Garage_CentralLS = {
-		GaragePoint = { x = 215.800, y = -810.057, z = 29.727 },
-		SpawnPoint = { x = 229.700, y = -800.1149, z = 29.5722, h = 157.84 },
-		DeletePoint = { x = 223.797, y = -760.415, z = 29.646 }
-	},
-	Garage_Sandy = {
-		GaragePoint = { x = 1737.59, y = 3710.2, z = 33.14 },
-		SpawnPoint = { x = 1737.84, y = 3719.28, z = 33.04, h = 21.22 },
-		DeletePoint = { x = 1722.66, y = 3713.74, z = 33.21 }
-	},
-	Garage_Paleto = {
-		GaragePoint = { x = 105.359, y = 6613.586, z = 31.3973 },
-		SpawnPoint = { x = 128.7822, y = 6622.9965, z = 30.7828, h = 315.01 },
-		DeletePoint = { x = 126.3572, y = 6608.4150, z = 30.8565 }
-	},
-	Garage_Prison = {
-		GaragePoint = { x = 1846.56, y = 2585.86, z = 44.67 },
-		SpawnPoint = { x = 1855.11, y = 2592.72, z = 44.67, h = 274.8 },
-		DeletePoint = { x = 1855.21, y = 2615.3, z = 34.67 } -- z = 44.67
-	},
-	Garage_RaceTrack = {
-		GaragePoint = { x = 1212.32, y = 339.94, z = 80.99 },
-		SpawnPoint = { x = 1199.02, y = 330.92, z = 80.99, h = 144.86 },
-		DeletePoint = { x = 1207.9, y = 343.8, z = 80.99 }
-	}
-}
-
-Config.CarPounds = {
-	Pound_LosSantos = {
-		PoundPoint = { x = 408.61, y = -1625.47, z = 28.29 },
-		SpawnPoint = { x = 405.64, y = -1643.4, z = 27.61, h = 229.54 }
-	},
-	Pound_Sandy = {
-		PoundPoint = { x = 1651.38, y = 3804.84, z = 37.65 },
-		SpawnPoint = { x = 1627.84, y = 3788.45, z = 33.77, h = 308.53 }
-	},
-	Pound_Paleto = {
-		PoundPoint = { x = -234.82, y = 6198.65, z = 30.94 },
-		SpawnPoint = { x = -230.08, y = 6190.24, z = 30.49, h = 140.24 }
-	}
-}
-
--- End of Cars
--- Start of Boats
-
-Config.BoatGarages = {
-	Garage_LSDock = {
-		GaragePoint = { x = -735.87, y = -1325.08, z = 0.6 },
-		SpawnPoint = { x = -718.87, y = -1320.18, z = -0.47477427124977, h = 45.0 },
-		DeletePoint = { x = -731.15, y = -1334.71, z = -0.47477427124977 }
-	},
-	Garage_SandyDock = {
-		GaragePoint = { x = 1333.2, y = 4269.92, z = 30.5 },
-		SpawnPoint = { x = 1334.61, y = 4264.68, z = 29.86, h = 87.0 },
-		DeletePoint = { x = 1323.73, y = 4269.94, z = 29.86 }
-	},
-	Garage_PaletoDock = {
-		GaragePoint = { x = -283.74, y = 6629.51, z = 6.3 },
-		SpawnPoint = { x = -290.46, y = 6622.72, z = -0.47477427124977, h = 52.0 },
-		DeletePoint = { x = -304.66, y = 6607.36, z = -0.47477427124977 }
-	}
-}
-
-Config.BoatPounds = {
-	Pound_LSDock = {
-		PoundPoint = { x = -738.67, y = -1400.43, z = 4.0 },
-		SpawnPoint = { x = -738.33, y = -1381.51, z = 0.12, h = 137.85 }
-	},
-	Pound_SandyDock = {
-		PoundPoint = { x = 1299.36, y = 4217.93, z = 32.91 },
-		SpawnPoint = { x = 1294.35, y = 4226.31, z = 29.86, h = 345.0 }
-	},
-	Pound_PaletoDock = {
-		PoundPoint = { x = -270.2, y = 6642.43, z = 6.36 },
-		SpawnPoint = { x = -290.38, y = 6638.54, z = -0.47477427124977, h = 130.0 }
-	}
-}
-
--- End of Boats
 -- Start of Aircrafts
-
 Config.AircraftGarages = {
-	Garage_LSAirport = {
-		GaragePoint = { x = -1617.14, y = -3145.52, z = 12.99 },
-		SpawnPoint = { x = -1657.99, y = -3134.38, z = 12.99, h = 330.11 },
-		DeletePoint = { x = -1642.12, y = -3144.25, z = 12.99 }
+	Los_Santos_Airport = {
+		Marker = vector3(-1617.14, -3145.52, 12.99),
+		Spawner = vector3(-1657.99, -3134.38, 12.99),
+		Deleter = vector3(-1642.12, -3144.25, 12.99),
+		Heading = 330.11
 	},
-	Garage_SandyAirport = {
-		GaragePoint = { x = 1723.84, y = 3288.29, z = 40.16 },
-		SpawnPoint = { x = 1710.85, y = 3259.06, z = 40.69, h = 104.66 },
-		DeletePoint = { x = 1714.45, y = 3246.75, z = 40.07 }
+	Sandy_Shores_Airport = {
+		Marker = vector3(1723.84, 3288.29, 40.16),
+		Spawner = vector3(1710.85, 3259.06, 40.69),
+		Deleter = vector3(1714.45, 3246.75, 40.07),
+		Heading = 104.66
 	},
-	Garage_GrapeseedAirport = {
-		GaragePoint = { x = 2152.83, y = 4797.03, z = 40.19 },
-		SpawnPoint = { x = 2122.72, y = 4804.85, z = 40.78, h = 115.04 },
-		DeletePoint = { x = 2082.36, y = 4806.06, z = 40.07 }
+	Grapeseed_Airport = {
+		Marker = vector3(2152.83, 4797.03, 40.19),
+		Spawner = vector3(2122.72, 4804.85, 40.78),
+		Deleter = vector3(2082.36, 4806.06, 40.07),
+		Heading = 115.04
 	}
 }
 
 Config.AircraftPounds = {
-	Pound_LSAirport = {
-		PoundPoint = { x = -1243.0, y = -3391.92, z = 12.94 },
-		SpawnPoint = { x = -1272.27, y = -3382.46, z = 12.94, h = 330.25 }
+	Los_Santos_Airport = {
+		Marker = vector3(-1243.0, -3391.92, 12.94),
+		Spawner = vector3(-1272.27, -3382.46, 12.94),
+		Heading = 330.25
+	}
+}
+-- End of Aircrafts
+
+-- Start of Boats
+Config.BoatGarages = {
+	Los_Santos_Dock = {
+		Marker = vector3(-735.87, -1325.08, 0.6),
+		Spawner = vector3(-718.87, -1320.18, -0.47),
+		Deleter = vector3(-731.15, -1334.71, -0.47),
+		Heading = 45.0
+	},
+	Sandy_Shores_Dock = {
+		Marker = vector3(1333.2, 4269.92, 30.5),
+		Spawner = vector3(1334.61, 4264.68, 29.86),
+		Deleter = vector3(1323.73, 4269.94, 29.86),
+		Heading = 87.0
+	},
+	Paleto_Bay_Dock = {
+		Marker = vector3(-283.74, 6629.51, 6.3),
+		Spawner = vector3(-290.46, 6622.72, -0.47),
+		Deleter = vector3(-304.66, 6607.36, -0.47),
+		Heading = 52.0
 	}
 }
 
--- End of Aircrafts
--- Start of Private Garages
+Config.BoatPounds = {
+	Los_Santos_Dock = {
+		Marker = vector3(-738.67, -1400.43, 4.0),
+		Spawner = vector3(-738.33, -1381.51, 0.12),
+		Heading = 137.85
+	}
+	--[[Sandy_Shores_Dock = {
+		Marker = vector3(1299.36, 4217.93, 32.91),
+		Spawner = vector3(1294.35, 4226.31, 29.86),
+		Heading = 345.0
+	},
+	Paleto_Bay_Dock = {
+		Marker = vector3(-270.2, 6642.43, 6.36),
+		Spawner = vector3(-290.38, 6638.54, -0.47),
+		Heading = 130.0
+	}]]--
+}
+-- End of Boats
 
+-- Start of Cars
+Config.CarGarages = {
+	Los_Santos = {
+		Marker = vector3(215.80, -810.06, 29.73),
+		Spawner = vector3(229.70, -800.12, 29.57),
+		Deleter = vector3(223.80, -760.42, 29.65),
+		Heading = 157.84
+	},
+	--[[Los_Santos_RaceTrack = {
+		Marker = vector3(1212.32, 339.94, 80.99),
+		Spawner = vector3(1199.02, 330.92, 80.99),
+		Deleter = vector3(1207.9, 343.8, 80.99),
+		Heading = 144.86
+	},]]--
+	Sandy_Shores = {
+		Marker = vector3(1737.59, 3710.2, 33.14),
+		Spawner = vector3(1737.84, 3719.28, 33.04),
+		Deleter = vector3(1722.66, 3713.74, 33.21),
+		Heading = 21.22
+	},
+	--[[Sandy_Shores_Prison = {
+		Marker = vector3(1846.56, 2585.86, 44.67),
+		Spawner = vector3(1855.11, 2592.72, 44.67),
+		Deleter = vector3(1855.21, 2615.3, 34.67),
+		Heading = 274.8 
+	},]]--
+	Paleto_Bay = {
+		Marker = vector3(105.36, 6613.59, 31.40),
+		Spawner = vector3(128.78, 6622.99, 30.78),
+		Deleter = vector3(126.36, 6608.41, 30.86),
+		Heading = 315.01
+	}
+}
+
+Config.CarPounds = {
+	Los_Santos = {
+		Marker = vector3(408.61, -1625.47, 28.29),
+		Spawner = vector3(405.64, -1643.4, 27.61),
+		Heading = 229.54
+	},
+	Sandy_Shores = {
+		Marker = vector3(1651.38, 3804.84, 37.65),
+		Spawner = vector3(1627.84, 3788.45, 33.77),
+		Heading = 308.53
+	},
+	Paleto_Bay = {
+		Marker = vector3(-234.82, 6198.65, 30.94),
+		Spawner = vector3(-230.08, 6190.24, 30.49),
+		Heading = 140.24
+	}
+}
+-- End of Cars
+
+-- Start of Private Cars
 Config.PrivateCarGarages = {
 	-- Maze Bank Building Garages
-	Garage_MazeBankBuilding = {
+	MazeBankBuilding_Main = {
 		Private = "MazeBankBuilding",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_OldSpiceWarm = {
+	MazeBankBuilding_OldSpiceWarm = {
 		Private = "OldSpiceWarm",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_OldSpiceClassical = {
+	MazeBankBuilding_OldSpiceClassical = {
 		Private = "OldSpiceClassical",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_OldSpiceVintage = {
+	MazeBankBuilding_OldSpiceVintage = {
 		Private = "OldSpiceVintage",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_ExecutiveRich = {
+	MazeBankBuilding_ExecutiveRich = {
 		Private = "ExecutiveRich",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_ExecutiveCool = {
+	MazeBankBuilding_ExecutiveCool = {
 		Private = "ExecutiveCool",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_ExecutiveContrast = {
+	MazeBankBuilding_ExecutiveContrast = {
 		Private = "ExecutiveContrast",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_PowerBrokerIce = {
+	MazeBankBuilding_PowerBrokerIce = {
 		Private = "PowerBrokerIce",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_PowerBrokerConservative = {
+	MazeBankBuilding_PowerBrokerConservative = {
 		Private = "PowerBrokerConservative",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
-	Garage_PowerBrokerPolished = {
+	MazeBankBuilding_PowerBrokerPolished = {
 		Private = "PowerBrokerPolished",
-		GaragePoint = { x = -60.38, y = -790.31, z = 43.23 },
-		SpawnPoint = { x = -44.031, y = -787.363, z = 43.186, h = 254.322 },
-		DeletePoint = { x = -58.88, y = -778.625, z = 43.175 }
+		Marker = vector3(-60.38, -790.31, 43.23),
+		Spawner = vector3(-44.03, -787.36, 43.19),
+		Deleter = vector3(-58.88, -778.63, 43.18),
+		Heading = 254.322
 	},
 	-- End of Maze Bank Building Garages
 	-- Start of Lom Bank Garages
-	Garage_LomBank = {
+	LomBank_Main = {
 		Private = "LomBank",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBOldSpiceWarm = {
+	LomBank_LBOldSpiceWarm = {
 		Private = "LBOldSpiceWarm",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBOldSpiceClassical = {
+	LomBank_LBOldSpiceClassical = {
 		Private = "LBOldSpiceClassical",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBOldSpiceVintage = {
+	LomBank_LBOldSpiceVintage = {
 		Private = "LBOldSpiceVintage",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBExecutiveRich = {
+	LomBank_LBExecutiveRich = {
 		Private = "LBExecutiveRich",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBExecutiveCool = {
+	LomBank_LBExecutiveCool = {
 		Private = "LBExecutiveCool",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBExecutiveContrast = {
+	LomBank_LBExecutiveContrast = {
 		Private = "LBExecutiveContrast",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBPowerBrokerIce = {
+	LomBank_LBPowerBrokerIce = {
 		Private = "LBPowerBrokerIce",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBPowerBrokerConservative = {
+	LomBank_LBPowerBrokerConservative = {
 		Private = "LBPowerBrokerConservative",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
-	Garage_LBPowerBrokerPolished = {
+	LomBank_LBPowerBrokerPolished = {
 		Private = "LBPowerBrokerPolished",
-		GaragePoint = { x = -1545.17, y = -566.24, z = 24.85 },
-		SpawnPoint = { x = -1551.88, y = -581.383, z = 24.708, h = 331.176 },
-		DeletePoint = { x = -1538.564, y = -576.049, z = 24.708 }
+		Marker = vector3(-1545.17, -566.24, 24.85),
+		Spawner = vector3(-1551.88, -581.38, 24.71),
+		Deleter = vector3(-1538.56, -576.05, 24.71),
+		Heading = 331.176
 	},
 	-- End of Lom Bank Garages
 	-- Start of Maze Bank West Garages
-	Garage_MazeBankWest = {
+	MazeBankWest_Main = {
 		Private = "MazeBankWest",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWOldSpiceWarm = {
+	MazeBankWest_MBWOldSpiceWarm = {
 		Private = "MBWOldSpiceWarm",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWOldSpiceClassical = {
+	MazeBankWest_MBWOldSpiceClassical = {
 		Private = "MBWOldSpiceClassical",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWOldSpiceVintage = {
+	MazeBankWest_MBWOldSpiceVintage = {
 		Private = "MBWOldSpiceVintage",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWExecutiveRich = {
+	MazeBankWest_MBWExecutiveRich = {
 		Private = "MBWExecutiveRich",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWExecutiveCool = {
+	MazeBankWest_MBWExecutiveCool = {
 		Private = "MBWExecutiveCool",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWExecutiveContrast = {
+	MazeBankWest_MBWExecutiveContrast = {
 		Private = "MBWExecutiveContrast",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWPowerBrokerIce = {
+	MazeBankWest_MBWPowerBrokerIce = {
 		Private = "MBWPowerBrokerIce",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWPowerBrokerConvservative = {
+	MazeBankWest_MBWPowerBrokerConvservative = {
 		Private = "MBWPowerBrokerConvservative",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
-	Garage_MBWPowerBrokerPolished = {
+	MazeBankWest_MBWPowerBrokerPolished = {
 		Private = "MBWPowerBrokerPolished",
-		GaragePoint = { x = -1368.14, y = -468.01, z = 30.6 },
-		SpawnPoint = { x = -1376.93, y = -474.32, z = 30.5, h = 97.95 },
-		DeletePoint = { x = -1362.065, y = -471.982, z = 30.5 }
+		Marker = vector3(-1368.14, -468.01, 30.6),
+		Spawner = vector3(-1376.93, -474.32, 30.5),
+		Deleter = vector3(-1362.07, -471.98, 30.5),
+		Heading = 97.95
 	},
 	-- End of Maze Bank West Garages
 	-- Start of Intergrity Way Garages
-	Garage_IntegrityWay = {
+	IntegrityWay_Main = {
 		Private = "IntegrityWay",
-		GaragePoint = { x = -14.1, y = -614.93, z = 34.86 },
-		SpawnPoint = { x = -7.351, y = -635.1, z = 34.724, h = 66.632 },
-		DeletePoint = { x = -37.575, y = -620.391, z = 34.073 }
+		Marker = vector3(-14.1, -614.93, 34.86),
+		Spawner = vector3(-7.35, -635.1, 34.72),
+		Deleter = vector3(-37.57, -620.39, 34.07),
+		Heading = 66.632
 	},
-	Garage_IntegrityWay28 = {
+	IntegrityWay_IntegrityWay28 = {
 		Private = "IntegrityWay28",
-		GaragePoint = { x = -14.1, y = -614.93, z = 34.86 },
-		SpawnPoint = { x = -7.351, y = -635.1, z = 34.724, h = 66.632 },
-		DeletePoint = { x = -37.575, y = -620.391, z = 34.073 }
+		Marker = vector3(-14.1, -614.93, 34.86),
+		Spawner = vector3(-7.35, -635.1, 34.72),
+		Deleter = vector3(-37.57, -620.39, 34.07),
+		Heading = 66.632
 	},
-	Garage_IntegrityWay30 = {
+	IntegrityWay_IntegrityWay30 = {
 		Private = "IntegrityWay30",
-		GaragePoint = { x = -14.1, y = -614.93, z = 34.86 },
-		SpawnPoint = { x = -7.351, y = -635.1, z = 34.724, h = 66.632 },
-		DeletePoint = { x = -37.575, y = -620.391, z = 34.073 }
+		Marker = vector3(-14.1, -614.93, 34.86),
+		Spawner = vector3(-7.35, -635.1, 34.72),
+		Deleter = vector3(-37.57, -620.39, 34.07),
+		Heading = 66.632
 	},
 	-- End of Intergrity Way Garages
 	-- Start of Dell Perro Heights Garages
-	Garage_DellPerroHeights = {
+	DellPerroHeights_Main = {
 		Private = "DellPerroHeights",
-		GaragePoint = { x = -1477.15, y = -517.17, z = 33.74 },
-		SpawnPoint = { x = -1483.16, y = -505.1, z = 31.81, h = 299.89 },
-		DeletePoint = { x = -1452.612, y = -508.782, z = 30.582 }
+		Marker = vector3(-1477.15, -517.17, 33.74),
+		Spawner = vector3(-1483.16, -505.1, 31.81),
+		Deleter = vector3(-1452.61, -508.78, 30.58),
+		Heading = 299.89
 	},
-	Garage_DellPerroHeightst4 = {
+	DellPerroHeights_DellPerroHeightst4 = {
 		Private = "DellPerroHeightst4",
-		GaragePoint = { x = -1477.15, y = -517.17, z = 33.74 },
-		SpawnPoint = { x = -1483.16, y = -505.1, z = 31.81, h = 299.89 },
-		DeletePoint = { x = -1452.612, y = -508.782, z = 30.582 }
+		Marker = vector3(-1477.15, -517.17, 33.74),
+		Spawner = vector3(-1483.16, -505.1, 31.81),
+		Deleter = vector3(-1452.61, -508.78, 30.58),
+		Heading = 299.89
 	},
-	Garage_DellPerroHeightst7 = {
+	DellPerroHeights_DellPerroHeightst7 = {
 		Private = "DellPerroHeightst7",
-		GaragePoint = { x = -1477.15, y = -517.17, z = 33.74 },
-		SpawnPoint = { x = -1483.16, y = -505.1, z = 31.81, h = 299.89 },
-		DeletePoint = { x = -1452.612, y = -508.782, z = 30.582 }
+		Marker = vector3(-1477.15, -517.17, 33.74),
+		Spawner = vector3(-1483.16, -505.1, 31.81),
+		Deleter = vector3(-1452.61, -508.78, 30.58),
+		Heading = 299.89
 	},
 	-- End of Dell Perro Heights Garages
 	-- Start of Milton Drive Garages
-	Garage_MiltonDrive = {
+	MiltonDrive_Main = {
 		Private = "MiltonDrive",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Modern1Apartment = {
+	MiltonDrive_Modern1Apartment = {
 		Private = "Modern1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Modern2Apartment = {
+	MiltonDrive_Modern2Apartment = {
 		Private = "Modern2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Modern3Apartment = {
+	MiltonDrive_Modern3Apartment = {
 		Private = "Modern3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Mody1Apartment = {
+	MiltonDrive_Mody1Apartment = {
 		Private = "Mody1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Mody2Apartment = {
+	MiltonDrive_Mody2Apartment = {
 		Private = "Mody2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Mody3Apartment = {
+	MiltonDrive_Mody3Apartment = {
 		Private = "Mody3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Vibrant1Apartment = {
+	MiltonDrive_Vibrant1Apartment = {
 		Private = "Vibrant1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Vibrant2Apartment = {
+	MiltonDrive_Vibrant2Apartment = {
 		Private = "Vibrant2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Vibrant3Apartment = {
+	MiltonDrive_Vibrant3Apartment = {
 		Private = "Vibrant3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Sharp1Apartment = {
+	MiltonDrive_Sharp1Apartment = {
 		Private = "Sharp1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Sharp2Apartment = {
+	MiltonDrive_Sharp2Apartment = {
 		Private = "Sharp2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Sharp3Apartment = {
+	MiltonDrive_Sharp3Apartment = {
 		Private = "Sharp3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Monochrome1Apartment = {
+	MiltonDrive_Monochrome1Apartment = {
 		Private = "Monochrome1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Monochrome2Apartment = {
+	MiltonDrive_Monochrome2Apartment = {
 		Private = "Monochrome2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Monochrome3Apartment = {
+	MiltonDrive_Monochrome3Apartment = {
 		Private = "Monochrome3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Seductive1Apartment = {
+	MiltonDrive_Seductive1Apartment = {
 		Private = "Seductive1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Seductive2Apartment = {
+	MiltonDrive_Seductive2Apartment = {
 		Private = "Seductive2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Seductive3Apartment = {
+	MiltonDrive_Seductive3Apartment = {
 		Private = "Seductive3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Regal1Apartment = {
+	MiltonDrive_Regal1Apartment = {
 		Private = "Regal1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Regal2Apartment = {
+	MiltonDrive_Regal2Apartment = {
 		Private = "Regal2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Regal3Apartment = {
+	MiltonDrive_Regal3Apartment = {
 		Private = "Regal3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Aqua1Apartment = {
+	MiltonDrive_Aqua1Apartment = {
 		Private = "Aqua1Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Aqua2Apartment = {
+	MiltonDrive_Aqua2Apartment = {
 		Private = "Aqua2Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
-	Garage_Aqua3Apartment = {
+	MiltonDrive_Aqua3Apartment = {
 		Private = "Aqua3Apartment",
-		GaragePoint = { x = -795.96, y = 331.83, z = 84.5 },
-		SpawnPoint = { x = -800.496, y = 333.468, z = 84.5, h = 180.494 },
-		DeletePoint = { x = -791.755, y = 333.468, z = 84.5 }
+		Marker = vector3(-795.96, 331.83, 84.5),
+		Spawner = vector3(-800.49, 333.47, 84.5),
+		Deleter = vector3(-791.75, 333.47, 84.5),
+		Heading = 180.494
 	},
 	-- End of Milton Drive Garages
 	-- Start of Single Garages
-	Garage_RichardMajesticApt2 = {
+	RichardMajesticApt2_Main = {
 		Private = "RichardMajesticApt2",
-		GaragePoint = { x = -887.5, y = -349.58, z = 33.534 },
-		SpawnPoint = { x = -886.03, y = -343.78, z = 33.534, h = 206.79 },
-		DeletePoint = { x = -894.324, y = -349.326, z = 33.534 }
+		Marker = vector3(-887.5, -349.58, 33.53),
+		Spawner = vector3(-886.03, -343.78, 33.53),
+		Deleter = vector3(-894.32, -349.33, 33.53),
+		Heading = 206.79
 	},
-	Garage_WildOatsDrive = {
+	WildOatsDrive_Main = {
 		Private = "WildOatsDrive",
-		GaragePoint = { x = -178.65, y = 503.45, z = 135.85 },
-		SpawnPoint = { x = -189.98, y = 505.8, z = 133.48, h = 282.62 },
-		DeletePoint = { x = -189.28, y = 500.56, z = 132.93 }
+		Marker = vector3(-178.65, 503.45, 135.85),
+		Spawner = vector3(-189.98, 505.8, 133.48),
+		Deleter = vector3(-189.28, 500.56, 132.93),
+		Heading = 282.62
 	},
-	Garage_WhispymoundDrive = {
+	WhispymoundDrive_Main = {
 		Private = "WhispymoundDrive",
-		GaragePoint = { x = 123.65, y = 565.75, z = 183.04 },
-		SpawnPoint = { x = 130.11, y = 571.47, z = 182.42, h = 270.71 },
-		DeletePoint = { x = 131.97, y = 566.77, z = 181.95 }
+		Marker = vector3(123.65, 565.75, 183.04),
+		Spawner = vector3(130.11, 571.47, 182.42),
+		Deleter = vector3(131.97, 566.77, 181.95),
+		Heading = 270.71
 	},
-	Garage_NorthConkerAvenue2044 = {
+	NorthConkerAvenue2044_Main = {
 		Private = "NorthConkerAvenue2044",
-		GaragePoint = { x = 348.18, y = 443.01, z = 146.7 },
-		SpawnPoint = { x = 358.397, y = 437.064, z = 144.277, h = 285.911 },
-		DeletePoint = { x = 351.383, y = 438.865, z = 145.66 }
+		Marker = vector3(348.18, 443.01, 146.7),
+		Spawner = vector3(358.39, 437.06, 144.27),
+		Deleter = vector3(351.38, 438.86, 145.66),
+		Heading = 285.911
 	},
-	Garage_NorthConkerAvenue2045 = {
+	NorthConkerAvenue2045_Main = {
 		Private = "NorthConkerAvenue2045",
-		GaragePoint = { x = 370.69, y = 430.76, z = 144.11 },
-		SpawnPoint = { x = 392.88, y = 434.54, z = 142.17, h = 264.94 },
-		DeletePoint = { x = 389.72, y = 429.95, z = 141.81 }
+		Marker = vector3(370.69, 430.76, 144.11),
+		Spawner = vector3(392.88, 434.54, 142.17),
+		Deleter = vector3(389.72, 429.95, 141.81),
+		Heading = 264.94
 	},
-	Garage_HillcrestAvenue2862 = {
+	HillcrestAvenue2862_Main = {
 		Private = "HillcrestAvenue2862",
-		GaragePoint = { x = -688.71, y = 597.57, z = 142.64 },
-		SpawnPoint = { x = -683.72, y = 609.88, z = 143.28, h = 338.06 },
-		DeletePoint = { x = -685.259, y = 601.083, z = 142.365 }
+		Marker = vector3(-688.71, 597.57, 142.64),
+		Spawner = vector3(-683.72, 609.88, 143.28),
+		Deleter = vector3(-685.26, 601.08, 142.36),
+		Heading = 338.06
 	},
-	Garage_HillcrestAvenue2868 = {
+	HillcrestAvenue2868_Main = {
 		Private = "HillcrestAvenue2868",
-		GaragePoint = { x = -752.753, y = 624.901, z = 141.2 },
-		SpawnPoint = { x = -749.32, y = 628.61, z = 141.48, h = 197.14 },
-		DeletePoint = { x = -754.286, y = 631.581, z = 141.2 }
+		Marker = vector3(-752.75, 624.90, 141.2),
+		Spawner = vector3(-749.32, 628.61, 141.48),
+		Deleter = vector3(-754.28, 631.58, 141.2),
+		Heading = 197.14
 	},
-	Garage_HillcrestAvenue2874 = {
+	HillcrestAvenue2874_Main = {
 		Private = "HillcrestAvenue2874",
-		GaragePoint = { x = -859.01, y = 695.95, z = 147.93 },
-		SpawnPoint = { x = -863.681, y = 698.72, z = 147.052, h = 341.77 },
-		DeletePoint = { x = -855.66, y = 698.77, z = 147.81 }
+		Marker = vector3(-859.01, 695.95, 147.93),
+		Spawner = vector3(-863.68, 698.72, 147.05),
+		Deleter = vector3(-855.66, 698.77, 147.81),
+		Heading = 341.77
 	},
-	Garage_MadWayneThunder = {
+	MadWayneThunder_Main = {
 		Private = "MadWayneThunder",
-		GaragePoint = { x = -1290.95, y = 454.52, z = 96.66 },
-		SpawnPoint = { x = -1297.62, y = 459.28, z = 96.48, h = 285.652 },
-		DeletePoint = { x = -1298.088, y = 468.952, z = 96.0 }
+		Marker = vector3(-1290.95, 454.52, 96.66),
+		Spawner = vector3(-1297.62, 459.28, 96.48),
+		Deleter = vector3(-1298.09, 468.95, 96.0),
+		Heading = 285.652
 	},
-	Garage_TinselTowersApt12 = {
+	TinselTowersApt12_Main = {
 		Private = "TinselTowersApt12",
-		GaragePoint = { x = -616.74, y = 56.38, z = 42.736 },
-		SpawnPoint = { x = -620.588, y = 60.102, z = 42.736, h = 109.316 },
-		DeletePoint = { x = -621.128, y = 52.691, z = 42.735 }
+		Marker = vector3(-616.74, 56.38, 42.73),
+		Spawner = vector3(-620.59, 60.10, 42.73),
+		Deleter = vector3(-621.13, 52.69, 42.73),
+		Heading = 109.316
 	},
 	-- End of Single Garages
 	-- Start of VENT Custom Garages
-	Garage_MedEndApartment1 = {
+	MedEndApartment1_Main = {
 		Private = "MedEndApartment1",
-		GaragePoint = { x = 240.23, y = 3102.84, z = 41.49 },
-		SpawnPoint = { x = 233.58, y = 3094.29, z = 41.49, h = 93.91 },
-		DeletePoint = { x = 237.52, y = 3112.63, z = 41.39 }
+		Marker = vector3(240.23, 3102.84, 41.49),
+		Spawner = vector3(233.58, 3094.29, 41.49),
+		Deleter = vector3(237.52, 3112.63, 41.39),
+		Heading = 93.91
 	},
-	Garage_MedEndApartment2 = {
+	MedEndApartment2_Main = {
 		Private = "MedEndApartment2",
-		GaragePoint = { x = 246.08, y = 3174.63, z = 41.72 },
-		SpawnPoint = { x = 234.15, y = 3164.37, z = 41.54, h = 102.03 },
-		DeletePoint = { x = 240.72, y = 3165.53, z = 41.65 }
+		Marker = vector3(246.08, 3174.63, 41.72),
+		Spawner = vector3(234.15, 3164.37, 41.54),
+		Deleter = vector3(240.72, 3165.53, 41.65),
+		Heading = 102.03
 	},
-	Garage_MedEndApartment3 = {
+	MedEndApartment3_Main = {
 		Private = "MedEndApartment3",
-		GaragePoint = { x = 984.92, y = 2668.95, z = 39.06 },
-		SpawnPoint = { x = 993.96, y = 2672.68, z = 39.06, h = 0.61 },
-		DeletePoint = { x = 994.04, y = 2662.1, z = 39.13 }
+		Marker = vector3(984.92, 2668.95, 39.06),
+		Spawner = vector3(993.96, 2672.68, 39.06),
+		Deleter = vector3(994.04, 2662.1, 39.13),
+		Heading = 0.61
 	},
-	Garage_MedEndApartment4 = {
+	MedEndApartment4_Main = {
 		Private = "MedEndApartment4",
-		GaragePoint = { x = 196.49, y = 3027.48, z = 42.89 },
-		SpawnPoint = { x = 203.1, y = 3039.47, z = 42.08, h = 271.3 },
-		DeletePoint = { x = 192.24, y = 3037.95, z = 42.89 }
+		Marker = vector3(196.49, 3027.48, 42.89),
+		Spawner = vector3(203.1, 3039.47, 42.08),
+		Deleter = vector3(192.24, 3037.95, 42.89),
+		Heading = 271.3
 	},
-	Garage_MedEndApartment5 = {
+	MedEndApartment5_Main = {
 		Private = "MedEndApartment5",
-		GaragePoint = { x = 1724.49, y = 4638.13, z = 42.31 },
-		SpawnPoint = { x = 1723.98, y = 4630.19, z = 42.23, h = 117.88 },
-		DeletePoint = { x = 1733.66, y = 4635.08, z = 42.24 }
+		Marker = vector3(1724.49, 4638.13, 42.31),
+		Spawner = vector3(1723.98, 4630.19, 42.23),
+		Deleter = vector3(1733.66, 4635.08, 42.24),
+		Heading = 117.88
 	},
-	Garage_MedEndApartment6 = {
+	MedEndApartment6_Main = {
 		Private = "MedEndApartment6",
-		GaragePoint = { x = 1670.76, y = 4740.99, z = 41.08 },
-		SpawnPoint = { x = 1673.47, y = 4756.51, z = 40.91, h = 12.82 },
-		DeletePoint = { x = 1668.46, y = 4750.83, z = 40.88 }
+		Marker = vector3(1670.76, 4740.99, 41.08),
+		Spawner = vector3(1673.47, 4756.51, 40.91),
+		Deleter = vector3(1668.46, 4750.83, 40.88),
+		Heading = 12.82
 	},
-	Garage_MedEndApartment7 = {
+	MedEndApartment7_Main = {
 		Private = "MedEndApartment7",
-		GaragePoint = { x = 15.24, y = 6573.38, z = 31.72 },
-		SpawnPoint = { x = 16.77, y = 6581.68, z = 31.42, h = 222.6 },
-		DeletePoint = { x = 10.45, y = 6588.04, z = 31.47 }
+		Marker = vector3(15.24, 6573.38, 31.72),
+		Spawner = vector3(16.77, 6581.68, 31.42),
+		Deleter = vector3(10.45, 6588.04, 31.47),
+		Heading = 222.6
 	},
-	Garage_MedEndApartment8 = {
+	MedEndApartment8_Main = {
 		Private = "MedEndApartment8",
-		GaragePoint = { x = -374.73, y = 6187.06, z = 30.54 },
-		SpawnPoint = { x = -377.97, y = 6183.73, z = 30.49, h = 223.71 },
-		DeletePoint = { x = -383.31, y = 6188.85, z = 30.49 }
+		Marker = vector3(-374.73, 6187.06, 30.54),
+		Spawner = vector3(-377.97, 6183.73, 30.49),
+		Deleter = vector3(-383.31, 6188.85, 30.49),
+		Heading = 223.71
 	},
-	Garage_MedEndApartment9 = {
+	MedEndApartment9_Main = {
 		Private = "MedEndApartment9",
-		GaragePoint = { x = -24.6, y = 6605.99, z = 30.45 },
-		SpawnPoint = { x = -16.0, y = 6607.74, z = 30.18, h = 35.31 },
-		DeletePoint = { x = -9.36, y = 6598.86, z = 30.47 }
+		Marker = vector3(-24.6, 6605.99, 30.45),
+		Spawner = vector3(-16.0, 6607.74, 30.18),
+		Deleter = vector3(-9.36, 6598.86, 30.47),
+		Heading = 35.31
 	},
-	Garage_MedEndApartment10 = {
+	MedEndApartment10_Main = {
 		Private = "MedEndApartment10",
-		GaragePoint = { x = -365.18, y = 6323.95, z = 28.9 },
-		SpawnPoint = { x = -359.49, y = 6327.41, z = 28.83, h = 218.58 },
-		DeletePoint = { x = -353.47, y = 6334.57, z = 28.83 }
+		Marker = vector3(-365.18, 6323.95, 28.9),
+		Spawner = vector3(-359.49, 6327.41, 28.83),
+		Deleter = vector3(-353.47, 6334.57, 28.83),
+		Heading = 218.58
 	}
 	-- End of VENT Custom Garages
 }
-
--- End of Private Garages
+-- End of Private Cars
