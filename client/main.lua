@@ -121,8 +121,11 @@ function ReturnOwnedAmbulanceMenu()
 			}, function(data, menu)
 				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(hasEnoughMoney)
 					if hasEnoughMoney then
-						SpawnVehicle(data.current.value, data.current.value.plate)
-						TriggerServerEvent('esx_advancedgarage:payAmbulance')
+						if data.current.value == nil then
+						else
+							SpawnVehicle(data.current.value, data.current.value.plate)
+							TriggerServerEvent('esx_advancedgarage:payAmbulance')
+						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
 					end
@@ -182,8 +185,11 @@ function ReturnOwnedPolicingMenu()
 			}, function(data, menu)
 				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyPolicing', function(hasEnoughMoney)
 					if hasEnoughMoney then
-						SpawnVehicle(data.current.value, data.current.value.plate)
-						TriggerServerEvent('esx_advancedgarage:payPolicing')
+						if data.current.value == nil then
+						else
+							SpawnVehicle(data.current.value, data.current.value.plate)
+							TriggerServerEvent('esx_advancedgarage:payPolicing')
+						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
 					end
@@ -270,11 +276,14 @@ function ListOwnedAircraftsMenu()
 			align    = 'top-left',
 			elements = elements
 		}, function(data, menu)
-			if data.current.value.stored then
-				menu.close()
-				SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+			if data.current.value == nil then
 			else
-				ESX.ShowNotification(_U('aircraft_is_impounded'))
+				if data.current.value.stored then
+					menu.close()
+					SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+				else
+					ESX.ShowNotification(_U('aircraft_is_impounded'))
+				end
 			end
 		end, function(data, menu)
 			menu.close()
@@ -360,8 +369,11 @@ function ReturnOwnedAircraftsMenu()
 			}, function(data, menu)
 				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(hasEnoughMoney)
 					if hasEnoughMoney then
-						SpawnVehicle(data.current.value, data.current.value.plate)
-						TriggerServerEvent('esx_advancedgarage:payAircraft')
+						if data.current.value == nil then
+						else
+							SpawnVehicle(data.current.value, data.current.value.plate)
+							TriggerServerEvent('esx_advancedgarage:payAircraft')
+						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
 					end
@@ -448,11 +460,14 @@ function ListOwnedBoatsMenu()
 			align    = 'top-left',
 			elements = elements
 		}, function(data, menu)
-			if data.current.value.stored then
-				menu.close()
-				SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+			if data.current.value == nil then
 			else
-				ESX.ShowNotification(_U('boat_is_impounded'))
+				if data.current.value.stored then
+					menu.close()
+					SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+				else
+					ESX.ShowNotification(_U('boat_is_impounded'))
+				end
 			end
 		end, function(data, menu)
 			menu.close()
@@ -538,8 +553,11 @@ function ReturnOwnedBoatsMenu()
 			}, function(data, menu)
 				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyBoats', function(hasEnoughMoney)
 					if hasEnoughMoney then
-						SpawnVehicle(data.current.value, data.current.value.plate)
-						TriggerServerEvent('esx_advancedgarage:payBoat')
+						if data.current.value == nil then
+						else
+							SpawnVehicle(data.current.value, data.current.value.plate)
+							TriggerServerEvent('esx_advancedgarage:payBoat')
+						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
 					end
@@ -626,11 +644,14 @@ function ListOwnedCarsMenu()
 			align    = 'top-left',
 			elements = elements
 		}, function(data, menu)
-			if data.current.value.stored then
-				menu.close()
-				SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+			if data.current.value == nil then
 			else
-				ESX.ShowNotification(_U('car_is_impounded'))
+				if data.current.value.stored then
+					menu.close()
+					SpawnVehicle(data.current.value.vehicle, data.current.value.plate)
+				else
+					ESX.ShowNotification(_U('car_is_impounded'))
+				end
 			end
 		end, function(data, menu)
 			menu.close()
@@ -716,8 +737,11 @@ function ReturnOwnedCarsMenu()
 			}, function(data, menu)
 				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyCars', function(hasEnoughMoney)
 					if hasEnoughMoney then
-						SpawnVehicle(data.current.value, data.current.value.plate)
-						TriggerServerEvent('esx_advancedgarage:payCar')
+						if data.current.value == nil then
+						else
+							SpawnVehicle(data.current.value, data.current.value.plate)
+							TriggerServerEvent('esx_advancedgarage:payCar')
+						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
 					end
