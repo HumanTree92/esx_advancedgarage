@@ -1,8 +1,17 @@
 Config = {}
 Config.Locale = 'en'
 
+Config.MenuAlign = 'top-left'
 Config.DrawDistance = 100
+
 Config.UseCommand = true -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
+Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
+Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
+Config.UseCustomKickMessage = false -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
+
+Config.GiveSocietyMoney = false -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
+Config.ShowVehicleLocation = true -- true = Will show Location of Vehicles in the Garage Menus.
+Config.ShowSpacers = true -- true = Shows Spacers in Menus.
 
 Config.PointMarker = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0} -- Green Color / Standard Size Circle.
 Config.DeleteMarker = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0} -- Red Color / Big Size Circle.
@@ -12,61 +21,76 @@ Config.JPoundMarker = {Type = 1, r = 255, g = 0, b = 0, x = 1.5, y = 1.5, z = 1.
 Config.GarageBlip = {Sprite = 290, Color = 38, Display = 2, Scale = 1.0} -- Public Garage Blip.
 Config.PGarageBlip = {Sprite = 290, Color = 53, Display = 2, Scale = 1.0} -- Private Garage Blip.
 Config.PoundBlip = {Sprite = 67, Color = 64, Display = 2, Scale = 1.0} -- Pound Blip.
+Config.JGarageBlip = {Sprite = 290, Color = 49, Display = 2, Scale = 1.0} -- Job Garage Blip.
 Config.JPoundBlip = {Sprite = 67, Color = 49, Display = 2, Scale = 1.0} -- Job Pound Blip.
 
 Config.PoundWait = 5 -- How many Minutes someone must wait before Opening Pound Menu Again.
 Config.JPoundWait = 2.5 -- How many Minutes someone must wait before Opening Job Pound Menu Again.
 
-Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
-Config.UseCustomKickMessage = true -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
-
 Config.UseDamageMult = false -- true = Costs more to Store a Broken/Damaged Vehicle.
 Config.DamageMult = 5 -- Higher Number = Higher Repair Price.
 
-Config.AircraftPoundPrice = 2500 -- How much it Costs to get Vehicle from Aircraft Pound.
-Config.BoatPoundPrice = 500 -- How much it Costs to get Vehicle from Boat Pound.
-Config.CarPoundPrice = 300 -- How much it Costs to get Vehicle from Car Pound.
-Config.PolicingPoundPrice = 80 -- How much it Costs to get Vehicle from Policing Pound.
+Config.UsingAdvancedVehicleShop = false -- Set to true if using esx_advancedvehicleshop
+
+Config.UseAmbulanceGarages = false -- true = Allows use of Ambulance Garages.
+Config.UseAmbulancePounds = false -- true = Allows use of Ambulance Pounds.
+Config.UseAmbulanceBlips = false -- true = Use Ambulance Blips.
 Config.AmbulancePoundPrice = 80 -- How much it Costs to get Vehicle from Ambulance Pound.
 
-Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
-Config.UseBlips = true -- true = Uses Blips | false = Does Opposite.
-Config.UseJobBlips = true -- true = Uses Job Blips | false = Does Opposite.
+Config.UsePoliceGarages = false -- true = Allows use of Police Garages.
+Config.UsePolicePounds = false -- true = Allows use of Police Pounds.
+Config.UsePoliceBlips = false -- true = Use Police Blips.
+Config.PolicePoundPrice = 80 -- How much it Costs to get Vehicle from Police Pound.
 
-Config.UseAircraftGarages = true -- true = Allows use of Aircraft Garages.
-Config.UseBoatGarages = true -- true = Allows use of Boat Garages.
-Config.UseCarGarages = true -- true = Allows use of Car Garages.
-Config.UsePrivateCarGarages = true -- true = Allows use of Private Car Garages.
-Config.UseJobCarGarages = true -- true = Allows use of Job Garages.
+Config.UseAircraftGarages = false -- true = Allows use of Aircraft Garages.
+Config.UseAircraftBlips = false -- true = Use Aircraft Blips.
+Config.AircraftPoundPrice = 2500 -- How much it Costs to get Vehicle from Aircraft Pound.
 
-Config.GiveSocietyMoney = false -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
-Config.DontShowPoundCarsInGarage = true -- true = Won't show Impounded Vehicles in Garage.
-Config.ShowVehicleLocation = false -- true = Will show Location of the Vehicle in the Garage Menu.
-Config.UseVehicleNamesLua = true -- true = Use a vehicle_names.lua for Addon Vehicles.
+Config.UseBoatGarages = false -- true = Allows use of Boat Garages.
+Config.UseBoatBlips = false -- true = Use Boat Blips.
+Config.BoatPoundPrice = 500 -- How much it Costs to get Vehicle from Boat Pound.
 
-Config.ShowGarageSpacer1 = true -- true = Shows spacer1 in Garage Menu.
-Config.ShowGarageSpacer2 = false -- true = Shows spacer2 in Garage Menu. Note: Don't use if "Config.ShowGarageSpacer3 = true".
-Config.ShowGarageSpacer3 = true -- true = Shows spacer3 in Garage Menu. Note: Don't use if "Config.ShowGarageSpacer2 = true".
+Config.UseCarGarages = false -- true = Allows use of Car Garages.
+Config.UseCarBlips = false -- true = Use Car Blips.
+Config.CarPoundPrice = 300 -- How much it Costs to get Vehicle from Car Pound.
 
-Config.ShowPoundSpacer2 = false -- true = Shows spacer2 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer3 = true".
-Config.ShowPoundSpacer3 = true -- true = Shows spacer3 in Pound Menu. Note: Don't use if "Config.ShowPoundSpacer2 = true".
+Config.UsePrivateCarGarages = false -- true = Allows use of Private Car Garages.
 
--- Start of Jobs
+-- Marker = Enter Location | Spawner = Spawn Location | Spawner2 = Job Aircraft Spawn Location | Deleter = Delete Location
+-- Deleter2 = Job Aircraft Delete Location | Heading = Spawn Heading | Heading2 = Job Aircraft Spawn Heading
+
+-- Start of Ambulance
+Config.AmbulanceGarages = {
+	Los_Santos = {
+		Marker = vector3(302.95, -1453.5, 28.97),
+		Spawner = vector3(300.33, -1431.91, 29.8),
+		Spawner2 = vector3(313.36, -1465.17, 46.51),
+		Deleter = vector3(300.33, -1431.91, 28.8),
+		Deleter2 = vector3(313.36, -1465.17, 45.51),
+		Heading = 226.71,
+		Heading2 = 318.34
+	}
+}
+
 Config.AmbulancePounds = {
 	Los_Santos = {
 		Marker = vector3(374.42, -1620.68, 28.29),
 		Spawner = vector3(391.74, -1619.0, 28.29),
 		Heading = 318.34
-	},
-	Sandy_Shores = {
-		Marker = vector3(1646.01, 3812.06, 37.65),
-		Spawner = vector3(1627.84, 3788.45, 33.77),
-		Heading = 308.53
-	},
-	Paleto_Bay = {
-		Marker = vector3(-223.6, 6243.37, 30.49),
-		Spawner = vector3(-230.88, 6255.89, 30.49),
-		Heading = 136.5
+	}
+}
+-- End of Ambulance
+
+-- Start of Police
+Config.PoliceGarages = {
+	Los_Santos = {
+		Marker = vector3(425.41, -1003.43, 29.71),
+		Spawner = vector3(434.28, -1015.8, 28.83),
+		Spawner2 = vector3(449.21, -981.35, 43.69),
+		Deleter = vector3(462.95, -1014.56, 27.07),
+		Deleter2 = vector3(449.21, -981.35, 42.69),
+		Heading = 90.46,
+		Heading2 = 184.53
 	}
 }
 
@@ -75,19 +99,9 @@ Config.PolicePounds = {
 		Marker = vector3(374.42, -1620.68, 28.29),
 		Spawner = vector3(391.74, -1619.0, 28.29),
 		Heading = 318.34
-	},
-	Sandy_Shores = {
-		Marker = vector3(1646.01, 3812.06, 37.65),
-		Spawner = vector3(1627.84, 3788.45, 33.77),
-		Heading = 308.53
-	},
-	Paleto_Bay = {
-		Marker = vector3(-223.6, 6243.37, 30.49),
-		Spawner = vector3(-230.88, 6255.89, 30.49),
-		Heading = 136.5
 	}
 }
--- End of Jobs
+-- End of Police
 
 -- Start of Aircrafts
 Config.AircraftGarages = {

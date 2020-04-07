@@ -50,6 +50,99 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedProperties', function(sou
 end)
 
 -- Start of Ambulance Code
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAmbulanceCars', function(source, cb)
+	local ownedAmbulanceCars = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if Config.ShowVehicleLocation then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'ambulance'
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedAmbulanceCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedAmbulanceCars)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'ambulance',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedAmbulanceCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedAmbulanceCars)
+		end)
+	end
+end)
+
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAmbulanceAircrafts', function(source, cb)
+	local ownedAmbulanceAircrafts = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if Config.UsingAdvancedVehicleShop then
+		if Config.ShowVehicleLocation then
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'aircraft',
+				['@job'] = 'ambulance'
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedAmbulanceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'aircraft'})
+				end
+				cb(ownedAmbulanceAircrafts)
+			end)
+		else
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'aircraft',
+				['@job'] = 'ambulance',
+				['@stored'] = true
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedAmbulanceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'aircraft'})
+				end
+				cb(ownedAmbulanceAircrafts)
+			end)
+		end
+	else
+		if Config.ShowVehicleLocation then
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'helicopter',
+				['@job'] = 'ambulance'
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedAmbulanceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'helicopter'})
+				end
+				cb(ownedAmbulanceAircrafts)
+			end)
+		else
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'helicopter',
+				['@job'] = 'ambulance',
+				['@stored'] = true
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedAmbulanceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'helicopter'})
+				end
+				cb(ownedAmbulanceAircrafts)
+			end)
+		end
+	end
+end)
+
 ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedAmbulanceCars', function(source, cb)
 	local ownedAmbulanceCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
@@ -91,8 +184,101 @@ end)
 -- End of Ambulance Code
 
 -- Start of Police Code
-ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', function(source, cb)
-	local ownedPolicingCars = {}
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedPoliceCars', function(source, cb)
+	local ownedPoliceCars = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if Config.ShowVehicleLocation then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'police'
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedPoliceCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedPoliceCars)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'police',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedPoliceCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedPoliceCars)
+		end)
+	end
+end)
+
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedPoliceAircrafts', function(source, cb)
+	local ownedPoliceAircrafts = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if Config.UsingAdvancedVehicleShop then
+		if Config.ShowVehicleLocation then
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'aircraft',
+				['@job'] = 'police'
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedPoliceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'aircraft'})
+				end
+				cb(ownedPoliceAircrafts)
+			end)
+		else
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'aircraft',
+				['@job'] = 'police',
+				['@stored'] = true
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedPoliceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'aircraft'})
+				end
+				cb(ownedPoliceAircrafts)
+			end)
+		end
+	else
+		if Config.ShowVehicleLocation then
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'helicopter',
+				['@job'] = 'police'
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedPoliceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'helicopter'})
+				end
+				cb(ownedPoliceAircrafts)
+			end)
+		else
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'helicopter',
+				['@job'] = 'police',
+				['@stored'] = true
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedPoliceAircrafts, {vehicle = vehicle, stored = v.stored, plate = v.plate, vtype = 'helicopter'})
+				end
+				cb(ownedPoliceAircrafts)
+			end)
+		end
+	end
+end)
+
+ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedPoliceCars', function(source, cb)
+	local ownedPoliceCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND `stored` = @stored', {
@@ -102,30 +288,30 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedPolicingCars', functio
 	}, function(data) 
 		for _,v in pairs(data) do
 			local vehicle = json.decode(v.vehicle)
-			table.insert(ownedPolicingCars, vehicle)
+			table.insert(ownedPoliceCars, vehicle)
 		end
-		cb(ownedPolicingCars)
+		cb(ownedPoliceCars)
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyPolicing', function(source, cb)
+ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyPolice', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.PolicingPoundPrice then
+	if xPlayer.getMoney() >= Config.PolicePoundPrice then
 		cb(true)
 	else
 		cb(false)
 	end
 end)
 
-RegisterServerEvent('esx_advancedgarage:payPolicing')
-AddEventHandler('esx_advancedgarage:payPolicing', function()
+RegisterServerEvent('esx_advancedgarage:payPolice')
+AddEventHandler('esx_advancedgarage:payPolice', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.PolicingPoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicingPoundPrice)
+	xPlayer.removeMoney(Config.PolicePoundPrice)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicePoundPrice)
 
 	if Config.GiveSocietyMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.PolicingPoundPrice)
+			account.addMoney(Config.PolicePoundPrice)
 		end)
 	end
 end)
@@ -136,12 +322,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(sour
 	local ownedAircrafts = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+	if Config.ShowVehicleLocation then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'aircraft',
-			['@job'] = 'civ',
-			['@stored'] = true
+			['@job'] = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -150,10 +335,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(sour
 			cb(ownedAircrafts)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'aircraft',
-			['@job'] = 'civ'
+			['@job'] = 'civ',
+			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -210,12 +396,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 	local ownedBoats = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+	if Config.ShowVehicleLocation then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'boat',
-			['@job'] = 'civ',
-			['@stored'] = true
+			['@job'] = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -224,10 +409,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 			cb(ownedBoats)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'boat',
-			['@job'] = 'civ'
+			['@job'] = 'civ',
+			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -284,12 +470,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 	local ownedCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.DontShowPoundCarsInGarage == true then
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+	if Config.ShowVehicleLocation then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'car',
-			['@job'] = 'civ',
-			['@stored'] = true
+			['@job'] = 'civ'
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)
@@ -298,10 +483,11 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 			cb(ownedCars)
 		end)
 	else
-		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'car',
-			['@job'] = 'civ'
+			['@job'] = 'civ',
+			['@stored'] = true
 		}, function(data)
 			for _,v in pairs(data) do
 				local vehicle = json.decode(v.vehicle)

@@ -1,7 +1,7 @@
 # About esx_advancedgarage:
 Advanced Garage System for ESX
 
-This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boats, & Aircrafts. This Garage Script only takes into account the Vehicles Purchased in the Car/Boat/Aircraft Shop or any other Shop that sells Vehicles. Players can also go to the Pound to retrieve their Vehicle if its lost or Destroyed for a Fee. During a reboot all Vehicles go back to the Garage.
+This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boats, & Aircrafts. This Garage Script only takes into account the Vehicles Purchased through `esx_vehicleshop` & `esx_advancedvehicleshop`. Players can also go to the Impound to retrieve their Vehicles if its lost or Destroyed for a Fee.
 
 # Look in the Wiki before submitting Issues. (Failure to abide by this will result in Block)
 * [Added Wiki that has the Common Problems Fixed](https://github.com/HumanTree92/esx_advancedgarage/wiki)
@@ -10,9 +10,8 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 * Unable to Store Vehicles you don't own.
 * Ability to Kick people who try to Cheat using the Garage & Set Custom Kick Message.
 * Private Property Garages.
-* Aircraft, Boat, & Car Garage.
-* Aircraft, Boat, & Car Impound.
-* Police & Ambulance Impound.
+* Ambulance, Police, Aircraft, Boat, & Car Garages.
+* Ambulance, Police, Aircraft, Boat, & Car Impounds.
 
 # Requirements:
 * Required:
