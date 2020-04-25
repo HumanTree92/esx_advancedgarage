@@ -5,6 +5,7 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 
 # Look in the Wiki before submitting Issues. (Failure to abide by this will result in Block)
 * [Added Wiki that has the Common Problems Fixed](https://github.com/HumanTree92/esx_advancedgarage/wiki)
+* Also if you are using Zap-Hosting I will not help with your issues at all. Zap is trash. If you want a great Server go somewhere else.
 
 # Helpfull Info:
 * Unable to Store Vehicles you don't own.
