@@ -4,7 +4,7 @@ Config.Locale = 'en'
 Config.MenuAlign = 'top-left'
 Config.DrawDistance = 100
 
-Config.UseCommand = true -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
+Config.UseCommand = false -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
 Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
 Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
 Config.UseCustomKickMessage = false -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
@@ -183,24 +183,12 @@ Config.CarGarages = {
 		Deleter = vector3(223.80, -760.42, 29.65),
 		Heading = 157.84
 	},
-	--[[Los_Santos_RaceTrack = {
-		Marker = vector3(1212.32, 339.94, 80.99),
-		Spawner = vector3(1199.02, 330.92, 80.99),
-		Deleter = vector3(1207.9, 343.8, 80.99),
-		Heading = 144.86
-	},]]--
 	Sandy_Shores = {
 		Marker = vector3(1737.59, 3710.2, 33.14),
 		Spawner = vector3(1737.84, 3719.28, 33.04),
 		Deleter = vector3(1722.66, 3713.74, 33.21),
 		Heading = 21.22
 	},
-	--[[Sandy_Shores_Prison = {
-		Marker = vector3(1846.56, 2585.86, 44.67),
-		Spawner = vector3(1855.11, 2592.72, 44.67),
-		Deleter = vector3(1855.21, 2615.3, 34.67),
-		Heading = 274.8 
-	},]]--
 	Paleto_Bay = {
 		Marker = vector3(105.36, 6613.59, 31.40),
 		Spawner = vector3(128.78, 6622.99, 30.78),

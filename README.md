@@ -1,13 +1,11 @@
 # About esx_advancedgarage:
-Advanced Garage System for ESX
-
-This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boats, & Aircrafts. This Garage Script only takes into account the Vehicles Purchased through `esx_vehicleshop` & `esx_advancedvehicleshop`. Players can also go to the Impound to retrieve their Vehicles if its lost or Destroyed for a Fee.
+Advanced Garage System for ESX - Made by Human Tree92 ([Velociti Entertainment Customs & Wiki](http://www.velocitientertainment.com/customs/))
 
 # Look in the Wiki before submitting Issues. (Failure to abide by this will result in Block)
-* [Added Wiki that has the Common Problems Fixed](https://github.com/HumanTree92/esx_advancedgarage/wiki)
-* Also if you are using Zap-Hosting I will not help with your issues at all. Zap is trash. If you want a great Server go somewhere else.
+* [Check Wiki](http://www.velocitientertainment.com/customs/)
 
 # Helpfull Info:
+* Works with esx_vehicleshop & esx_advancedvehicleshop.
 * Unable to Store Vehicles you don't own.
 * Ability to Kick people who try to Cheat using the Garage & Set Custom Kick Message.
 * Private Property Garages.
@@ -38,12 +36,16 @@ This Code has been completely re-worked. ESX Advanced Garage supports Cars, Boat
 
 # Other Scripts:
 If you like this please check out some of my other stuff like
-* [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
-* [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
-* [esx_advancedhospital](https://github.com/HumanTree92/esx_advancedhospital)
-* [esx_advancedweaponshop](https://github.com/HumanTree92/esx_advancedweaponshop)
+* [esx_advancedbanking](https://github.com/HumanTree92/esx_advancedbanking)
 * [esx_advancedfuel](https://github.com/HumanTree92/esx_advancedfuel)
+* [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
+* [esx_advancedholdup](https://github.com/HumanTree92/esx_advancedholdup)
+* [esx_advancedhospital](https://github.com/HumanTree92/esx_advancedhospital)
+* [esx_advancedjail](https://github.com/HumanTree92/esx_advancedjail)
+* [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
+* [esx_advancedweaponshop](https://github.com/HumanTree92/esx_advancedweaponshop)
 * [esx_extraitems](https://github.com/HumanTree92/esx_extraitems)
+* [esx_joblisting](https://github.com/HumanTree92/esx_joblisting)
 * [esx_licenseshop](https://github.com/HumanTree92/esx_licenseshop)
 * [esx_vehiclespawner](https://github.com/HumanTree92/esx_vehiclespawner)
 * [FiveM_CustomMapAddons](https://github.com/HumanTree92/FiveM_CustomMapAddons)
