@@ -11,6 +11,7 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **Questions**
+Have you looked at the Wiki on my Website:
 Are you using Essentialmode:
 Are you using the Latest es_extended: 
 Who is your Hosting Provider: 
