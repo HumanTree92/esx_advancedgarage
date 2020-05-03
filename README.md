@@ -25,8 +25,9 @@ Advanced Garage System for ESX - Made by Human Tree92 ([Velociti Entertainment C
 1) Download the .zip.
 2) Extract the .zip or Open the .zip.
 3) Import the `esx_vehicleshop_fix.sql` into your database if using with esx_vehicleshop or edit your Database & change your job to NOT NULL & DEFAULT civ
-3) Place `esx_advancedgarage` in your ESX Directory
-4) Add `start esx_advancedgarage` to your server.cfg
+4) Edit the `config.lua` before starting the script. By default everything is turned off.
+5) Place `esx_advancedgarage` in your ESX Directory
+6) Add `start esx_advancedgarage` to your server.cfg
 
 # KNOWN BUGS:
 * There is a Limit on how many Vehicles that can be in each garage. For me it was 36 Vehicles in the Car Garage but after that i couldn't pull anymore out. You can still buy more Boats & Planes if the Car Garage is at 36.
