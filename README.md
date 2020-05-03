@@ -1,8 +1,8 @@
 # About esx_advancedgarage:
 Advanced Garage System for ESX - Made by Human Tree92 ([Velociti Entertainment Customs & Wiki](http://www.velocitientertainment.com/customs/))
 
-# Look in the Wiki before submitting Issues. (Failure to abide by this will result in Block)
-* [Check Wiki](http://www.velocitientertainment.com/customs/)
+# Check the [Closed Topics](https://github.com/HumanTree92/esx_advancedgarage/issues?q=is%3Aissue+is%3Aclosed) & [Wiki](http://www.velocitientertainment.com/customs/) before opening an issue to see if your issue has already been Answered.
+* Failure to due the above will result in Topic being Deleted & you being Blocked. IDGAF if i block you. It doesn't hurt me.
 
 # Helpfull Info:
 * Works with esx_vehicleshop & esx_advancedvehicleshop.
