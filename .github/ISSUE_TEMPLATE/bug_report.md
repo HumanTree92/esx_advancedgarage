@@ -1,8 +1,7 @@
 ---
 name: Bug report
-about: Before submitting an issue make sure you look through the Closed Topics & the
-  Wiki. By Creating an issue you agree that you have looked through the Closed Topics,
-  Wiki & accept any punishments.
+about: Make sure you have looked through the Closed Topics & the Wiki before submitting
+  an issue as you accept any Punishments.
 title: ''
 labels: ''
 assignees: ''
@@ -18,7 +17,4 @@ Have you looked through the Wiki?:
 Are you using Essentialmode?: 
 Are you using the Latest es_extended?: 
 Are you using OneSync?: 
-Linux or Windows?: 
-
-**Note**As most problems have already been Answered/Fixed.
-By Creating an issue you agree that you have looked through the Closed Topics, Wiki & accept any punishments.
+Linux or Windows?:
