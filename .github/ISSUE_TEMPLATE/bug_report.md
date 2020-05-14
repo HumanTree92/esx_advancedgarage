@@ -1,22 +1,20 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Make sure you have looked through the Closed Topics & the Wiki before submitting
+  an issue as you accept any Punishments.
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the bug | A Clear & Concise Description of Bug**
+
 
 **Questions**
-Have you looked at the Wiki on my Website:
-Are you using Essentialmode:
-Are you using the Latest es_extended: 
-Who is your Hosting Provider: 
-Linux or Windows:
-OneSync (Yes or No):
-
-**Additional context**
-Add any other context about the problem here.
+Have you looked through the Closed Topics?: 
+Have you looked through the Wiki?: 
+Are you using Essentialmode?: 
+Are you using the Latest es_extended?: 
+Are you using OneSync?: 
+Linux or Windows?:
