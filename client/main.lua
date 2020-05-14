@@ -1045,6 +1045,7 @@ AddEventHandler('esx_advancedgarage:hasExitedMarker', function()
 	CurrentAction = nil
 end)
 
+-- Resource Stop
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then
 		ESX.UI.Menu.CloseAll()
