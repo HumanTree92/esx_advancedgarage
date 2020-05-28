@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug Report - DO NOT DELETE PREWRITTEN TEXT
 about: Make sure you have looked through the Closed Topics & the Wiki before submitting
   an issue as you accept any Punishments.
 title: ''
