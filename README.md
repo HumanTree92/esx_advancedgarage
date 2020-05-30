@@ -1,6 +1,8 @@
 # About esx_advancedgarage:
 Advanced Garage System for ESX - Made by Human Tree92 ([Velociti Entertainment Customs & Wiki](http://www.velocitientertainment.com/customs/))
 
+I can not Guarantee that this will work with the Latest es_extended V2.
+
 # Creating Issues
 * Check the [Closed Topics](https://github.com/HumanTree92/esx_advancedgarage/issues?q=is%3Aissue+is%3Aclosed) & [Wiki](http://www.velocitientertainment.com/customs/) before opening an issue to see if your issue has already been Answered.
 * Do NOT Delete the Pre-Written Text in the issue.
@@ -16,7 +18,7 @@ Advanced Garage System for ESX - Made by Human Tree92 ([Velociti Entertainment C
 
 # Requirements:
 * Required:
-  * [es_extended](https://github.com/ESX-Org/es_extended)
+  * [es_extended V1 Final](https://github.com/ESX-Org/es_extended) or [extendedmode](https://github.com/extendedmode/extendedmode)
   * [esx_property](https://github.com/ESX-Org/esx_property)
 * Optional:
   * [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
