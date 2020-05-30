@@ -15,6 +15,6 @@ assignees: ''
 Have you looked through the Closed Topics?: 
 Have you looked through the Wiki?: 
 Are you using Essentialmode?: 
-Are you using the Latest es_extended?: 
+Are you using es_extended (If yes what Version)?: 
 Are you using OneSync?: 
 Linux or Windows?:
