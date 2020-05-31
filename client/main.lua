@@ -241,6 +241,7 @@ function ReturnOwnedAmbulanceMenu()
 						else
 							SpawnVehicle(data.current.value, data.current.value.plate)
 							TriggerServerEvent('esx_advancedgarage:payAmbulance')
+							WasinJPound = true
 						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
@@ -248,7 +249,6 @@ function ReturnOwnedAmbulanceMenu()
 				end)
 			end, function(data, menu)
 				menu.close()
-				WasinJPound = true
 			end)
 		end)
 	end
@@ -430,6 +430,7 @@ function ReturnOwnedPoliceMenu()
 						else
 							SpawnVehicle(data.current.value, data.current.value.plate)
 							TriggerServerEvent('esx_advancedgarage:payPolice')
+							WasinJPound = true
 						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
@@ -437,7 +438,6 @@ function ReturnOwnedPoliceMenu()
 				end)
 			end, function(data, menu)
 				menu.close()
-				WasinJPound = true
 			end)
 		end)
 	end
@@ -578,6 +578,7 @@ function ReturnOwnedAircraftsMenu()
 						else
 							SpawnVehicle(data.current.value, data.current.value.plate)
 							TriggerServerEvent('esx_advancedgarage:payAircraft')
+							WasInPound = true
 						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
@@ -585,7 +586,6 @@ function ReturnOwnedAircraftsMenu()
 				end)
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
@@ -726,6 +726,7 @@ function ReturnOwnedBoatsMenu()
 						else
 							SpawnVehicle(data.current.value, data.current.value.plate)
 							TriggerServerEvent('esx_advancedgarage:payBoat')
+							WasInPound = true
 						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
@@ -733,7 +734,6 @@ function ReturnOwnedBoatsMenu()
 				end)
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
@@ -874,6 +874,7 @@ function ReturnOwnedCarsMenu()
 						else
 							SpawnVehicle(data.current.value, data.current.value.plate)
 							TriggerServerEvent('esx_advancedgarage:payCar')
+							WasInPound = true
 						end
 					else
 						ESX.ShowNotification(_U('not_enough_money'))
@@ -881,7 +882,6 @@ function ReturnOwnedCarsMenu()
 				end)
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
