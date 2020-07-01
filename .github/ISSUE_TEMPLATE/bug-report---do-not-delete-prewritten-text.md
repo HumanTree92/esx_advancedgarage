@@ -8,13 +8,14 @@ assignees: ''
 
 ---
 
-**Describe the bug | A Clear & Concise Description of Bug**
+**Describe the Bug | A Clear & Concise Description of Bug**
 
 
 **Questions**
 Have you looked through the Closed Topics?: 
 Have you looked through the Wiki?: 
+What Version of es_extended are you using?: 
+Are you using a Pre-Installed ESX?: 
 Are you using Essentialmode?: 
-Are you using es_extended (If yes what Version)?: 
 Are you using OneSync?: 
-Linux or Windows?:
+Linux or Windows?: 
