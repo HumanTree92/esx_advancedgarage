@@ -12,10 +12,12 @@ assignees: ''
 
 
 **Questions**
+Have you made changes to anything in `client/main.lua` or `server/main.lua`?: 
 Have you looked through the Closed Topics?: 
 Have you looked through the Wiki?: 
-What Version of es_extended are you using?: 
-Are you using a Pre-Installed ESX?: 
+Are you using a Pre-Installed ESX? If Yes who?: 
+Are you using es_extended? If Yes what Version? (Example: 1.2): 
 Are you using Essentialmode?: 
+Are you using ExtendedMode?: 
 Are you using OneSync?: 
 Linux or Windows?: 

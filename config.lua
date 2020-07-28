@@ -2,7 +2,7 @@ Config = {}
 Config.Locale = 'en'
 
 Config.MenuAlign = 'top-left'
-Config.DrawDistance = 100
+Config.DrawDistance = 20
 
 Config.UseCommand = false -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
 Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
@@ -24,7 +24,10 @@ Config.PoundBlip = {Sprite = 67, Color = 64, Display = 2, Scale = 1.0} -- Pound 
 Config.JGarageBlip = {Sprite = 290, Color = 49, Display = 2, Scale = 1.0} -- Job Garage Blip.
 Config.JPoundBlip = {Sprite = 67, Color = 49, Display = 2, Scale = 1.0} -- Job Pound Blip.
 
+Config.UsePoundTimer = false -- true = Uses Pound Timer
 Config.PoundWait = 5 -- How many Minutes someone must wait before Opening Pound Menu Again.
+
+Config.UseJPoundTimer = false -- true = Uses Job Pound Timer
 Config.JPoundWait = 2.5 -- How many Minutes someone must wait before Opening Job Pound Menu Again.
 
 Config.UseDamageMult = false -- true = Costs more to Store a Broken/Damaged Vehicle.

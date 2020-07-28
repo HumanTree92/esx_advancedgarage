@@ -1,7 +1,6 @@
-local CurrentActionData, PlayerData, userProperties, this_Garage, BlipList, PrivateBlips, JobBlips = {}, {}, {}, {}, {}, {}, {}
-local HasAlreadyEnteredMarker = false
+local CurrentActionData, PlayerData, userProperties, this_Garage, vehInstance, BlipList, PrivateBlips, JobBlips = {}, {}, {}, {}, {}, {}, {}, {}
+local HasAlreadyEnteredMarker, WasInPound, WasinJPound = false, false, false
 local LastZone, CurrentAction, CurrentActionMsg
-local WasInPound, WasinJPound = false, false
 ESX = nil
 
 Citizen.CreateThread(function()
@@ -235,20 +234,39 @@ function ReturnOwnedAmbulanceMenu()
 				align = Config.MenuAlign,
 				elements = elements
 			}, function(data, menu)
-				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(hasEnoughMoney)
-					if hasEnoughMoney then
-						if data.current.value == nil then
+				local doesVehicleExist = false
+
+				for k,v in pairs (vehInstance) do
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.value.plate) then
+						if DoesEntityExist(v.vehicleentity) then
+							doesVehicleExist = true
 						else
-							SpawnVehicle(data.current.value, data.current.value.plate)
-							TriggerServerEvent('esx_advancedgarage:payAmbulance')
+							table.remove(vehInstance, k)
+							doesVehicleExist = false
 						end
-					else
-						ESX.ShowNotification(_U('not_enough_money'))
 					end
-				end)
+				end
+
+				if not doesVehicleExist and not DoesAPlayerDrivesVehicle(data.current.value.plate) then
+					ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(hasEnoughMoney)
+						if hasEnoughMoney then
+							if data.current.value == nil then
+							else
+								SpawnVehicle(data.current.value, data.current.value.plate)
+								TriggerServerEvent('esx_advancedgarage:payAmbulance')
+								if Config.UsePoundTimer then
+									WasinJPound = true
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_enough_money'))
+						end
+					end)
+				else
+					ESX.ShowNotification(_U('cant_take_out'))
+				end
 			end, function(data, menu)
 				menu.close()
-				WasinJPound = true
 			end)
 		end)
 	end
@@ -424,20 +442,39 @@ function ReturnOwnedPoliceMenu()
 				align = Config.MenuAlign,
 				elements = elements
 			}, function(data, menu)
-				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyPolice', function(hasEnoughMoney)
-					if hasEnoughMoney then
-						if data.current.value == nil then
+				local doesVehicleExist = false
+
+				for k,v in pairs (vehInstance) do
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.value.plate) then
+						if DoesEntityExist(v.vehicleentity) then
+							doesVehicleExist = true
 						else
-							SpawnVehicle(data.current.value, data.current.value.plate)
-							TriggerServerEvent('esx_advancedgarage:payPolice')
+							table.remove(vehInstance, k)
+							doesVehicleExist = false
 						end
-					else
-						ESX.ShowNotification(_U('not_enough_money'))
 					end
-				end)
+				end
+
+				if not doesVehicleExist and not DoesAPlayerDrivesVehicle(data.current.value.plate) then
+					ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyPolice', function(hasEnoughMoney)
+						if hasEnoughMoney then
+							if data.current.value == nil then
+							else
+								SpawnVehicle(data.current.value, data.current.value.plate)
+								TriggerServerEvent('esx_advancedgarage:payPolice')
+								if Config.UsePoundTimer then
+									WasinJPound = true
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_enough_money'))
+						end
+					end)
+				else
+					ESX.ShowNotification(_U('cant_take_out'))
+				end
 			end, function(data, menu)
 				menu.close()
-				WasinJPound = true
 			end)
 		end)
 	end
@@ -572,20 +609,39 @@ function ReturnOwnedAircraftsMenu()
 				align = Config.MenuAlign,
 				elements = elements
 			}, function(data, menu)
-				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(hasEnoughMoney)
-					if hasEnoughMoney then
-						if data.current.value == nil then
+				local doesVehicleExist = false
+
+				for k,v in pairs (vehInstance) do
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.value.plate) then
+						if DoesEntityExist(v.vehicleentity) then
+							doesVehicleExist = true
 						else
-							SpawnVehicle(data.current.value, data.current.value.plate)
-							TriggerServerEvent('esx_advancedgarage:payAircraft')
+							table.remove(vehInstance, k)
+							doesVehicleExist = false
 						end
-					else
-						ESX.ShowNotification(_U('not_enough_money'))
 					end
-				end)
+				end
+
+				if not doesVehicleExist and not DoesAPlayerDrivesVehicle(data.current.value.plate) then
+					ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(hasEnoughMoney)
+						if hasEnoughMoney then
+							if data.current.value == nil then
+							else
+								SpawnVehicle(data.current.value, data.current.value.plate)
+								TriggerServerEvent('esx_advancedgarage:payAircraft')
+								if Config.UsePoundTimer then
+									WasInPound = true
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_enough_money'))
+						end
+					end)
+				else
+					ESX.ShowNotification(_U('cant_take_out'))
+				end
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
@@ -720,20 +776,39 @@ function ReturnOwnedBoatsMenu()
 				align = Config.MenuAlign,
 				elements = elements
 			}, function(data, menu)
-				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyBoats', function(hasEnoughMoney)
-					if hasEnoughMoney then
-						if data.current.value == nil then
+				local doesVehicleExist = false
+
+				for k,v in pairs (vehInstance) do
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.value.plate) then
+						if DoesEntityExist(v.vehicleentity) then
+							doesVehicleExist = true
 						else
-							SpawnVehicle(data.current.value, data.current.value.plate)
-							TriggerServerEvent('esx_advancedgarage:payBoat')
+							table.remove(vehInstance, k)
+							doesVehicleExist = false
 						end
-					else
-						ESX.ShowNotification(_U('not_enough_money'))
 					end
-				end)
+				end
+
+				if not doesVehicleExist and not DoesAPlayerDrivesVehicle(data.current.value.plate) then
+					ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyBoats', function(hasEnoughMoney)
+						if hasEnoughMoney then
+							if data.current.value == nil then
+							else
+								SpawnVehicle(data.current.value, data.current.value.plate)
+								TriggerServerEvent('esx_advancedgarage:payBoat')
+								if Config.UsePoundTimer then
+									WasInPound = true
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_enough_money'))
+						end
+					end)
+				else
+					ESX.ShowNotification(_U('cant_take_out'))
+				end
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
@@ -868,20 +943,39 @@ function ReturnOwnedCarsMenu()
 				align = Config.MenuAlign,
 				elements = elements
 			}, function(data, menu)
-				ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyCars', function(hasEnoughMoney)
-					if hasEnoughMoney then
-						if data.current.value == nil then
+				local doesVehicleExist = false
+
+				for k,v in pairs (vehInstance) do
+					if ESX.Math.Trim(v.plate) == ESX.Math.Trim(data.current.value.plate) then
+						if DoesEntityExist(v.vehicleentity) then
+							doesVehicleExist = true
 						else
-							SpawnVehicle(data.current.value, data.current.value.plate)
-							TriggerServerEvent('esx_advancedgarage:payCar')
+							table.remove(vehInstance, k)
+							doesVehicleExist = false
 						end
-					else
-						ESX.ShowNotification(_U('not_enough_money'))
 					end
-				end)
+				end
+
+				if not doesVehicleExist and not DoesAPlayerDrivesVehicle(data.current.value.plate) then
+					ESX.TriggerServerCallback('esx_advancedgarage:checkMoneyCars', function(hasEnoughMoney)
+						if hasEnoughMoney then
+							if data.current.value == nil then
+							else
+								SpawnVehicle(data.current.value, data.current.value.plate)
+								TriggerServerEvent('esx_advancedgarage:payCar')
+								if Config.UsePoundTimer then
+									WasInPound = true
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_enough_money'))
+						end
+					end)
+				else
+					ESX.ShowNotification(_U('cant_take_out'))
+				end
 			end, function(data, menu)
 				menu.close()
-				WasInPound = true
 			end)
 		end)
 	end
@@ -893,14 +987,18 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 
-		if WasInPound then
-			Citizen.Wait(Config.PoundWait * 60000)
-			WasInPound = false
+		if Config.UsePoundTimer then
+			if WasInPound then
+				Citizen.Wait(Config.PoundWait * 60000)
+				WasInPound = false
+			end
 		end
 
-		if WasinJPound then
-			Citizen.Wait(Config.JPoundWait * 60000)
-			WasinJPound = false
+		if Config.UseJPoundTimer then
+			if WasinJPound then
+				Citizen.Wait(Config.JPoundWait * 60000)
+				WasinJPound = false
+			end
 		end
 	end
 end)
@@ -936,6 +1034,12 @@ end
 
 -- Store Vehicles
 function StoreVehicle(vehicle, vehicleProps)
+	for k,v in pairs (vehInstance) do
+		if ESX.Math.Trim(v.plate) == ESX.Math.Trim(vehicleProps.plate) then
+			table.remove(vehInstance, k)
+		end
+	end
+
 	ESX.Game.DeleteVehicle(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
@@ -952,6 +1056,8 @@ function SpawnVehicle(vehicle, plate)
 		SetVehicleEngineOn(callback_vehicle, true, true)
 		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
 		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
+		local carplate = GetVehicleNumberPlateText(callback_vehicle)
+		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 
@@ -968,10 +1074,30 @@ function SpawnVehicle2(vehicle, plate)
 		SetVehicleEngineOn(callback_vehicle, true, true)
 		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
 		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
+		local carplate = GetVehicleNumberPlateText(callback_vehicle)
+		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
+end
+
+-- Check Vehicles
+function DoesAPlayerDrivesVehicle(plate)
+	local isVehicleTaken = false
+	local players = ESX.Game.GetPlayers()
+	for i=1, #players, 1 do
+		local target = GetPlayerPed(players[i])
+		if target ~= PlayerPedId() then
+			local plate1 = GetVehicleNumberPlateText(GetVehiclePedIsIn(target, true))
+			local plate2 = GetVehicleNumberPlateText(GetVehiclePedIsIn(target, false))
+			if plate == plate1 or plate == plate2 then
+				isVehicleTaken = true
+				break
+			end
+		end
+	end
+	return isVehicleTaken
 end
 
 -- Entered Marker
@@ -1386,39 +1512,106 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		local playerPed = GetPlayerPed(-1)
+		local playerVeh = GetVehiclePedIsIn(playerPed, false)
+		local model = GetEntityModel(playerVeh)
 
 		if CurrentAction then
 			ESX.ShowHelpNotification(CurrentActionMsg)
 
 			if IsControlJustReleased(0, 38) then
 				if CurrentAction == 'ambulance_garage_point' then
-					ListOwnedAmbulanceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
+						ListOwnedAmbulanceMenu()
+					else
+						ESX.ShowNotification(_U('must_ambulance'))
+					end
 				elseif CurrentAction == 'ambulance_store_point' then
-					StoreOwnedAmbulanceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
+						if IsThisModelACar(model) or IsThisModelABicycle(model) or IsThisModelABike(model) or IsThisModelAHeli(model) then
+							if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+								StoreOwnedAmbulanceMenu()
+							else
+								ESX.ShowNotification(_U('driver_seat'))
+							end
+						else
+							ESX.ShowNotification(_U('not_correct_veh'))
+						end
+					else
+						ESX.ShowNotification(_U('must_ambulance'))
+					end
 				elseif CurrentAction == 'ambulance_pound_point' then
-					ReturnOwnedAmbulanceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
+						ReturnOwnedAmbulanceMenu()
+					else
+						ESX.ShowNotification(_U('must_ambulance'))
+					end
 				elseif CurrentAction == 'police_garage_point' then
-					ListOwnedPoliceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
+						ListOwnedPoliceMenu()
+					else
+						ESX.ShowNotification(_U('must_police'))
+					end
 				elseif CurrentAction == 'police_store_point' then
-					StoreOwnedPoliceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
+						if IsThisModelACar(model) or IsThisModelABicycle(model) or IsThisModelABike(model) or IsThisModelAHeli(model) then
+							if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+								StoreOwnedPoliceMenu()
+							else
+								ESX.ShowNotification(_U('driver_seat'))
+							end
+						else
+							ESX.ShowNotification(_U('not_correct_veh'))
+						end
+					else
+						ESX.ShowNotification(_U('must_police'))
+					end
 				elseif CurrentAction == 'police_pound_point' then
-					ReturnOwnedPoliceMenu()
+					if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
+						ReturnOwnedPoliceMenu()
+					else
+						ESX.ShowNotification(_U('must_police'))
+					end
 				elseif CurrentAction == 'aircraft_garage_point' then
 					ListOwnedAircraftsMenu()
 				elseif CurrentAction == 'aircraft_store_point' then
-					StoreOwnedAircraftsMenu()
+					if IsThisModelAHeli(model) or IsThisModelAPlane(model) then
+						if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+							StoreOwnedAircraftsMenu()
+						else
+							ESX.ShowNotification(_U('driver_seat'))
+						end
+					else
+						ESX.ShowNotification(_U('not_correct_veh'))
+					end
 				elseif CurrentAction == 'aircraft_pound_point' then
 					ReturnOwnedAircraftsMenu()
 				elseif CurrentAction == 'boat_garage_point' then
 					ListOwnedBoatsMenu()
 				elseif CurrentAction == 'boat_store_point' then
-					StoreOwnedBoatsMenu()
+					if IsThisModelABoat(model) then
+						if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+							StoreOwnedBoatsMenu()
+						else
+							ESX.ShowNotification(_U('driver_seat'))
+						end
+					else
+						ESX.ShowNotification(_U('not_correct_veh'))
+					end
 				elseif CurrentAction == 'boat_pound_point' then
 					ReturnOwnedBoatsMenu()
 				elseif CurrentAction == 'car_garage_point' then
 					ListOwnedCarsMenu()
 				elseif CurrentAction == 'car_store_point' then
-					StoreOwnedCarsMenu()
+					if IsThisModelACar(model) or IsThisModelABicycle(model) or IsThisModelABike(model) or IsThisModelAQuadbike(model) then
+						if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+							StoreOwnedCarsMenu()
+						else
+							ESX.ShowNotification(_U('driver_seat'))
+						end
+					else
+						ESX.ShowNotification(_U('not_correct_veh'))
+					end
 				elseif CurrentAction == 'car_pound_point' then
 					ReturnOwnedCarsMenu()
 				end

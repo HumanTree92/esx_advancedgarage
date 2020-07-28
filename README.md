@@ -33,8 +33,8 @@ Advanced Garage System for ESX V1 Final or EXM - Made by Human Tree92 ([Velociti
 
 # KNOWN BUGS:
 * There is a Limit on how many Vehicles that can be in each garage. For me it was 36 Vehicles in the Car Garage but after that i couldn't pull anymore out. You can still buy more Boats & Planes if the Car Garage is at 36.
-* It is Possible to Duplicate Vehicles but do note that if said Person Duplicates a Vehicle & takes 1 of them & sell thems the other one is useless & can NOT be stored or sold.
-* Doesn't work well when using the Car Dealer Job.
+* It is Possible to Duplicate Vehicles if the resource is restarted while vehicles are out.
+* Might not work well when using the Car Dealer Job. (Haven't Tested this)
 * If you are having problems with the SQL from esx_vehicleshop try the SQL from here. If a problem with the SQL from here try esx_vehicleshop SQL. If still having problems please submit an issue.
 
 # Other Scripts:
