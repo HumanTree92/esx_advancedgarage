@@ -1040,7 +1040,7 @@ function StoreVehicle(vehicle, vehicleProps)
 		end
 	end
 
-	ESX.Game.DeleteVehicle(vehicle)
+	DeleteEntity(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
