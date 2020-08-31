@@ -8,6 +8,7 @@ Config.UseCommand = false -- Will allow players to do /getproperties instead of 
 Config.ParkVehicles = false -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
 Config.KickPossibleCheaters = true -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
 Config.UseCustomKickMessage = false -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
+Config.LegacyFuel = false -- set it to true if you use LegacyFuel and want your fuel level to be saved. Won't work with other fuel system.
 
 Config.GiveSocietyMoney = false -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
 Config.ShowVehicleLocation = true -- true = Will show Location of Vehicles in the Garage Menus.
