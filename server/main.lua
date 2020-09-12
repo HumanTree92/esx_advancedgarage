@@ -4,7 +4,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 -- Make sure all Vehicles are Stored on restart
 MySQL.ready(function()
-	if Config.ParkVehicles then
+	if Config.Main.ParkVehicles then
 		ParkVehicles()
 	else
 		print('esx_advancedgarage: Parking Vehicles on restart is currently set to false.')
@@ -22,7 +22,7 @@ function ParkVehicles()
 end
 
 -- Add Command for Getting Properties
-if Config.UseCommand then
+if Config.Main.Commands then
 	ESX.RegisterCommand('getgarages', 'user', function(xPlayer, args, showError)
 		xPlayer.triggerEvent('esx_advancedgarage:getPropertiesC')
 	end, true, {help = 'Get Private Garages', validate = false})
@@ -54,7 +54,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAmbulanceCars', function(
 	local ownedAmbulanceCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.ShowVehicleLocation then
+	if Config.Main.ShowVehLoc then
 		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'car',
@@ -86,8 +86,8 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAmbulanceAircrafts', func
 	local ownedAmbulanceAircrafts = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.UsingAdvancedVehicleShop then
-		if Config.ShowVehicleLocation then
+	if Config.Main.AdvVehShop then
+		if Config.Main.ShowVehLoc then
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'aircraft',
@@ -114,7 +114,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAmbulanceAircrafts', func
 			end)
 		end
 	else
-		if Config.ShowVehicleLocation then
+		if Config.Main.ShowVehLoc then
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'helicopter',
@@ -162,7 +162,7 @@ end)
 
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.AmbulancePoundPrice then
+	if xPlayer.getMoney() >= Config.Ambulance.PoundP then
 		cb(true)
 	else
 		cb(false)
@@ -172,12 +172,12 @@ end)
 RegisterServerEvent('esx_advancedgarage:payAmbulance')
 AddEventHandler('esx_advancedgarage:payAmbulance', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.AmbulancePoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AmbulancePoundPrice)
+	xPlayer.removeMoney(Config.Ambulance.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Ambulance.PoundP)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.AmbulancePoundPrice)
+			account.addMoney(Config.Ambulance.PoundP)
 		end)
 	end
 end)
@@ -188,7 +188,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedPoliceCars', function(sou
 	local ownedPoliceCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.ShowVehicleLocation then
+	if Config.Main.ShowVehLoc then
 		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'car',
@@ -220,8 +220,8 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedPoliceAircrafts', functio
 	local ownedPoliceAircrafts = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.UsingAdvancedVehicleShop then
-		if Config.ShowVehicleLocation then
+	if Config.Main.AdvVehShop then
+		if Config.Main.ShowVehLoc then
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'aircraft',
@@ -248,7 +248,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedPoliceAircrafts', functio
 			end)
 		end
 	else
-		if Config.ShowVehicleLocation then
+		if Config.Main.ShowVehLoc then
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'helicopter',
@@ -296,7 +296,7 @@ end)
 
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyPolice', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.PolicePoundPrice then
+	if xPlayer.getMoney() >= Config.Police.PoundP then
 		cb(true)
 	else
 		cb(false)
@@ -306,23 +306,96 @@ end)
 RegisterServerEvent('esx_advancedgarage:payPolice')
 AddEventHandler('esx_advancedgarage:payPolice', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.PolicePoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.PolicePoundPrice)
+	xPlayer.removeMoney(Config.Police.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Police.PoundP)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.PolicePoundPrice)
+			account.addMoney(Config.Police.PoundP)
 		end)
 	end
 end)
 -- End of Police Code
+
+-- Start of Mechanic Code
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedMechanicCars', function(source, cb)
+	local ownedMechanicCars = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if Config.Main.ShowVehLoc then
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'mechanic'
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedMechanicCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedMechanicCars)
+		end)
+	else
+		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			['@owner'] = xPlayer.identifier,
+			['@Type'] = 'car',
+			['@job'] = 'mechanic',
+			['@stored'] = true
+		}, function(data)
+			for _,v in pairs(data) do
+				local vehicle = json.decode(v.vehicle)
+				table.insert(ownedMechanicCars, {vehicle = vehicle, stored = v.stored, plate = v.plate})
+			end
+			cb(ownedMechanicCars)
+		end)
+	end
+end)
+
+ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedMechanicCars', function(source, cb)
+	local ownedMechanicCars = {}
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND `stored` = @stored', {
+		['@owner'] = xPlayer.identifier,
+		['@job'] = 'mechanic',
+		['@stored'] = false
+	}, function(data) 
+		for _,v in pairs(data) do
+			local vehicle = json.decode(v.vehicle)
+			table.insert(ownedMechanicCars, vehicle)
+		end
+		cb(ownedMechanicCars)
+	end)
+end)
+
+ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyMechanic', function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.getMoney() >= Config.Mechanic.PoundP then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
+RegisterServerEvent('esx_advancedgarage:payMechanic')
+AddEventHandler('esx_advancedgarage:payMechanic', function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.removeMoney(Config.Mechanic.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Mechanic.PoundP)
+
+	if Config.Main.GiveSocMoney then
+		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
+			account.addMoney(Config.Mechanic.PoundP)
+		end)
+	end
+end)
+-- End of Mechanic Code
 
 -- Start of Aircraft Code
 ESX.RegisterServerCallback('esx_advancedgarage:getOwnedAircrafts', function(source, cb)
 	local ownedAircrafts = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.ShowVehicleLocation then
+	if Config.Main.ShowVehLoc then
 		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'aircraft',
@@ -370,7 +443,7 @@ end)
 
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.AircraftPoundPrice then
+	if xPlayer.getMoney() >= Config.Aircrafts.PoundP then
 		cb(true)
 	else
 		cb(false)
@@ -380,12 +453,12 @@ end)
 RegisterServerEvent('esx_advancedgarage:payAircraft')
 AddEventHandler('esx_advancedgarage:payAircraft', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.AircraftPoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.AircraftPoundPrice)
+	xPlayer.removeMoney(Config.Aircrafts.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Aircrafts.PoundP)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.AircraftPoundPrice)
+			account.addMoney(Config.Aircrafts.PoundP)
 		end)
 	end
 end)
@@ -396,7 +469,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedBoats', function(source, 
 	local ownedBoats = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.ShowVehicleLocation then
+	if Config.Main.ShowVehLoc then
 		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'boat',
@@ -444,7 +517,7 @@ end)
 
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyBoats', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.BoatPoundPrice then
+	if xPlayer.getMoney() >= Config.Boats.PoundP then
 		cb(true)
 	else
 		cb(false)
@@ -454,12 +527,12 @@ end)
 RegisterServerEvent('esx_advancedgarage:payBoat')
 AddEventHandler('esx_advancedgarage:payBoat', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.BoatPoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.BoatPoundPrice)
+	xPlayer.removeMoney(Config.Boats.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Boats.PoundP)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.BoatPoundPrice)
+			account.addMoney(Config.Boats.PoundP)
 		end)
 	end
 end)
@@ -470,7 +543,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedCars', function(source, c
 	local ownedCars = {}
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if Config.ShowVehicleLocation then
+	if Config.Main.ShowVehLoc then
 		MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job', { -- job = NULL
 			['@owner'] = xPlayer.identifier,
 			['@Type'] = 'car',
@@ -518,7 +591,7 @@ end)
 
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyCars', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getMoney() >= Config.CarPoundPrice then
+	if xPlayer.getMoney() >= Config.Cars.PoundP then
 		cb(true)
 	else
 		cb(false)
@@ -528,12 +601,12 @@ end)
 RegisterServerEvent('esx_advancedgarage:payCar')
 AddEventHandler('esx_advancedgarage:payCar', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeMoney(Config.CarPoundPrice)
-	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.CarPoundPrice)
+	xPlayer.removeMoney(Config.Cars.PoundP)
+	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Cars.PoundP)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
-			account.addMoney(Config.CarPoundPrice)
+			account.addMoney(Config.Cars.PoundP)
 		end)
 	end
 end)
@@ -564,20 +637,20 @@ ESX.RegisterServerCallback('esx_advancedgarage:storeVehicle', function (source, 
 					cb(true)
 				end)
 			else
-				if Config.KickPossibleCheaters == true then
-					if Config.UseCustomKickMessage == true then
-						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: ' .. vehiclemodel .. '. Original Vehicle: ' .. originalvehprops.model):format(xPlayer.identifier))
+				if Config.Main.KickCheaters then
+					if Config.Main.CustomKickMsg then
+						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: %s | Original Vehicle: %s '):format(xPlayer.identifier, vehiclemodel, originalvehprops.model))
 
 						DropPlayer(source, _U('custom_kick'))
 						cb(false)
 					else
-						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: ' .. vehiclemodel .. '. Original Vehicle: ' .. originalvehprops.model):format(xPlayer.identifier))
+						print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: %s | Original Vehicle: %s '):format(xPlayer.identifier, vehiclemodel, originalvehprops.model))
 
 						DropPlayer(source, 'You have been Kicked from the Server for Possible Garage Cheating!!!')
 						cb(false)
 					end
 				else
-					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: ' .. vehiclemodel .. '. Original Vehicle: '.. originalvehprops.model):format(xPlayer.identifier))
+					print(('esx_advancedgarage: %s attempted to Cheat! Tried Storing: %s | Original Vehicle: %s '):format(xPlayer.identifier, vehiclemodel, originalvehprops.model))
 					cb(false)
 				end
 			end
@@ -595,7 +668,7 @@ AddEventHandler('esx_advancedgarage:payhealth', function(price)
 	xPlayer.removeMoney(price)
 	TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. price)
 
-	if Config.GiveSocietyMoney then
+	if Config.Main.GiveSocMoney then
 		TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
 			account.addMoney(price)
 		end)
