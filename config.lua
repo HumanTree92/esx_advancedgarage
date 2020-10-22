@@ -2,22 +2,18 @@ Config = {}
 Config.Locale = 'en'
 
 Config.Main = {
-	MenuAlign = 'top-left', -- Menu Align. Current will show on Top Left.
 	DrawDistance = 20, -- Draw Distance to Markers.
-	AdvVehShop = false, -- Set to true if using esx_advancedvehicleshop.
 	Commands = false, -- Will allow players to do /getproperties instead of having to log out & back in to see Private Garages.
 	ParkVehicles = false, -- true = Automatically Park all Vehicles in Garage on Server/Script Restart | false = Opposite of true but players will have to go to Pound to get their Vehicle Back.
 	KickCheaters = true, -- true = Kick Player that tries to Cheat Garage by changing Vehicle Hash/Plate.
 	CustomKickMsg = false, -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
 	GiveSocMoney = false, -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
-	ShowVehLoc = true, -- true = Will show Location of Vehicles in the Garage Menus.
-	Spacers = true, -- true = Shows Spacers in Menus.
-	PoundTimer = false, -- true = Uses Pound Timer
-	PoundWait = 5, -- How many Minutes someone must wait before Opening Pound Menu Again.
-	JPoundTimer = false, -- true = Uses Job Pound Timer
-	JPoundWait = 2.5, -- How many Minutes someone must wait before Opening Job Pound Menu Again.
 	DamageMult = false, -- true = Costs more to Store a Broken/Damaged Vehicle.
-	MultAmount = 5 -- Higher Number = Higher Repair Price.
+	MultAmount = 5, -- Higher Number = Higher Repair Price.
+	RenameVehs = false, -- true = Allows Players to Rename their Vehicles.
+	RenameMin = 4, -- Minimum Characters
+	RenameMax = 61, -- Max Characters + 1 (If you want Max Characters to be 45 then set it 46)
+	TruckShop = false -- true = Using esx_advancedvehicleshop Truck Dealership
 }
 
 Config.Blips = {
@@ -125,7 +121,9 @@ Config.AmbulancePounds = {
 	Los_Santos = {
 		Marker = vector3(374.42, -1620.68, 28.29),
 		Spawner = vector3(391.74, -1619.0, 28.29),
-		Heading = 318.34
+		Spawner2 = vector3(362.75, -1598.33, 35.95),
+		Heading = 318.34,
+		Heading2 = 311.87
 	}
 }
 -- End of Ambulance
@@ -147,7 +145,9 @@ Config.PolicePounds = {
 	Los_Santos = {
 		Marker = vector3(374.42, -1620.68, 28.29),
 		Spawner = vector3(391.74, -1619.0, 28.29),
-		Heading = 318.34
+		Spawner2 = vector3(362.75, -1598.33, 35.95),
+		Heading = 318.34,
+		Heading2 = 311.87
 	}
 }
 -- End of Police
@@ -230,16 +230,6 @@ Config.BoatPounds = {
 		Spawner = vector3(-738.33, -1381.51, 0.12),
 		Heading = 137.85
 	}
-	--[[Sandy_Shores_Dock = {
-		Marker = vector3(1299.36, 4217.93, 32.91),
-		Spawner = vector3(1294.35, 4226.31, 29.86),
-		Heading = 345.0
-	},
-	Paleto_Bay_Dock = {
-		Marker = vector3(-270.2, 6642.43, 6.36),
-		Spawner = vector3(-290.38, 6638.54, -0.47),
-		Heading = 130.0
-	}]]--
 }
 -- End of Boats
 

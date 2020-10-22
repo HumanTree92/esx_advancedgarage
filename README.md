@@ -7,35 +7,35 @@ Advanced Garage System for ESX V1 Final or EXM - Made by Human Tree92 ([Velociti
 * Failue to due any of the above will result in Topic being deleted & you being Blocked. The Pre-Written text helps me with getting to the Bottom of the Issues & i hate explaining things over & over.
 
 # Helpfull Info:
-* Works with esx_vehicleshop & esx_advancedvehicleshop.
 * Unable to Store Vehicles you don't own.
 * Ability to Kick people who try to Cheat using the Garage & Set Custom Kick Message.
 * Private Property Garages.
-* Ambulance, Police, Aircraft, Boat, & Car Garages.
-* Ambulance, Police, Aircraft, Boat, & Car Impounds.
+* Ambulance, Police, Mechanic, Aircraft, Boat, & Car Garages.
+* Ambulance, Police, Mechanic, Aircraft, Boat, & Car Impounds.
+* Uses esx_menu_list instead of esx_menu_default.
+* Ability to Rename Vehicle.
+* No longer needing a vehicle_names.lua file. New system pulls name from Vehicle Shop.
+* Vehicles are stored in a Class basses. Example: If you buy a Super Car it will show up under the Super Car Class in Garage.
+* WILL NOT WORK WITH esx_vehicleshop & WILL ONLY WORK WITH esx_advancedvehicleshop
 
 # Requirements:
 * Required:
   * [es_extended V1 Final](https://github.com/esx-framework/es_extended/tree/v1-final) or [extendedmode](https://github.com/extendedmode/extendedmode)
   * [esx_property](https://github.com/ESX-Org/esx_property)
-* Optional:
   * [esx_advancedvehicleshop](https://github.com/HumanTree92/esx_advancedvehicleshop)
-  * [esx_vehicleshop](https://github.com/ESX-Org/esx_vehicleshop)
+* Optional:
   * [esx_mechanicjob](https://github.com/ESX-Org/esx_mechanicjob)
 
 # Download & Installation:
-1) Download the .zip.
-2) Extract the .zip or Open the .zip.
-3) Import the `esx_vehicleshop_fix.sql` into your database if using with esx_vehicleshop or edit your Database & change your job to NOT NULL & DEFAULT civ
-4) Edit the `config.lua` before starting the script. By default everything is turned off.
-5) Place `esx_advancedgarage` in your ESX Directory
-6) Add `start esx_advancedgarage` to your server.cfg
+1) Download Master or Release & Extract the .zip or Open the .zip.
+2) Edit the `config.lua` before starting the script. By default everything is turned off.
+3) Place `esx_advancedgarage` in your ESX Directory
+4) Add `start esx_advancedgarage` to your server.cfg
+5) Add `setr esx_MenuAlign "top-right"` to your server.cfg
 
 # KNOWN BUGS:
-* There is a Limit on how many Vehicles that can be in each garage. For me it was 36 Vehicles in the Car Garage but after that i couldn't pull anymore out. You can still buy more Boats & Planes if the Car Garage is at 36.
+* With the New Menu Design there is still a Limit before the Menu breaks. This is something i can't fix. But each Class can holdup to roughly 36 Vehicles for a total of 432 Vehicles.
 * It is Possible to Duplicate Vehicles if the resource is restarted while vehicles are out.
-* Might not work well when using the Car Dealer Job. (Haven't Tested this)
-* If you are having problems with the SQL from esx_vehicleshop try the SQL from here. If a problem with the SQL from here try esx_vehicleshop SQL. If still having problems please submit an issue.
 
 # Other Scripts:
 If you like this please check out some of my other stuff like
