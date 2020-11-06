@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `owned_vehicles` (
 	`type` varchar(20) NOT NULL DEFAULT 'car',
 	`job` varchar(20) NOT NULL DEFAULT 'civ',
 	`stored` tinyint(1) NOT NULL DEFAULT '0',
+	`garage` varchar(255) NOT NULL DEFAULT 'Los_Santos',
 	
 	PRIMARY KEY (`plate`)
 );

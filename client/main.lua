@@ -1,6 +1,6 @@
 local CurrentActionData, PlayerData, userProperties, this_Garage, vehInstance, BlipList, PrivateBlips, JobBlips = {}, {}, {}, {}, {}, {}, {}, {}
 local HasAlreadyEnteredMarker = false
-local LastZone, CurrentAction, CurrentActionMsg
+local LastZone, CurrentAction, CurrentActionMsg, garageName
 ESX = nil
 
 Citizen.CreateThread(function()
@@ -125,7 +125,7 @@ function OpenAmbulanceGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'ambulance', 'cars')
+			end, 'ambulance', 'cars', garageName)
 		elseif action == 'helis' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceHelis)
@@ -174,7 +174,7 @@ function OpenAmbulanceGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'ambulance', 'helis')
+			end, 'ambulance', 'helis', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -318,7 +318,7 @@ function StoreOwnedAmbulanceMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -385,7 +385,7 @@ function OpenPoliceGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'police', 'cars')
+			end, 'police', 'cars', garageName)
 		elseif action == 'helis' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceHelis)
@@ -434,7 +434,7 @@ function OpenPoliceGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'police', 'helis')
+			end, 'police', 'helis', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -578,7 +578,7 @@ function StoreOwnedPoliceMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -644,7 +644,7 @@ function OpenMechanicGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'mechanic', 'cars')
+			end, 'mechanic', 'cars', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -727,7 +727,7 @@ function StoreOwnedMechanicMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -794,7 +794,7 @@ function OpenAircraftGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'helis')
+			end, 'civ', 'helis', garageName)
 		elseif action == 'planes' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPlanes)
@@ -843,7 +843,7 @@ function OpenAircraftGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'planes')
+			end, 'civ', 'planes', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -926,7 +926,7 @@ function StoreOwnedAircraftMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -994,7 +994,7 @@ function OpenBoatGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'boats')
+			end, 'civ', 'boats', garageName)
 		elseif action == 'subs' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSubs)
@@ -1043,7 +1043,7 @@ function OpenBoatGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'subs')
+			end, 'civ', 'subs', garageName)
 		-- Start of VENT Custom
 		elseif action == 'custom_boats' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
@@ -1093,7 +1093,7 @@ function OpenBoatGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'customboats')
+			end, 'civ', 'customboats', garageName)
 		-- End of VENT Custom
 		end
 	end, function(data, menu)
@@ -1177,7 +1177,7 @@ function StoreOwnedBoatMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -1261,7 +1261,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'bikes')
+			end, 'civ', 'bikes', garageName)
 		elseif action == 'compacts' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCompacts)
@@ -1310,7 +1310,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'compacts')
+			end, 'civ', 'compacts', garageName)
 		elseif action == 'coupes' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCoupes)
@@ -1359,7 +1359,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'coupes')
+			end, 'civ', 'coupes', garageName)
 		elseif action == 'motorcycles' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMotorcycles)
@@ -1408,7 +1408,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'motorcycles')
+			end, 'civ', 'motorcycles', garageName)
 		elseif action == 'muscles' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMuscles)
@@ -1457,7 +1457,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'muscles')
+			end, 'civ', 'muscles', garageName)
 		elseif action == 'offroads' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOffRoads)
@@ -1506,7 +1506,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'offroads')
+			end, 'civ', 'offroads', garageName)
 		elseif action == 'sedans' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSedans)
@@ -1555,7 +1555,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'sedans')
+			end, 'civ', 'sedans', garageName)
 		elseif action == 'sports' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSports)
@@ -1604,7 +1604,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'sports')
+			end, 'civ', 'sports', garageName)
 		elseif action == 'sportsclassics' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSportsClassics)
@@ -1653,7 +1653,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'sportsclassics')
+			end, 'civ', 'sportsclassics', garageName)
 		elseif action == 'supers' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSupers)
@@ -1702,7 +1702,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'supers')
+			end, 'civ', 'supers', garageName)
 		elseif action == 'suvs' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSUVs)
@@ -1751,7 +1751,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'suvs')
+			end, 'civ', 'suvs', garageName)
 		elseif action == 'vans' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedVans)
@@ -1800,7 +1800,7 @@ function OpenCarGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'vans')
+			end, 'civ', 'vans', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -1868,7 +1868,7 @@ function OpenTruckGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'box')
+			end, 'civ', 'box', garageName)
 		elseif action == 'haul' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHaul)
@@ -1917,7 +1917,7 @@ function OpenTruckGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'haul')
+			end, 'civ', 'haul', garageName)
 		elseif action == 'other' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOther)
@@ -1966,7 +1966,7 @@ function OpenTruckGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'other')
+			end, 'civ', 'other', garageName)
 		elseif action == 'trans' then
 			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
 			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedTrans)
@@ -2015,7 +2015,7 @@ function OpenTruckGarageMenu()
 						menu2.close()
 					end)
 				end
-			end, 'civ', 'trans')
+			end, 'civ', 'trans', garageName)
 		end
 	end, function(data, menu)
 		menu.close()
@@ -2098,7 +2098,7 @@ function StoreOwnedCarMenu()
 			else
 				ESX.ShowNotification(_U('cannot_store_vehicle'))
 			end
-		end, vehicleProps)
+		end, vehicleProps, garageName)
 	else
 		ESX.ShowNotification(_U('no_vehicle_to_enter'))
 	end
@@ -2310,7 +2310,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Ambulance.Markers.Points.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_garage_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'ambulance_garage_point'
 						end
 					end
 
@@ -2322,7 +2322,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance2 < Config.Ambulance.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'ambulance_store_point'
 						end
 					end
 
@@ -2334,7 +2334,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance3 < Config.Ambulance.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'ambulance_store_point'
 						end
 					end
 				end
@@ -2354,7 +2354,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Ambulance.Markers.Pounds.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_pound_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'ambulance_pound_point'
 						end
 					end
 				end
@@ -2376,7 +2376,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Police.Markers.Points.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_garage_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'police_garage_point'
 						end
 					end
 
@@ -2388,7 +2388,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance2 < Config.Police.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'police_store_point'
 						end
 					end
 
@@ -2400,7 +2400,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance3 < Config.Police.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'police_store_point'
 						end
 					end
 				end
@@ -2420,7 +2420,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Police.Markers.Pounds.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_pound_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'police_pound_point'
 						end
 					end
 				end
@@ -2441,7 +2441,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Mechanic.Markers.Points.x then
-							isInMarker, this_Garage, currentZone = true, v, 'mechanic_garage_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'mechanic_garage_point'
 						end
 					end
 
@@ -2453,7 +2453,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance2 < Config.Mechanic.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'mechanic_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'mechanic_store_point'
 						end
 					end
 				end
@@ -2473,7 +2473,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Mechanic.Markers.Pounds.x then
-							isInMarker, this_Garage, currentZone = true, v, 'mechanic_pound_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'mechanic_pound_point'
 						end
 					end
 				end
@@ -2493,7 +2493,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Aircrafts.Markers.Points.x then
-						isInMarker, this_Garage, currentZone = true, v, 'aircraft_garage_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'aircraft_garage_point'
 					end
 				end
 
@@ -2505,7 +2505,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance2 < Config.Aircrafts.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'aircraft_store_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'aircraft_store_point'
 					end
 				end
 			end
@@ -2521,7 +2521,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Aircrafts.Markers.Pounds.x then
-						isInMarker, this_Garage, currentZone = true, v, 'aircraft_pound_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'aircraft_pound_point'
 					end
 				end
 			end
@@ -2540,7 +2540,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Boats.Markers.Points.x then
-						isInMarker, this_Garage, currentZone = true, v, 'boat_garage_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'boat_garage_point'
 					end
 				end
 
@@ -2552,7 +2552,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance2 < Config.Boats.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'boat_store_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'boat_store_point'
 					end
 				end
 			end
@@ -2568,7 +2568,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Boats.Markers.Pounds.x then
-						isInMarker, this_Garage, currentZone = true, v, 'boat_pound_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'boat_pound_point'
 					end
 				end
 			end
@@ -2587,7 +2587,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Cars.Markers.Points.x then
-						isInMarker, this_Garage, currentZone = true, v, 'car_garage_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'car_garage_point'
 					end
 				end
 
@@ -2599,7 +2599,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance2 < Config.Cars.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'car_store_point'
 					end
 				end
 			end
@@ -2615,7 +2615,7 @@ Citizen.CreateThread(function()
 					end
 
 					if distance < Config.Cars.Markers.Pounds.x then
-						isInMarker, this_Garage, currentZone = true, v, 'car_pound_point'
+						garageName, isInMarker, this_Garage, currentZone = k, true, v, 'car_pound_point'
 					end
 				end
 			end
@@ -2635,7 +2635,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance < Config.Pvt.Markers.Points.x then
-							isInMarker, this_Garage, currentZone = true, v, 'car_garage_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'car_garage_point'
 						end
 					end
 
@@ -2647,7 +2647,7 @@ Citizen.CreateThread(function()
 						end
 
 						if distance2 < Config.Pvt.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+							garageName, isInMarker, this_Garage, currentZone = k, true, v, 'car_store_point'
 						end
 					end
 				end
