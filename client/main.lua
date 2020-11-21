@@ -95,10 +95,10 @@ function OpenAmbulanceGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -144,10 +144,10 @@ function OpenAmbulanceGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle2(vehVehicle, vehPlate)
+								SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -203,7 +203,7 @@ function OpenAmbulanceImpoundMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+						local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 						local doesVehicleExist = false
 
 						if data2.value == 'return' then
@@ -222,7 +222,7 @@ function OpenAmbulanceImpoundMenu()
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 									if hasEnoughMoney then
 										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle(vehVehicle, vehPlate)
+											SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 											ESX.UI.Menu.CloseAll()
 										end, 'ambulance', 'both', 'pay')
 									else
@@ -249,7 +249,7 @@ function OpenAmbulanceImpoundMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+						local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 						local doesVehicleExist = false
 
 						if data2.value == 'return' then
@@ -268,7 +268,7 @@ function OpenAmbulanceImpoundMenu()
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 									if hasEnoughMoney then
 										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle2(vehVehicle, vehPlate)
+											SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
 											ESX.UI.Menu.CloseAll()
 										end, 'ambulance', 'both', 'pay')
 									else
@@ -355,10 +355,10 @@ function OpenPoliceGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -404,10 +404,10 @@ function OpenPoliceGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle2(vehVehicle, vehPlate)
+								SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -463,7 +463,7 @@ function OpenPoliceImpoundMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+						local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 						local doesVehicleExist = false
 
 						if data2.value == 'return' then
@@ -482,7 +482,7 @@ function OpenPoliceImpoundMenu()
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 									if hasEnoughMoney then
 										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle(vehVehicle, vehPlate)
+											SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 											ESX.UI.Menu.CloseAll()
 										end, 'police', 'both', 'pay')
 									else
@@ -509,7 +509,7 @@ function OpenPoliceImpoundMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+						local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 						local doesVehicleExist = false
 
 						if data2.value == 'return' then
@@ -528,7 +528,7 @@ function OpenPoliceImpoundMenu()
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 									if hasEnoughMoney then
 										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle2(vehVehicle, vehPlate)
+											SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
 											ESX.UI.Menu.CloseAll()
 										end, 'police', 'both', 'pay')
 									else
@@ -614,10 +614,10 @@ function OpenMechanicGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -662,7 +662,7 @@ function OpenMechanicImpoundMenu()
 			end
 
 			ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-				local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+				local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 				local doesVehicleExist = false
 
 				if data2.value == 'return' then
@@ -681,7 +681,7 @@ function OpenMechanicImpoundMenu()
 						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 							if hasEnoughMoney then
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate)
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 									ESX.UI.Menu.CloseAll()
 								end, 'mechanic', 'both', 'pay')
 							else
@@ -764,10 +764,10 @@ function OpenAircraftGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -813,10 +813,10 @@ function OpenAircraftGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -861,7 +861,7 @@ function OpenAircraftImpoundMenu()
 			end
 
 			ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-				local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+				local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 				local doesVehicleExist = false
 
 				if data2.value == 'return' then
@@ -880,7 +880,7 @@ function OpenAircraftImpoundMenu()
 						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 							if hasEnoughMoney then
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate)
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 									ESX.UI.Menu.CloseAll()
 								end, 'civ', 'aircrafts', 'pay')
 							else
@@ -964,10 +964,10 @@ function OpenBoatGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1013,10 +1013,10 @@ function OpenBoatGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1044,57 +1044,6 @@ function OpenBoatGarageMenu()
 					end)
 				end
 			end, 'civ', 'subs')
-		-- Start of VENT Custom
-		elseif action == 'custom_boats' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCustomBoats)
-				if #ownedCustomBoats == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('custom_boats')))
-				else
-					for _,v in pairs(ownedCustomBoats) do
-						local vehStored = _U('veh_loc_unknown')
-						if v.stored then
-							vehStored = _U('veh_loc_garage')
-						else
-							vehStored = _U('veh_loc_impound')
-						end
-
-						table.insert(elements.rows, {data = v, cols = {v.plate, v.vehName, vehStored, '{{' .. _U('spawn') .. '|spawn}} {{' .. _U('rename') .. '|rename}}'}})
-					end
-
-					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
-						if data2.value == 'spawn' then
-							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
-								ESX.UI.Menu.CloseAll()
-							else
-								ESX.ShowNotification(_U('veh_not_here'))
-							end
-						elseif data2.value == 'rename' then
-							if Config.Main.RenameVehs then
-								ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'renamevehicle', {
-									title = _U('veh_rename', Config.Main.RenameMin, Config.Main.RenameMax - 1)
-								}, function(data3, menu3)
-									if string.len(data3.value) >= Config.Main.RenameMin and string.len(data3.value) < Config.Main.RenameMax then
-										TriggerServerEvent('esx_advancedgarage:renameVehicle', vehPlate, data3.value)
-										ESX.UI.Menu.CloseAll()
-									else
-										ESX.ShowNotification(_U('veh_rename_empty', Config.Main.RenameMin, Config.Main.RenameMax - 1))
-									end
-								end, function(data3, menu3)
-									menu3.close()
-								end)
-							else
-								ESX.ShowNotification(_U('veh_rename_no'))
-							end
-						end
-					end, function(data2, menu2)
-						menu2.close()
-					end)
-				end
-			end, 'civ', 'customboats')
-		-- End of VENT Custom
 		end
 	end, function(data, menu)
 		menu.close()
@@ -1112,7 +1061,7 @@ function OpenBoatImpoundMenu()
 			end
 
 			ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-				local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+				local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 				local doesVehicleExist = false
 
 				if data2.value == 'return' then
@@ -1131,7 +1080,7 @@ function OpenBoatImpoundMenu()
 						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 							if hasEnoughMoney then
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate)
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 									ESX.UI.Menu.CloseAll()
 								end, 'civ', 'boats', 'pay')
 							else
@@ -1231,10 +1180,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1280,10 +1229,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1329,10 +1278,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1378,10 +1327,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1427,10 +1376,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1476,10 +1425,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1525,10 +1474,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1574,10 +1523,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1623,10 +1572,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1672,10 +1621,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1721,10 +1670,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1770,10 +1719,10 @@ function OpenCarGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1838,10 +1787,10 @@ function OpenTruckGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1887,10 +1836,10 @@ function OpenTruckGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1936,10 +1885,10 @@ function OpenTruckGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -1985,10 +1934,10 @@ function OpenTruckGarageMenu()
 					end
 
 					ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'owned_vehicles_list', elements, function(data2, menu2)
-						local vehVehicle, vehPlate, vehStored = data2.data.vehicle, data2.data.plate, data2.data.stored
+						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate)
+								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 								ESX.UI.Menu.CloseAll()
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
@@ -2033,7 +1982,7 @@ function OpenCarImpoundMenu()
 			end
 
 			ESX.UI.Menu.Open('list', GetCurrentResourceName(), 'out_owned_vehicles_list', elements, function(data2, menu2)
-				local vehVehicle, vehPlate = data2.data.vehicle, data2.data.plate
+				local vehVehicle, vehPlate, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.fuel
 				local doesVehicleExist = false
 
 				if data2.value == 'return' then
@@ -2052,7 +2001,7 @@ function OpenCarImpoundMenu()
 						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
 							if hasEnoughMoney then
 								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate)
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
 									ESX.UI.Menu.CloseAll()
 								end, 'civ', 'cars', 'pay')
 							else
@@ -2138,13 +2087,19 @@ function StoreVehicle(vehicle, vehicleProps)
 		end
 	end
 
+	if Config.Main.LegacyFuel then
+		currentFuel = exports['LegacyFuel']:GetFuel(vehicle)
+		TriggerServerEvent('esx_advancedgarage:setVehicleFuel', vehicleProps.plate, currentFuel)
+		print("currentFuel: "..currentFuel)
+	end
+
 	DeleteEntity(vehicle)
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', vehicleProps.plate, true)
 	ESX.ShowNotification(_U('vehicle_in_garage'))
 end
 
 -- Spawn Vehicles
-function SpawnVehicle(vehicle, plate)
+function SpawnVehicle(vehicle, plate, fuel)
 	ESX.Game.SpawnVehicle(vehicle.model, this_Garage.Spawner, this_Garage.Heading, function(callback_vehicle)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
@@ -2156,13 +2111,16 @@ function SpawnVehicle(vehicle, plate)
 		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
 		local carplate = GetVehicleNumberPlateText(callback_vehicle)
 		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
+		if Config.Main.LegacyFuel then
+			exports['LegacyFuel']:SetFuel(callback_vehicle, fuel)
+		end
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 
 	TriggerServerEvent('esx_advancedgarage:setVehicleState', plate, false)
 end
 
-function SpawnVehicle2(vehicle, plate)
+function SpawnVehicle2(vehicle, plate, fuel)
 	ESX.Game.SpawnVehicle(vehicle.model, this_Garage.Spawner2, this_Garage.Heading2, function(callback_vehicle)
 		ESX.Game.SetVehicleProperties(callback_vehicle, vehicle)
 		SetVehRadioStation(callback_vehicle, "OFF")
@@ -2174,6 +2132,9 @@ function SpawnVehicle2(vehicle, plate)
 		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
 		local carplate = GetVehicleNumberPlateText(callback_vehicle)
 		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
+		if Config.Main.LegacyFuel then
+			exports['LegacyFuel']:SetFuel(callback_vehicle, fuel)
+		end
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), callback_vehicle, -1)
 	end)
 

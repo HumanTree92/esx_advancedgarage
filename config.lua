@@ -13,7 +13,8 @@ Config.Main = {
 	RenameVehs = false, -- true = Allows Players to Rename their Vehicles.
 	RenameMin = 4, -- Minimum Characters
 	RenameMax = 61, -- Max Characters + 1 (If you want Max Characters to be 45 then set it 46)
-	TruckShop = false -- true = Using esx_advancedvehicleshop Truck Dealership
+	TruckShop = false, -- true = Using esx_advancedvehicleshop Truck Dealership
+	LegacyFuel = false -- ture = Using LegacyFuel & you want Fuel to Save
 }
 
 Config.Blips = {

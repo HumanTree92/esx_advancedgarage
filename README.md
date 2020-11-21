@@ -17,6 +17,7 @@ Advanced Garage System for ESX V1 Final or EXM - Made by Human Tree92 ([Velociti
 * No longer needing a vehicle_names.lua file. New system pulls name from Vehicle Shop.
 * Vehicles are stored in a Class basses. Example: If you buy a Super Car it will show up under the Super Car Class in Garage.
 * WILL NOT WORK WITH esx_vehicleshop & WILL ONLY WORK WITH esx_advancedvehicleshop
+* Now supports LegacyFuel
 
 # Requirements:
 * Required:
@@ -40,7 +41,6 @@ Advanced Garage System for ESX V1 Final or EXM - Made by Human Tree92 ([Velociti
 # Other Scripts:
 If you like this please check out some of my other stuff like
 * [esx_advancedbanking](https://github.com/HumanTree92/esx_advancedbanking)
-* [esx_advancedfuel](https://github.com/HumanTree92/esx_advancedfuel)
 * [esx_advancedgarage](https://github.com/HumanTree92/esx_advancedgarage)
 * [esx_advancedholdup](https://github.com/HumanTree92/esx_advancedholdup)
 * [esx_advancedhospital](https://github.com/HumanTree92/esx_advancedhospital)
