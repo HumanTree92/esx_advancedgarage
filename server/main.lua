@@ -5,6 +5,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 -- Make sure all Vehicles are Stored on restart
 MySQL.ready(function()
 	if Config.Main.ParkVehicles then
+		--ParkVehicles()
 		MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = true WHERE `stored` = @stored', {
 			['@stored'] = false
 		}, function(rowsChanged)
@@ -238,19 +239,19 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 				end
 				cb(ownedTrans)
 			end)
-		elseif type == 'bikes' then
-			local ownedBikes = {}
+		elseif type == 'cycles' then
+			local ownedCycles = {}
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND category = @category', {
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'car',
 				['@job'] = 'civ',
-				['@category'] = 'bikes'
+				['@category'] = 'cycles'
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedBikes, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
+					table.insert(ownedCycles, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
-				cb(ownedBikes)
+				cb(ownedCycles)
 			end)
 		elseif type == 'compacts' then
 			local ownedCompacts = {}

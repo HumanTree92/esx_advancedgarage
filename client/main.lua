@@ -67,22 +67,39 @@ end
 
 -- Start of Ambulance Code
 function OpenAmbulanceGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ambulancegaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('cars'), value = 'cars'},
-			{label = _U('helis'), value = 'helis'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoCars, NoHelis = true, true
 
-		if action == 'cars' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceCars)
-				if #ownedAmbulanceCars == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('cars')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceCars)
+		if #ownedAmbulanceCars > 0 then
+			table.insert(elements, {label = _U('cars'), value = 'cars'})
+			NoCars = false
+		end
+	end, 'ambulance', 'cars')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceHelis)
+		if #ownedAmbulanceHelis > 0 then
+			table.insert(elements, {label = _U('helis'), value = 'helis'})
+			NoHelis = false
+		end
+	end, 'ambulance', 'helis')
+	Citizen.Wait(250)
+
+	if NoCars and NoHelis then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ambulancegaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'cars' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceCars)
 					for _,v in pairs(ownedAmbulanceCars) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -124,14 +141,10 @@ function OpenAmbulanceGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'ambulance', 'cars')
-		elseif action == 'helis' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceHelis)
-				if #ownedAmbulanceHelis == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('helis')))
-				else
+				end, 'ambulance', 'cars')
+			elseif action == 'helis' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedAmbulanceHelis)
 					for _,v in pairs(ownedAmbulanceHelis) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -173,12 +186,12 @@ function OpenAmbulanceGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'ambulance', 'helis')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'ambulance', 'helis')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenAmbulanceImpoundMenu()
@@ -327,22 +340,39 @@ end
 
 -- Start of Police Code
 function OpenPoliceGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'policegaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('cars'), value = 'cars'},
-			{label = _U('helis'), value = 'helis'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoCars, NoHelis = true, true
 
-		if action == 'cars' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceCars)
-				if #ownedPoliceCars == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('cars')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceCars)
+		if #ownedPoliceCars > 0 then
+			table.insert(elements, {label = _U('cars'), value = 'cars'})
+			NoCars = false
+		end
+	end, 'police', 'cars')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceHelis)
+		if #ownedPoliceHelis > 0 then
+			table.insert(elements, {label = _U('helis'), value = 'helis'})
+			NoHelis = false
+		end
+	end, 'police', 'helis')
+	Citizen.Wait(250)
+
+	if NoCars and NoHelis then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'policegaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'cars' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceCars)
 					for _,v in pairs(ownedPoliceCars) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -384,14 +414,10 @@ function OpenPoliceGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'police', 'cars')
-		elseif action == 'helis' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceHelis)
-				if #ownedPoliceHelis == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('helis')))
-				else
+				end, 'police', 'cars')
+			elseif action == 'helis' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPoliceHelis)
 					for _,v in pairs(ownedPoliceHelis) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -433,12 +459,12 @@ function OpenPoliceGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'police', 'helis')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'police', 'helis')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenPoliceImpoundMenu()
@@ -587,21 +613,32 @@ end
 
 -- Start of Mechanic Code
 function OpenMechanicGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mechanicgaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('cars'), value = 'cars'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoCars = true
 
-		if action == 'cars' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMechanicCars)
-				if #ownedMechanicCars == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('cars')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMechanicCars)
+		if #ownedMechanicCars > 0 then
+			table.insert(elements, {label = _U('cars'), value = 'cars'})
+			NoCars = false
+		end
+	end, 'mechanic', 'cars')
+	Citizen.Wait(250)
+
+	if NoCars then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mechanicgaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'cars' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMechanicCars)
 					for _,v in pairs(ownedMechanicCars) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -643,12 +680,12 @@ function OpenMechanicGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'mechanic', 'cars')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'mechanic', 'cars')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenMechanicImpoundMenu()
@@ -736,22 +773,39 @@ end
 
 -- Start of Aircraft Code
 function OpenAircraftGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'aircraftgaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('helis'), value = 'helis'},
-			{label = _U('planes'), value = 'planes'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoHelis, NoPlanes = true, true
 
-		if action == 'helis' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHelis)
-				if #ownedHelis == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('helis')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHelis)
+		if #ownedHelis > 0 then
+			table.insert(elements, {label = _U('helis'), value = 'helis'})
+			NoHelis = false
+		end
+	end, 'civ', 'helis')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPlanes)
+		if #ownedPlanes > 0 then
+			table.insert(elements, {label = _U('planes'), value = 'planes'})
+			NoPlanes = false
+		end
+	end, 'civ', 'planes')
+	Citizen.Wait(250)
+
+	if NoHelis and NoPlanes then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'aircraftgaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'helis' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHelis)
 					for _,v in pairs(ownedHelis) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -793,14 +847,10 @@ function OpenAircraftGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'helis')
-		elseif action == 'planes' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPlanes)
-				if #ownedPlanes == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('planes')))
-				else
+				end, 'civ', 'helis')
+			elseif action == 'planes' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedPlanes)
 					for _,v in pairs(ownedPlanes) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -842,12 +892,12 @@ function OpenAircraftGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'planes')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'civ', 'planes')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenAircraftImpoundMenu()
@@ -935,23 +985,39 @@ end
 
 -- Start of Boat Code
 function OpenBoatGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'boatgaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('custom_boats'), value = 'custom_boats'},
-			{label = _U('boats'), value = 'boats'},
-			{label = _U('subs'), value = 'subs'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoBoats, NoSubs = true, true
 
-		if action == 'boats' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBoats)
-				if #ownedBoats == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('boats')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBoats)
+		if #ownedBoats > 0 then
+			table.insert(elements, {label = _U('boats'), value = 'boats'})
+			NoBoats = false
+		end
+	end, 'civ', 'boats')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSubs)
+		if #ownedSubs > 0 then
+			table.insert(elements, {label = _U('subs'), value = 'subs'})
+			NoSubs = false
+		end
+	end, 'civ', 'subs')
+	Citizen.Wait(250)
+
+	if NoBoats and NoSubs then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'boatgaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'boats' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBoats)
 					for _,v in pairs(ownedBoats) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -993,14 +1059,10 @@ function OpenBoatGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'boats')
-		elseif action == 'subs' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSubs)
-				if #ownedSubs == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('subs')))
-				else
+				end, 'civ', 'boats')
+			elseif action == 'subs' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSubs)
 					for _,v in pairs(ownedSubs) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1042,12 +1104,12 @@ function OpenBoatGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'subs')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'civ', 'subs')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenBoatImpoundMenu()
@@ -1135,40 +1197,122 @@ end
 
 -- Start of Car Code
 function OpenCarGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cargaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('large_trucks'), value = 'large_trucks'},
-			{label = _U('bikes'), value = 'bikes'},
-			{label = _U('compacts'), value = 'compacts'},
-			{label = _U('coupes'), value = 'coupes'},
-			{label = _U('motorcycles'), value = 'motorcycles'},
-			{label = _U('muscles'), value = 'muscles'},
-			{label = _U('offroads'), value = 'offroads'},
-			{label = _U('sedans'), value = 'sedans'},
-			{label = _U('sports'), value = 'sports'},
-			{label = _U('sportsclassics'), value = 'sportsclassics'},
-			{label = _U('supers'), value = 'supers'},
-			{label = _U('suvs'), value = 'suvs'},
-			{label = _U('vans'), value = 'vans'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoCycles, NoCompacts, NoCoupes, NoMotos, NoMuscles, NoOffs, NoSedans, NoSports, NoSportCs, NoSupers, NoSUVs, NoVans = true, true, true, true, true, true, true, true, true, true, true, true
 
-		if action == 'large_trucks' then
-			if Config.Main.TruckShop then
-				OpenTruckGarageMenu()
-			else
-				ESX.ShowNotification(_U('large_trucks_no'))
-			end
-		elseif action == 'bikes' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBikes)
-				if #ownedBikes == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('bikes')))
+	-- Start of esx_advancedvehicleshop Truck Shop
+	if Config.Main.TruckShop then
+		table.insert(elements, {label = _U('large_trucks'), value = 'large_trucks'})
+	end
+	-- End of esx_advancedvehicleshop Truck Shop
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCycles)
+		if #ownedCycles > 0 then
+			table.insert(elements, {label = _U('cycles'), value = 'cycles'})
+			NoCycles = false
+		end
+	end, 'civ', 'cycles')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCompacts)
+		if #ownedCompacts > 0 then
+			table.insert(elements, {label = _U('compacts'), value = 'compacts'})
+			NoCompacts = false
+		end
+	end, 'civ', 'compacts')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCoupes)
+		if #ownedCoupes > 0 then
+			table.insert(elements, {label = _U('coupes'), value = 'coupes'})
+			NoCoupes = false
+		end
+	end, 'civ', 'coupes')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMotorcycles)
+		if #ownedMotorcycles > 0 then
+			table.insert(elements, {label = _U('motorcycles'), value = 'motorcycles'})
+			NoMotos = false
+		end
+	end, 'civ', 'motorcycles')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMuscles)
+		if #ownedMuscles > 0 then
+			table.insert(elements, {label = _U('muscles'), value = 'muscles'})
+			NoMuscles = false
+		end
+	end, 'civ', 'muscles')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOffRoads)
+		if #ownedOffRoads > 0 then
+			table.insert(elements, {label = _U('offroads'), value = 'offroads'})
+			NoOffs = false
+		end
+	end, 'civ', 'offroads')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSedans)
+		if #ownedSedans > 0 then
+			table.insert(elements, {label = _U('sedans'), value = 'sedans'})
+			NoSedans = false
+		end
+	end, 'civ', 'sedans')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSports)
+		if #ownedSports > 0 then
+			table.insert(elements, {label = _U('sports'), value = 'sports'})
+			NoSports = false
+		end
+	end, 'civ', 'sports')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSportsClassics)
+		if #ownedSportsClassics > 0 then
+			table.insert(elements, {label = _U('sportsclassics'), value = 'sportsclassics'})
+			NoSportCs = false
+		end
+	end, 'civ', 'sportsclassics')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSupers)
+		if #ownedSupers > 0 then
+			table.insert(elements, {label = _U('supers'), value = 'supers'})
+			NoSupers = false
+		end
+	end, 'civ', 'supers')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSUVs)
+		if #ownedSUVs > 0 then
+			table.insert(elements, {label = _U('suvs'), value = 'suvs'})
+			NoSUVs = false
+		end
+	end, 'civ', 'suvs')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedVans)
+		if #ownedVans > 0 then
+			table.insert(elements, {label = _U('vans'), value = 'vans'})
+			NoVans = false
+		end
+	end, 'civ', 'vans')
+	Citizen.Wait(250)
+
+	if NoCycles and NoCompacts and NoCoupes and NoMotos and NoMuscles and NoOffs and NoSedans and NoSports and NoSportCs and NoSupers and NoSUVs and NoVans and not Config.Main.TruckShop then
+		ESX.UI.Menu.CloseAll()
+		ESX.ShowNotification(_U('garage_no_veh'))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cargaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'large_trucks' then
+				if Config.Main.TruckShop then
+					OpenTruckGarageMenu()
 				else
-					for _,v in pairs(ownedBikes) do
+					ESX.ShowNotification(_U('large_trucks_no'))
+				end
+			elseif action == 'cycles' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCycles)
+					for _,v in pairs(ownedCycles) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
 							vehStored = _U('veh_loc_garage')
@@ -1209,14 +1353,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'bikes')
-		elseif action == 'compacts' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCompacts)
-				if #ownedCompacts == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('compacts')))
-				else
+				end, 'civ', 'cycles')
+			elseif action == 'compacts' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCompacts)
 					for _,v in pairs(ownedCompacts) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1258,14 +1398,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'compacts')
-		elseif action == 'coupes' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCoupes)
-				if #ownedCoupes == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('coupes')))
-				else
+				end, 'civ', 'compacts')
+			elseif action == 'coupes' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedCoupes)
 					for _,v in pairs(ownedCoupes) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1307,14 +1443,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'coupes')
-		elseif action == 'motorcycles' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMotorcycles)
-				if #ownedMotorcycles == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('motorcycles')))
-				else
+				end, 'civ', 'coupes')
+			elseif action == 'motorcycles' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMotorcycles)
 					for _,v in pairs(ownedMotorcycles) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1356,14 +1488,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'motorcycles')
-		elseif action == 'muscles' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMuscles)
-				if #ownedMuscles == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('muscles')))
-				else
+				end, 'civ', 'motorcycles')
+			elseif action == 'muscles' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedMuscles)
 					for _,v in pairs(ownedMuscles) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1405,14 +1533,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'muscles')
-		elseif action == 'offroads' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOffRoads)
-				if #ownedOffRoads == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('offroads')))
-				else
+				end, 'civ', 'muscles')
+			elseif action == 'offroads' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOffRoads)
 					for _,v in pairs(ownedOffRoads) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1454,14 +1578,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'offroads')
-		elseif action == 'sedans' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSedans)
-				if #ownedSedans == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('sedans')))
-				else
+				end, 'civ', 'offroads')
+			elseif action == 'sedans' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSedans)
 					for _,v in pairs(ownedSedans) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1503,14 +1623,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'sedans')
-		elseif action == 'sports' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSports)
-				if #ownedSports == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('sports')))
-				else
+				end, 'civ', 'sedans')
+			elseif action == 'sports' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSports)
 					for _,v in pairs(ownedSports) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1552,14 +1668,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'sports')
-		elseif action == 'sportsclassics' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSportsClassics)
-				if #ownedSportsClassics == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('sportsclassics')))
-				else
+				end, 'civ', 'sports')
+			elseif action == 'sportsclassics' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSportsClassics)
 					for _,v in pairs(ownedSportsClassics) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1601,14 +1713,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'sportsclassics')
-		elseif action == 'supers' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSupers)
-				if #ownedSupers == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('supers')))
-				else
+				end, 'civ', 'sportsclassics')
+			elseif action == 'supers' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSupers)
 					for _,v in pairs(ownedSupers) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1650,14 +1758,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'supers')
-		elseif action == 'suvs' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSUVs)
-				if #ownedSUVs == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('suvs')))
-				else
+				end, 'civ', 'supers')
+			elseif action == 'suvs' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedSUVs)
 					for _,v in pairs(ownedSUVs) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1699,14 +1803,10 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'suvs')
-		elseif action == 'vans' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedVans)
-				if #ownedVans == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('vans')))
-				else
+				end, 'civ', 'suvs')
+			elseif action == 'vans' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedVans)
 					for _,v in pairs(ownedVans) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1748,33 +1848,61 @@ function OpenCarGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'vans')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'civ', 'vans')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenTruckGarageMenu()
-	ESX.UI.Menu.CloseAll()
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'truckgaragemenu', {
-		title = _U('garage_menu'),
-		align = GetConvar('esx_MenuAlign', 'top-left'),
-		elements = {
-			{label = _U('box'), value = 'box'},
-			{label = _U('haul'), value = 'haul'},
-			{label = _U('other'), value = 'other'},
-			{label = _U('trans'), value = 'trans'}
-	}}, function(data, menu)
-		local action = data.current.value
+	local elements = {}
+	local NoBox, NoHaul, NoOther, NoTrans = true, true, true, true
 
-		if action == 'box' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBox)
-				if #ownedBox == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('box')))
-				else
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBox)
+		if #ownedBox > 0 then
+			table.insert(elements, {label = _U('box'), value = 'box'})
+			NoBox = false
+		end
+	end, 'civ', 'box')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHaul)
+		if #ownedHaul > 0 then
+			table.insert(elements, {label = _U('haul'), value = 'haul'})
+			NoHaul = false
+		end
+	end, 'civ', 'haul')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOther)
+		if #ownedOther > 0 then
+			table.insert(elements, {label = _U('other'), value = 'other'})
+			NoOther = false
+		end
+	end, 'civ', 'other')
+
+	ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedTrans)
+		if #ownedTrans > 0 then
+			table.insert(elements, {label = _U('trans'), value = 'trans'})
+			NoTrans = false
+		end
+	end, 'civ', 'trans')
+	Citizen.Wait(250)
+
+	if NoBox and NoHaul and NoOther and NoTrans then
+		ESX.ShowNotification(_U('garage_no', _U('large_trucks')))
+	else
+		ESX.UI.Menu.CloseAll()
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'truckgaragemenu', {
+			title = _U('garage_menu'),
+			align = GetConvar('esx_MenuAlign', 'top-left'),
+			elements = elements
+		}, function(data, menu)
+			local action = data.current.value
+
+			if action == 'box' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedBox)
 					for _,v in pairs(ownedBox) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1816,14 +1944,10 @@ function OpenTruckGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'box')
-		elseif action == 'haul' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHaul)
-				if #ownedHaul == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('haul')))
-				else
+				end, 'civ', 'box')
+			elseif action == 'haul' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedHaul)
 					for _,v in pairs(ownedHaul) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1865,14 +1989,10 @@ function OpenTruckGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'haul')
-		elseif action == 'other' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOther)
-				if #ownedOther == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('other')))
-				else
+				end, 'civ', 'haul')
+			elseif action == 'other' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedOther)
 					for _,v in pairs(ownedOther) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1914,14 +2034,10 @@ function OpenTruckGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'other')
-		elseif action == 'trans' then
-			local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
-			ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedTrans)
-				if #ownedTrans == 0 then
-					ESX.ShowNotification(_U('garage_no', _U('trans')))
-				else
+				end, 'civ', 'other')
+			elseif action == 'trans' then
+				local elements = {head = {_U('veh_plate'), _U('veh_name'), _U('veh_loc'), _U('actions')}, rows = {}}
+				ESX.TriggerServerCallback('esx_advancedgarage:getOwnedVehicles', function(ownedTrans)
 					for _,v in pairs(ownedTrans) do
 						local vehStored = _U('veh_loc_unknown')
 						if v.stored then
@@ -1963,12 +2079,12 @@ function OpenTruckGarageMenu()
 					end, function(data2, menu2)
 						menu2.close()
 					end)
-				end
-			end, 'civ', 'trans')
-		end
-	end, function(data, menu)
-		menu.close()
-	end)
+				end, 'civ', 'trans')
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end
 end
 
 function OpenCarImpoundMenu()
@@ -2775,14 +2891,10 @@ Citizen.CreateThread(function()
 						ESX.ShowNotification(_U('cant_in_veh'))
 					end
 				elseif CurrentAction == 'boat_store_point' then
-					if IsThisModelABoat(model) then
-						if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
-							StoreOwnedBoatMenu()
-						else
-							ESX.ShowNotification(_U('driver_seat'))
-						end
+					if (GetPedInVehicleSeat(playerVeh, -1) == playerPed) then
+						StoreOwnedBoatMenu()
 					else
-						ESX.ShowNotification(_U('not_correct_veh'))
+						ESX.ShowNotification(_U('driver_seat'))
 					end
 				elseif CurrentAction == 'boat_pound_point' then
 					if not IsPedSittingInAnyVehicle(PlayerPedId()) then
