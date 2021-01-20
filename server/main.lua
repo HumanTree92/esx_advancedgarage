@@ -5,6 +5,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 -- Make sure all Vehicles are Stored on restart
 MySQL.ready(function()
 	if Config.Main.ParkVehicles then
+		--ParkVehicles()
 		MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = true WHERE `stored` = @stored', {
 			['@stored'] = false
 		}, function(rowsChanged)
@@ -61,7 +62,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedAmbulanceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedAmbulanceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedAmbulanceCars)
 			end)
@@ -76,7 +77,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedAmbulanceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedAmbulanceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedAmbulanceHelis)
 			end)
@@ -93,7 +94,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedPoliceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedPoliceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedPoliceCars)
 			end)
@@ -108,7 +109,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedPoliceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedPoliceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedPoliceHelis)
 			end)
@@ -125,7 +126,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedMechanicCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedMechanicCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedMechanicCars)
 			end)
@@ -142,7 +143,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedHelis)
 			end)
@@ -157,7 +158,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedPlanes, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedPlanes, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedPlanes)
 			end)
@@ -172,7 +173,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedBoats, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedBoats, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedBoats)
 			end)
@@ -187,7 +188,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSubs, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSubs, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSubs)
 			end)
@@ -202,7 +203,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedBox, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedBox, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedBox)
 			end)
@@ -217,7 +218,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedHaul, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedHaul, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedHaul)
 			end)
@@ -232,7 +233,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedOther, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedOther, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedOther)
 			end)
@@ -247,24 +248,24 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedTrans, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedTrans, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedTrans)
 			end)
-		elseif type == 'bikes' then
-			local ownedBikes = {}
+		elseif type == 'cycles' then
+			local ownedCycles = {}
 			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND garage = @garage AND Type = @Type AND job = @job AND category = @category', {
 				['@owner'] = xPlayer.identifier,
 				['@garage'] = garage,
 				['@Type'] = 'car',
 				['@job'] = 'civ',
-				['@category'] = 'bikes'
+				['@category'] = 'cycles'
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedBikes, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedCycles, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
-				cb(ownedBikes)
+				cb(ownedCycles)
 			end)
 		elseif type == 'compacts' then
 			local ownedCompacts = {}
@@ -277,7 +278,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedCompacts, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedCompacts, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedCompacts)
 			end)
@@ -292,7 +293,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedCoupes, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedCoupes, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedCoupes)
 			end)
@@ -307,7 +308,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedMotorcycles, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedMotorcycles, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedMotorcycles)
 			end)
@@ -322,7 +323,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedMuscles, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedMuscles, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedMuscles)
 			end)
@@ -337,7 +338,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedOffRoads, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedOffRoads, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedOffRoads)
 			end)
@@ -352,7 +353,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSedans, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSedans, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSedans)
 			end)
@@ -367,7 +368,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSports, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSports, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSports)
 			end)
@@ -382,7 +383,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSportsClassics, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSportsClassics, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSportsClassics)
 			end)
@@ -397,7 +398,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSupers, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSupers, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSupers)
 			end)
@@ -412,7 +413,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedSUVs, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedSUVs, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedSUVs)
 			end)
@@ -427,7 +428,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 			}, function(data)
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(ownedVans, {vehicle = vehicle, plate = v.plate, vehName = v.name, stored = v.stored})
+					table.insert(ownedVans, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
 				end
 				cb(ownedVans)
 			end)
@@ -451,7 +452,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outAmbulanceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outAmbulanceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outAmbulanceCars)
 			end)
@@ -465,7 +466,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outAmbulanceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outAmbulanceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outAmbulanceHelis)
 			end)
@@ -481,7 +482,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outPoliceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outPoliceCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outPoliceCars)
 			end)
@@ -495,7 +496,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outPoliceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outPoliceHelis, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outPoliceHelis)
 			end)
@@ -510,7 +511,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outMechanicCars, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outMechanicCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outMechanicCars)
 			end)
@@ -526,7 +527,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outCivAircrafts, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outCivAircrafts, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outCivAircrafts)
 			end)
@@ -540,7 +541,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outCivBoats, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outCivBoats, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outCivBoats)
 			end)
@@ -554,7 +555,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			}, function(data) 
 				for _,v in pairs(data) do
 					local vehicle = json.decode(v.vehicle)
-					table.insert(outCivCars, {vehicle = vehicle, plate = v.plate, vehName = v.name})
+					table.insert(outCivCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
 				end
 				cb(outCivCars)
 			end)
@@ -767,6 +768,21 @@ AddEventHandler('esx_advancedgarage:setVehicleState', function(plate, state)
 
 	MySQL.Async.execute('UPDATE owned_vehicles SET `stored` = @stored WHERE plate = @plate', {
 		['@stored'] = state,
+		['@plate'] = plate
+	}, function(rowsChanged)
+		if rowsChanged == 0 then
+			print(('esx_advancedgarage: %s exploited the garage!'):format(xPlayer.identifier))
+		end
+	end)
+end)
+
+-- Set Fuel Level
+RegisterServerEvent('esx_advancedgarage:setVehicleFuel')
+AddEventHandler('esx_advancedgarage:setVehicleFuel', function(plate, fuel)
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	MySQL.Async.execute('UPDATE owned_vehicles SET fuel = @fuel WHERE plate = @plate', {
+		['@fuel'] = fuel,
 		['@plate'] = plate
 	}, function(rowsChanged)
 		if rowsChanged == 0 then
