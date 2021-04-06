@@ -79,4 +79,5 @@ Locales['en'] = {
 	['veh_rename_no'] = 'Vehicle Renaming is Currently turned Off.',
 	['get_properties'] = '~y~Getting Private Garages!',
 	['large_trucks_no'] = 'Truck Dealership isn\'t being used on this Server!',
+	['spawnpoint_blocked'] = 'Vehicle spawn point is ~r~blocked~s~!',
 }

@@ -9,7 +9,7 @@ Config.Main = {
 	CustomKickMsg = false, -- true = Sets Custom Kick Message for those that try to Cheat. Note: "Config.KickPossibleCheaters" must be true.
 	GiveSocMoney = false, -- true = Gives money to society_mechanic. Note: REQUIRES esx_mechanicjob.
 	DamageMult = false, -- true = Costs more to Store a Broken/Damaged Vehicle.
-	MultAmount = 5, -- Higher Number = Higher Repair Price.
+	MultAmount = 3, -- Higher Number = Higher Repair Price.
 	RenameVehs = false, -- true = Allows Players to Rename their Vehicles.
 	RenameMin = 4, -- Minimum Characters
 	RenameMax = 61, -- Max Characters + 1 (If you want Max Characters to be 45 then set it 46)
@@ -29,7 +29,7 @@ Config.Ambulance = {
 	Garages = false, -- true = Allows use of Ambulance Garages.
 	Pounds = false, -- true = Allows use of Ambulance Pounds.
 	Blips = false, -- true = Use Ambulance Blips.
-	PoundP = 80, -- How much it Costs to get Vehicles from Ambulance Pound.
+	PoundP = 80, -- How much it Costs to get Vehicles from the Ambulance Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -41,7 +41,7 @@ Config.Police = {
 	Garages = false, -- true = Allows use of Police Garages.
 	Pounds = false, -- true = Allows use of Police Pounds.
 	Blips = false, -- true = Use Police Blips.
-	PoundP = 80, -- How much it Costs to get Vehicles from Police Pound.
+	PoundP = 80, -- How much it Costs to get Vehicles from the Police Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -53,7 +53,7 @@ Config.Mechanic = {
 	Garages = false, -- true = Allows use of Mechanic Garages.
 	Pounds = false, -- true = Allows use of Mechanic Pounds.
 	Blips = false, -- true = Use Mechanic Blips.
-	PoundP = 150, -- How much it Costs to get Vehicles from Mechanic Pound.
+	PoundP = 150, -- How much it Costs to get Vehicles from the Mechanic Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -64,7 +64,7 @@ Config.Mechanic = {
 Config.Aircrafts = {
 	Garages = false, -- true = Allows use of Aircraft Garages.
 	Blips = false, -- true = Use Aircraft Blips.
-	PoundP = 2500, -- How much it Costs to get Vehicles from Aircraft Pound.
+	PoundP = 2500, -- How much it Costs to get Vehicles from the Aircraft Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -75,7 +75,7 @@ Config.Aircrafts = {
 Config.Boats = {
 	Garages = false, -- true = Allows use of Boat Garages.
 	Blips = false, -- true = Use Boat Blips.
-	PoundP = 500, -- How much it Costs to get Vehicles from Boat Pound.
+	PoundP = 500, -- How much it Costs to get Vehicles from the Boat Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -86,7 +86,7 @@ Config.Boats = {
 Config.Cars = {
 	Garages = false, -- true = Allows use of Car Garages.
 	Blips = false, -- true = Use Car Blips.
-	PoundP = 300, -- How much it Costs to get Vehicles from Car Pound.
+	PoundP = 300, -- How much it Costs to get Vehicles from the Car Pound.
 	Markers = {
 		Points = {Type = 1, r = 0, g = 255, b = 0, x = 1.5, y = 1.5, z = 1.0}, -- Green Color / Standard Size Circle.
 		Delete = {Type = 1, r = 255, g = 0, b = 0, x = 5.0, y = 5.0, z = 1.0}, -- Red Color / Big Size Circle.
@@ -191,12 +191,18 @@ Config.AircraftGarages = {
 		Spawner = vector3(2122.72, 4804.85, 40.78),
 		Deleter = vector3(2082.36, 4806.06, 40.07),
 		Heading = 115.04
-	}
+	},
+	--[[Cayo_Airport = {
+		Marker = vector3(4460.86, -4472.47, 3.27),
+		Spawner = vector3(4485.77, -4462.86, 4.23),
+		Deleter = vector3(4485.77, -4462.86, 3.23),
+		Heading = 198.75
+	}]]--
 }
 
 Config.AircraftPounds = {
 	Los_Santos_Airport = {
-		Marker = vector3(-1243.0, -3391.92, 12.94),
+		Marker = vector3(-1237.96, -3386.61, 12.94),
 		Spawner = vector3(-1272.27, -3382.46, 12.94),
 		Heading = 330.25
 	}
@@ -222,7 +228,13 @@ Config.BoatGarages = {
 		Spawner = vector3(-290.46, 6622.72, -0.47),
 		Deleter = vector3(-304.66, 6607.36, -0.47),
 		Heading = 52.0
-	}
+	},
+	--[[Cayo_Perico_Dock = {
+		Marker = vector3(4877.95, -5169.9, 1.45),
+		Spawner = vector3(4790.57, -5209.31, 1.02),
+		Deleter = vector3(4790.57, -5209.31, 0.02),
+		Heading = 0.64
+	}]]--
 }
 
 Config.BoatPounds = {
@@ -253,7 +265,13 @@ Config.CarGarages = {
 		Spawner = vector3(128.78, 6622.99, 30.78),
 		Deleter = vector3(126.36, 6608.41, 30.86),
 		Heading = 315.01
-	}
+	},
+	--[[Cayo_Perico = {
+		Marker = vector3(4503.25, -4520.67, 3.41),
+		Spawner = vector3(4511.52, -4517.73, 4.11),
+		Deleter = vector3(4503.27, -4536.21, 3.13),
+		Heading = 22.2
+	}]]--
 }
 
 Config.CarPounds = {

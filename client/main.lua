@@ -83,7 +83,7 @@ function OpenAmbulanceGarageMenu()
 			NoHelis = false
 		end
 	end, 'ambulance', 'helis')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoCars and NoHelis then
 		ESX.UI.Menu.CloseAll()
@@ -115,8 +115,12 @@ function OpenAmbulanceGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -160,8 +164,12 @@ function OpenAmbulanceGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner2, 5.0) then
+									SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -232,16 +240,20 @@ function OpenAmbulanceImpoundMenu()
 							end
 
 							if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-									if hasEnoughMoney then
-										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-											ESX.UI.Menu.CloseAll()
-										end, 'ambulance', 'both', 'pay')
-									else
-										ESX.ShowNotification(_U('not_enough_money'))
-									end
-								end, 'ambulance', 'both', 'check')
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+										if hasEnoughMoney then
+											ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+												SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+												ESX.UI.Menu.CloseAll()
+											end, 'ambulance', 'both', 'pay')
+										else
+											ESX.ShowNotification(_U('not_enough_money'))
+										end
+									end, 'ambulance', 'both', 'check')
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_out_world'))
 							end
@@ -278,16 +290,20 @@ function OpenAmbulanceImpoundMenu()
 							end
 
 							if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-									if hasEnoughMoney then
-										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
-											ESX.UI.Menu.CloseAll()
-										end, 'ambulance', 'both', 'pay')
-									else
-										ESX.ShowNotification(_U('not_enough_money'))
-									end
-								end, 'ambulance', 'both', 'check')
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner2, 5.0) then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+										if hasEnoughMoney then
+											ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+												SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
+												ESX.UI.Menu.CloseAll()
+											end, 'ambulance', 'both', 'pay')
+										else
+											ESX.ShowNotification(_U('not_enough_money'))
+										end
+									end, 'ambulance', 'both', 'check')
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_out_world'))
 							end
@@ -356,7 +372,7 @@ function OpenPoliceGarageMenu()
 			NoHelis = false
 		end
 	end, 'police', 'helis')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoCars and NoHelis then
 		ESX.UI.Menu.CloseAll()
@@ -388,8 +404,12 @@ function OpenPoliceGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -433,8 +453,12 @@ function OpenPoliceGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner2, 5.0) then
+									SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -505,16 +529,20 @@ function OpenPoliceImpoundMenu()
 							end
 
 							if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-									if hasEnoughMoney then
-										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-											ESX.UI.Menu.CloseAll()
-										end, 'police', 'both', 'pay')
-									else
-										ESX.ShowNotification(_U('not_enough_money'))
-									end
-								end, 'police', 'both', 'check')
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+										if hasEnoughMoney then
+											ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+												SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+												ESX.UI.Menu.CloseAll()
+											end, 'police', 'both', 'pay')
+										else
+											ESX.ShowNotification(_U('not_enough_money'))
+										end
+									end, 'police', 'both', 'check')
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_out_world'))
 							end
@@ -551,16 +579,20 @@ function OpenPoliceImpoundMenu()
 							end
 
 							if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-									if hasEnoughMoney then
-										ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-											SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
-											ESX.UI.Menu.CloseAll()
-										end, 'police', 'both', 'pay')
-									else
-										ESX.ShowNotification(_U('not_enough_money'))
-									end
-								end, 'police', 'both', 'check')
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+										if hasEnoughMoney then
+											ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+												SpawnVehicle2(vehVehicle, vehPlate, vehFuel)
+												ESX.UI.Menu.CloseAll()
+											end, 'police', 'both', 'pay')
+										else
+											ESX.ShowNotification(_U('not_enough_money'))
+										end
+									end, 'police', 'both', 'check')
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_out_world'))
 							end
@@ -622,7 +654,7 @@ function OpenMechanicGarageMenu()
 			NoCars = false
 		end
 	end, 'mechanic', 'cars')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoCars then
 		ESX.UI.Menu.CloseAll()
@@ -654,8 +686,12 @@ function OpenMechanicGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -715,16 +751,20 @@ function OpenMechanicImpoundMenu()
 					end
 
 					if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-							if hasEnoughMoney then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-									ESX.UI.Menu.CloseAll()
-								end, 'mechanic', 'both', 'pay')
-							else
-								ESX.ShowNotification(_U('not_enough_money'))
-							end
-						end, 'mechanic', 'both', 'check')
+						if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+							ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+								if hasEnoughMoney then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+										SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+										ESX.UI.Menu.CloseAll()
+									end, 'mechanic', 'both', 'pay')
+								else
+									ESX.ShowNotification(_U('not_enough_money'))
+								end
+							end, 'mechanic', 'both', 'check')
+						else
+							ESX.ShowNotification(_U('spawnpoint_blocked'))
+						end
 					else
 						ESX.ShowNotification(_U('veh_out_world'))
 					end
@@ -789,7 +829,7 @@ function OpenAircraftGarageMenu()
 			NoPlanes = false
 		end
 	end, 'civ', 'planes')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoHelis and NoPlanes then
 		ESX.UI.Menu.CloseAll()
@@ -821,8 +861,12 @@ function OpenAircraftGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -866,8 +910,12 @@ function OpenAircraftGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -927,16 +975,20 @@ function OpenAircraftImpoundMenu()
 					end
 
 					if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-							if hasEnoughMoney then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-									ESX.UI.Menu.CloseAll()
-								end, 'civ', 'aircrafts', 'pay')
-							else
-								ESX.ShowNotification(_U('not_enough_money'))
-							end
-						end, 'civ', 'aircrafts', 'check')
+						if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+							ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+								if hasEnoughMoney then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+										SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+										ESX.UI.Menu.CloseAll()
+									end, 'civ', 'aircrafts', 'pay')
+								else
+									ESX.ShowNotification(_U('not_enough_money'))
+								end
+							end, 'civ', 'aircrafts', 'check')
+						else
+							ESX.ShowNotification(_U('spawnpoint_blocked'))
+						end
 					else
 						ESX.ShowNotification(_U('veh_out_world'))
 					end
@@ -1001,7 +1053,7 @@ function OpenBoatGarageMenu()
 			NoSubs = false
 		end
 	end, 'civ', 'subs')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoBoats and NoSubs then
 		ESX.UI.Menu.CloseAll()
@@ -1033,8 +1085,12 @@ function OpenBoatGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1078,8 +1134,12 @@ function OpenBoatGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1139,16 +1199,20 @@ function OpenBoatImpoundMenu()
 					end
 
 					if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-							if hasEnoughMoney then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-									ESX.UI.Menu.CloseAll()
-								end, 'civ', 'boats', 'pay')
-							else
-								ESX.ShowNotification(_U('not_enough_money'))
-							end
-						end, 'civ', 'boats', 'check')
+						if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+							ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+								if hasEnoughMoney then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+										SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+										ESX.UI.Menu.CloseAll()
+									end, 'civ', 'boats', 'pay')
+								else
+									ESX.ShowNotification(_U('not_enough_money'))
+								end
+							end, 'civ', 'boats', 'check')
+						else
+							ESX.ShowNotification(_U('spawnpoint_blocked'))
+						end
 					else
 						ESX.ShowNotification(_U('veh_out_world'))
 					end
@@ -1289,7 +1353,7 @@ function OpenCarGarageMenu()
 			NoVans = false
 		end
 	end, 'civ', 'vans')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoCycles and NoCompacts and NoCoupes and NoMotos and NoMuscles and NoOffs and NoSedans and NoSports and NoSportCs and NoSupers and NoSUVs and NoVans and not Config.Main.TruckShop then
 		ESX.UI.Menu.CloseAll()
@@ -1327,8 +1391,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1372,8 +1440,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1417,8 +1489,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1462,8 +1538,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1507,8 +1587,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1552,8 +1636,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1597,8 +1685,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1642,8 +1734,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1687,8 +1783,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1732,8 +1832,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1777,8 +1881,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1822,8 +1930,12 @@ function OpenCarGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1887,7 +1999,7 @@ function OpenTruckGarageMenu()
 			NoTrans = false
 		end
 	end, 'civ', 'trans')
-	Citizen.Wait(250)
+	Citizen.Wait(500)
 
 	if NoBox and NoHaul and NoOther and NoTrans then
 		ESX.ShowNotification(_U('garage_no', _U('large_trucks')))
@@ -1918,8 +2030,12 @@ function OpenTruckGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -1963,8 +2079,12 @@ function OpenTruckGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -2008,8 +2128,12 @@ function OpenTruckGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -2053,8 +2177,12 @@ function OpenTruckGarageMenu()
 						local vehVehicle, vehPlate, vehStored, vehFuel = data2.data.vehicle, data2.data.plate, data2.data.stored, data2.data.fuel
 						if data2.value == 'spawn' then
 							if vehStored then
-								SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-								ESX.UI.Menu.CloseAll()
+								if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification(_U('spawnpoint_blocked'))
+								end
 							else
 								ESX.ShowNotification(_U('veh_not_here'))
 							end
@@ -2114,16 +2242,20 @@ function OpenCarImpoundMenu()
 					end
 
 					if not doesVehicleExist and not DoesAPlayerDrivesVehicle(vehPlate) then
-						ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
-							if hasEnoughMoney then
-								ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
-									SpawnVehicle(vehVehicle, vehPlate, vehFuel)
-									ESX.UI.Menu.CloseAll()
-								end, 'civ', 'cars', 'pay')
-							else
-								ESX.ShowNotification(_U('not_enough_money'))
-							end
-						end, 'civ', 'cars', 'check')
+						if ESX.Game.IsSpawnPointClear(this_Garage.Spawner, 5.0) then
+							ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function(hasEnoughMoney)
+								if hasEnoughMoney then
+									ESX.TriggerServerCallback('esx_advancedgarage:payImpound', function()
+										SpawnVehicle(vehVehicle, vehPlate, vehFuel)
+										ESX.UI.Menu.CloseAll()
+									end, 'civ', 'cars', 'pay')
+								else
+									ESX.ShowNotification(_U('not_enough_money'))
+								end
+							end, 'civ', 'cars', 'check')
+						else
+							ESX.ShowNotification(_U('spawnpoint_blocked'))
+						end
 					else
 						ESX.ShowNotification(_U('veh_out_world'))
 					end
@@ -2398,8 +2530,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Ambulance.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Ambulance.Markers.Delete.x, Config.Ambulance.Markers.Delete.y, Config.Ambulance.Markers.Delete.z, Config.Ambulance.Markers.Delete.r, Config.Ambulance.Markers.Delete.g, Config.Ambulance.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance2 < Config.Ambulance.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance2 < Config.Ambulance.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+							end
 						end
 					end
 
@@ -2410,8 +2544,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Ambulance.Markers.Delete.Type, v.Deleter2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Ambulance.Markers.Delete.x, Config.Ambulance.Markers.Delete.y, Config.Ambulance.Markers.Delete.z, Config.Ambulance.Markers.Delete.r, Config.Ambulance.Markers.Delete.g, Config.Ambulance.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance3 < Config.Ambulance.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance3 < Config.Ambulance.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'ambulance_store_point'
+							end
 						end
 					end
 				end
@@ -2464,8 +2600,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Police.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Police.Markers.Delete.x, Config.Police.Markers.Delete.y, Config.Police.Markers.Delete.z, Config.Police.Markers.Delete.r, Config.Police.Markers.Delete.g, Config.Police.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance2 < Config.Police.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance2 < Config.Police.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+							end
 						end
 					end
 
@@ -2476,8 +2614,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Police.Markers.Delete.Type, v.Deleter2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Police.Markers.Delete.x, Config.Police.Markers.Delete.y, Config.Police.Markers.Delete.z, Config.Police.Markers.Delete.r, Config.Police.Markers.Delete.g, Config.Police.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance3 < Config.Police.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance3 < Config.Police.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'police_store_point'
+							end
 						end
 					end
 				end
@@ -2529,8 +2669,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Mechanic.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Mechanic.Markers.Delete.x, Config.Mechanic.Markers.Delete.y, Config.Mechanic.Markers.Delete.z, Config.Mechanic.Markers.Delete.r, Config.Mechanic.Markers.Delete.g, Config.Mechanic.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance2 < Config.Mechanic.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'mechanic_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance2 < Config.Mechanic.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'mechanic_store_point'
+							end
 						end
 					end
 				end
@@ -2581,8 +2723,10 @@ Citizen.CreateThread(function()
 						DrawMarker(Config.Aircrafts.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Aircrafts.Markers.Delete.x, Config.Aircrafts.Markers.Delete.y, Config.Aircrafts.Markers.Delete.z, Config.Aircrafts.Markers.Delete.r, Config.Aircrafts.Markers.Delete.g, Config.Aircrafts.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 					end
 
-					if distance2 < Config.Aircrafts.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'aircraft_store_point'
+					if IsPedSittingInAnyVehicle(PlayerPedId()) then
+						if distance2 < Config.Aircrafts.Markers.Delete.x then
+							isInMarker, this_Garage, currentZone = true, v, 'aircraft_store_point'
+						end
 					end
 				end
 			end
@@ -2628,8 +2772,10 @@ Citizen.CreateThread(function()
 						DrawMarker(Config.Boats.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Boats.Markers.Delete.x, Config.Boats.Markers.Delete.y, Config.Boats.Markers.Delete.z, Config.Boats.Markers.Delete.r, Config.Boats.Markers.Delete.g, Config.Boats.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 					end
 
-					if distance2 < Config.Boats.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'boat_store_point'
+					if IsPedSittingInAnyVehicle(PlayerPedId()) then
+						if distance2 < Config.Boats.Markers.Delete.x then
+							isInMarker, this_Garage, currentZone = true, v, 'boat_store_point'
+						end
 					end
 				end
 			end
@@ -2675,8 +2821,10 @@ Citizen.CreateThread(function()
 						DrawMarker(Config.Cars.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Cars.Markers.Delete.x, Config.Cars.Markers.Delete.y, Config.Cars.Markers.Delete.z, Config.Cars.Markers.Delete.r, Config.Cars.Markers.Delete.g, Config.Cars.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 					end
 
-					if distance2 < Config.Cars.Markers.Delete.x then
-						isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+					if IsPedSittingInAnyVehicle(PlayerPedId()) then
+						if distance2 < Config.Cars.Markers.Delete.x then
+							isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+						end
 					end
 				end
 			end
@@ -2723,8 +2871,10 @@ Citizen.CreateThread(function()
 							DrawMarker(Config.Pvt.Markers.Delete.Type, v.Deleter, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Pvt.Markers.Delete.x, Config.Pvt.Markers.Delete.y, Config.Pvt.Markers.Delete.z, Config.Pvt.Markers.Delete.r, Config.Pvt.Markers.Delete.g, Config.Pvt.Markers.Delete.b, 100, false, true, 2, false, nil, nil, false)
 						end
 
-						if distance2 < Config.Pvt.Markers.Delete.x then
-							isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+						if IsPedSittingInAnyVehicle(PlayerPedId()) then
+							if distance2 < Config.Pvt.Markers.Delete.x then
+								isInMarker, this_Garage, currentZone = true, v, 'car_store_point'
+							end
 						end
 					end
 				end
