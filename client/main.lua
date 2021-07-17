@@ -2355,8 +2355,7 @@ function SpawnVehicle(vehicle, plate, fuel)
 		SetVehicleDeformationFixed(callback_vehicle)
 		SetVehicleUndriveable(callback_vehicle, false)
 		SetVehicleEngineOn(callback_vehicle, true, true)
-		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
-		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
+		SetEntityAsMissionEntity(callback_vehicle, true, false)
 		local carplate = GetVehicleNumberPlateText(callback_vehicle)
 		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
 		if Config.Main.LegacyFuel then
@@ -2376,8 +2375,7 @@ function SpawnVehicle2(vehicle, plate, fuel)
 		SetVehicleDeformationFixed(callback_vehicle)
 		SetVehicleUndriveable(callback_vehicle, false)
 		SetVehicleEngineOn(callback_vehicle, true, true)
-		--SetVehicleEngineHealth(callback_vehicle, 1000) -- Might not be needed
-		--SetVehicleBodyHealth(callback_vehicle, 1000) -- Might not be needed
+		SetEntityAsMissionEntity(callback_vehicle, true, false)
 		local carplate = GetVehicleNumberPlateText(callback_vehicle)
 		table.insert(vehInstance, {vehicleentity = callback_vehicle, plate = carplate})
 		if Config.Main.LegacyFuel then
@@ -2506,7 +2504,7 @@ Citizen.CreateThread(function()
 
 		if Config.Ambulance.Garages then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
-				for k,v in pairs(Config.AmbulanceGarages) do
+				for k,v in pairs(Config.Ambulance.Locations.Garages) do
 					local distance = #(playerCoords - v.Marker)
 					local distance2 = #(playerCoords - v.Deleter)
 					local distance3 = #(playerCoords - v.Deleter2)
@@ -2556,7 +2554,7 @@ Citizen.CreateThread(function()
 
 		if Config.Ambulance.Pounds then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
-				for k,v in pairs(Config.AmbulancePounds) do
+				for k,v in pairs(Config.Ambulance.Locations.Pounds) do
 					local distance = #(playerCoords - v.Marker)
 
 					if distance < Config.Main.DrawDistance then
@@ -2576,7 +2574,7 @@ Citizen.CreateThread(function()
 
 		if Config.Police.Garages then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
-				for k,v in pairs(Config.PoliceGarages) do
+				for k,v in pairs(Config.Police.Locations.Garages) do
 					local distance = #(playerCoords - v.Marker)
 					local distance2 = #(playerCoords - v.Deleter)
 					local distance3 = #(playerCoords - v.Deleter2)
@@ -2626,7 +2624,7 @@ Citizen.CreateThread(function()
 
 		if Config.Police.Pounds then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
-				for k,v in pairs(Config.PolicePounds) do
+				for k,v in pairs(Config.Police.Locations.Pounds) do
 					local distance = #(playerCoords - v.Marker)
 
 					if distance < Config.Main.DrawDistance then
@@ -2646,7 +2644,7 @@ Citizen.CreateThread(function()
 
 		if Config.Mechanic.Garages then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
-				for k,v in pairs(Config.MechanicGarages) do
+				for k,v in pairs(Config.Mechanic.Locations.Garages) do
 					local distance = #(playerCoords - v.Marker)
 					local distance2 = #(playerCoords - v.Deleter)
 
@@ -2681,7 +2679,7 @@ Citizen.CreateThread(function()
 
 		if Config.Mechanic.Pounds then
 			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
-				for k,v in pairs(Config.MechanicPounds) do
+				for k,v in pairs(Config.Mechanic.Locations.Pounds) do
 					local distance = #(playerCoords - v.Marker)
 
 					if distance < Config.Main.DrawDistance then
@@ -2700,7 +2698,7 @@ Citizen.CreateThread(function()
 		end
 
 		if Config.Aircrafts.Garages then
-			for k,v in pairs(Config.AircraftGarages) do
+			for k,v in pairs(Config.Aircrafts.Locations.Garages) do
 				local distance = #(playerCoords - v.Marker)
 				local distance2 = #(playerCoords - v.Deleter)
 
@@ -2731,7 +2729,7 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			for k,v in pairs(Config.AircraftPounds) do
+			for k,v in pairs(Config.Aircrafts.Locations.Pounds) do
 				local distance = #(playerCoords - v.Marker)
 
 				if distance < Config.Main.DrawDistance then
@@ -2749,7 +2747,7 @@ Citizen.CreateThread(function()
 		end
 
 		if Config.Boats.Garages then
-			for k,v in pairs(Config.BoatGarages) do
+			for k,v in pairs(Config.Boats.Locations.Garages) do
 				local distance = #(playerCoords - v.Marker)
 				local distance2 = #(playerCoords - v.Deleter)
 
@@ -2780,7 +2778,7 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			for k,v in pairs(Config.BoatPounds) do
+			for k,v in pairs(Config.Boats.Locations.Pounds) do
 				local distance = #(playerCoords - v.Marker)
 
 				if distance < Config.Main.DrawDistance then
@@ -2798,7 +2796,7 @@ Citizen.CreateThread(function()
 		end
 
 		if Config.Cars.Garages then
-			for k,v in pairs(Config.CarGarages) do
+			for k,v in pairs(Config.Cars.Locations.Garages) do
 				local distance = #(playerCoords - v.Marker)
 				local distance2 = #(playerCoords - v.Deleter)
 
@@ -2829,7 +2827,7 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			for k,v in pairs(Config.CarPounds) do
+			for k,v in pairs(Config.Cars.Locations.Pounds) do
 				local distance = #(playerCoords - v.Marker)
 
 				if distance < Config.Main.DrawDistance then
@@ -2847,7 +2845,7 @@ Citizen.CreateThread(function()
 		end
 
 		if Config.Pvt.Garages then
-			for k,v in pairs(Config.PrivateCarGarages) do
+			for k,v in pairs(Config.Pvt.Locations.Garages) do
 				if not v.Private or has_value(userProperties, v.Private) then
 					local distance = #(playerCoords - v.Marker)
 					local distance2 = #(playerCoords - v.Deleter)
@@ -3087,7 +3085,7 @@ end)
 -- Create Blips
 function CreateBlips()
 	if Config.Aircrafts.Garages and Config.Aircrafts.Blips then
-		for k,v in pairs(Config.AircraftGarages) do
+		for k,v in pairs(Config.Aircrafts.Locations.Garages) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Garages.Sprite)
@@ -3102,7 +3100,7 @@ function CreateBlips()
 			table.insert(BlipList, blip)
 		end
 
-		for k,v in pairs(Config.AircraftPounds) do
+		for k,v in pairs(Config.Aircrafts.Locations.Pounds) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Pounds.Sprite)
@@ -3119,7 +3117,7 @@ function CreateBlips()
 	end
 
 	if Config.Boats.Garages and Config.Boats.Blips then
-		for k,v in pairs(Config.BoatGarages) do
+		for k,v in pairs(Config.Boats.Locations.Garages) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Garages.Sprite)
@@ -3134,7 +3132,7 @@ function CreateBlips()
 			table.insert(BlipList, blip)
 		end
 
-		for k,v in pairs(Config.BoatPounds) do
+		for k,v in pairs(Config.Boats.Locations.Pounds) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Pounds.Sprite)
@@ -3151,7 +3149,7 @@ function CreateBlips()
 	end
 
 	if Config.Cars.Garages and Config.Cars.Blips then
-		for k,v in pairs(Config.CarGarages) do
+		for k,v in pairs(Config.Cars.Locations.Garages) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Garages.Sprite)
@@ -3166,7 +3164,7 @@ function CreateBlips()
 			table.insert(BlipList, blip)
 		end
 
-		for k,v in pairs(Config.CarPounds) do
+		for k,v in pairs(Config.Cars.Locations.Pounds) do
 			local blip = AddBlipForCoord(v.Marker)
 
 			SetBlipSprite (blip, Config.Blips.Pounds.Sprite)
@@ -3194,7 +3192,7 @@ function DeletePrivateBlips()
 end
 
 function RefreshPrivateBlips()
-	for zoneKey,zoneValues in pairs(Config.PrivateCarGarages) do
+	for zoneKey,zoneValues in pairs(Config.Pvt.Locations.Garages) do
 		if zoneValues.Private and has_value(userProperties, zoneValues.Private) then
 			local blip = AddBlipForCoord(zoneValues.Marker)
 
@@ -3225,7 +3223,7 @@ end
 function RefreshJobBlips()
 	if Config.Ambulance.Garages and Config.Ambulance.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
-			for k,v in pairs(Config.AmbulanceGarages) do
+			for k,v in pairs(Config.Ambulance.Locations.Garages) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JGarages.Sprite)
@@ -3244,7 +3242,7 @@ function RefreshJobBlips()
 
 	if Config.Ambulance.Pounds and Config.Ambulance.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' then
-			for k,v in pairs(Config.AmbulancePounds) do
+			for k,v in pairs(Config.Ambulance.Locations.Pounds) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JPounds.Sprite)
@@ -3263,7 +3261,7 @@ function RefreshJobBlips()
 
 	if Config.Police.Garages and Config.Police.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
-			for k,v in pairs(Config.PoliceGarages) do
+			for k,v in pairs(Config.Police.Locations.Garages) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JGarages.Sprite)
@@ -3282,7 +3280,7 @@ function RefreshJobBlips()
 
 	if Config.Police.Pounds and Config.Police.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' then
-			for k,v in pairs(Config.PolicePounds) do
+			for k,v in pairs(Config.Police.Locations.Pounds) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JPounds.Sprite)
@@ -3301,7 +3299,7 @@ function RefreshJobBlips()
 
 	if Config.Mechanic.Garages and Config.Mechanic.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
-			for k,v in pairs(Config.MechanicGarages) do
+			for k,v in pairs(Config.Mechanic.Locations.Garages) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JGarages.Sprite)
@@ -3320,7 +3318,7 @@ function RefreshJobBlips()
 
 	if Config.Mechanic.Pounds and Config.Mechanic.Blips then
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == 'mechanic' then
-			for k,v in pairs(Config.MechanicPounds) do
+			for k,v in pairs(Config.Mechanic.Locations.Pounds) do
 				local blip = AddBlipForCoord(v.Marker)
 
 				SetBlipSprite (blip, Config.Blips.JPounds.Sprite)

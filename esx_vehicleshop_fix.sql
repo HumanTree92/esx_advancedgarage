@@ -10,6 +10,7 @@ CREATE TABLE `owned_vehicles` (
 	`name` varchar(60) NOT NULL DEFAULT 'Unknown',
 	`fuel` int(11) NOT NULL DEFAULT '100',
 	`stored` TINYINT(1) NOT NULL DEFAULT '0',
+	`image` longtext DEFAULT NULL,
 
 	PRIMARY KEY (`plate`)
 );

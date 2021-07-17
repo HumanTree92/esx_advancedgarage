@@ -1,12 +1,8 @@
 Locales['es'] = {
 	-- Blips
 	['blip_garage'] = 'Garaje | Vehículos',
-	['blip_garageaircrafts'] = 'Garaje | Aeronaves',
-	['blip_garageboats'] = 'Garaje | Barcos',
 	['blip_garage_private'] = 'Garaje | Privado',
 	['blip_pound'] = 'Garaje | Deposito de Vehículos',
-	['blip_poundaircrafts'] = 'Garaje | Deposito de Aeronaves',
-	['blip_poundboats'] = 'Garaje | Deposito de Barcos',
 	['blip_ambulance_garage'] = 'Garaje | Hospital',
 	['blip_ambulance_impound'] = 'Garaje | Deposito Hospital',
 	['blip_police_garage'] = 'Garaje | Policía',
@@ -44,7 +40,7 @@ Locales['es'] = {
 	['haul'] = 'Haulers',
 	['other'] = 'Other Trucks',
 	['trans'] = 'Transport Trucks',
-	['bikes'] = 'Bicicletas',
+	['cycles'] = 'Bicicletas',
 	['compacts'] = 'Compactos',
 	['coupes'] = 'Coupes',
 	['motorcycles'] = 'Motos',
@@ -63,6 +59,7 @@ Locales['es'] = {
 	['press_to_delete'] = 'Pulsa ~INPUT_PICKUP~ para guardar el vehículo en el garaje.',
 	['press_to_impound'] = 'Pulsa ~INPUT_PICKUP~ para acceder al deposito.',
 	['garage_no'] = 'No tienes ningún %s!',
+	['garage_no_veh'] = '¡No tienes ningún vehículo para este garaje!',
 	['impound_no'] = '¡No tienes ningún vehículo en el depósito!',
 	['veh_not_here'] = '¡Ese vehículo no está aquí!',
 	['veh_out_world'] = '¡Ese vehículo está actualmente en el mundo!',
@@ -82,4 +79,5 @@ Locales['es'] = {
 	['veh_rename_no'] = 'El cambio de nombre del vehículo está desactivado actualmente.',
 	['get_properties'] = '~y~¡Obteniendo garajes privados!',
 	['large_trucks_no'] = '¡El concesionario de camiones no se utiliza en este servidor!',
+	['spawnpoint_blocked'] = '¡El punto de generación del vehículo está ~r~bloqueado~s~!',
 }
