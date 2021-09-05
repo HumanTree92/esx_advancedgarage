@@ -1,7 +1,3 @@
-ESX = nil
-
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-
 -- Make sure all Vehicles are Stored on restart
 MySQL.ready(function()
 	if Config.Main.ParkVehicles then

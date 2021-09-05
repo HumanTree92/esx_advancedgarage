@@ -1,5 +1,5 @@
 # About esx_advancedgarage:
-Advanced Garage System for ESX V1 Final, Legacy, &/or EXM - Made by Human Tree92 ([Velociti Entertainment Customs & Wiki]( http://www.velocitientertainment.com/customs/ ))
+Advanced Garage System for ESX Legacy - Made by Human Tree92 ([Velociti Entertainment Customs & Wiki]( http://www.velocitientertainment.com/customs/ ))
 
 # Creating Issues
 * Check the [Closed Topics]( https://github.com/HumanTree92/esx_advancedgarage/issues?q=is%3Aissue+is%3Aclosed ) & [Wiki]( http://www.velocitientertainment.com/customs/ ) before opening an issue to see if your issue has already been Answered.
@@ -21,11 +21,7 @@ Advanced Garage System for ESX V1 Final, Legacy, &/or EXM - Made by Human Tree92
 
 # Requirements:
 * Required:
-  * ESX Legacy Links - Use one of the following
-    * [es_extended V1 Final]( https://github.com/esx-framework/es_extended/tree/v1-final )
-	* [es_extended Legacy]( https://github.com/esx-framework/es_extended/tree/legacy )
-	* [ESX Legacy]( https://github.com/esx-framework/esx-legacy )
-	* [ExtendedMode]( https://github.com/extendedmode/extendedmode )
+  * [ESX Legacy]( https://github.com/esx-framework/esx-legacy )
   * [esx_property]( https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_property )
   * [esx_advancedvehicleshop]( https://github.com/HumanTree92/esx_advancedvehicleshop )
 * Optional:
@@ -81,7 +77,7 @@ Scripts that will no longer be Maintained.
 
 # Legal
 ### License
-esx_advancedgarage - Advanced Garage for ESX V1 Final, Legacy, &/or EXM
+esx_advancedgarage - Advanced Garage for ESX Legacy
 
 Copyright (C) 2011-2021 Velociti Entertainment
 

@@ -6,7 +6,9 @@ description 'ESX Advanced Garage'
 
 Author 'Human Tree92 | Velociti Entertainment'
 
-version '1.0.0'
+version 'legacy'
+
+shared_script '@es_extended/imports.lua'
 
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',

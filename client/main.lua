@@ -1,23 +1,6 @@
 local CurrentActionData, PlayerData, userProperties, this_Garage, vehInstance, BlipList, PrivateBlips, JobBlips = {}, {}, {}, {}, {}, {}, {}, {}
 local HasAlreadyEnteredMarker = false
 local LastZone, CurrentAction, CurrentActionMsg
-ESX = nil
-
-Citizen.CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-
-	ESX.PlayerData = ESX.GetPlayerData()
-
-	CreateBlips()
-	RefreshJobBlips()
-end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
@@ -31,6 +14,7 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 
 	ESX.PlayerData = xPlayer
 
+	CreateBlips()
 	RefreshJobBlips()
 end)
 
