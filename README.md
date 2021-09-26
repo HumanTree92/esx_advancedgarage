@@ -51,6 +51,7 @@ If you like this please check out some of my other stuff like
 * [esx_joblisting]( https://github.com/HumanTree92/esx_joblisting )
 * [esx_licenseshop]( https://github.com/HumanTree92/esx_licenseshop )
 * [esx_vehiclespawner]( https://github.com/HumanTree92/esx_vehiclespawner )
+* [esx_vehicletheft]( https://github.com/HumanTree92/esx_vehicletheft )
 * [FiveM_CustomMapAddons]( https://github.com/HumanTree92/FiveM_CustomMapAddons )
 
 # Archived Scripts:
