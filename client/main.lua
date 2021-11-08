@@ -2322,7 +2322,6 @@ function StoreVehicle(vehicle, vehicleProps)
 	if Config.Main.LegacyFuel then
 		currentFuel = exports['LegacyFuel']:GetFuel(vehicle)
 		TriggerServerEvent('esx_advancedgarage:setVehicleFuel', vehicleProps.plate, currentFuel)
-		print("currentFuel: "..currentFuel)
 	end
 
 	DeleteEntity(vehicle)
