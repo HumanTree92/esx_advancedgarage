@@ -9,12 +9,11 @@ Advanced Garage System for ESX Legacy - Made by Human Tree92 ([Velociti Entertai
 # Helpfull Info:
 * Unable to Store Vehicles you don't own.
 * Ability to Kick people who try to Cheat using the Garage & Set Custom Kick Message.
-* Private Property Garages.
-* Ambulance, Police, Mechanic, Aircraft, Boat, & Car Garages.
-* Ambulance, Police, Mechanic, Aircraft, Boat, & Car Impounds.
+* Private Property Garages. Must have esx_property
+* Ambulance, Police, Mechanic, Taxi, Aircraft, Boat, & Car Garages/Impounds.
 * Uses esx_menu_list instead of esx_menu_default.
 * Ability to Rename Vehicle.
-* No longer needing a vehicle_names.lua file. New system pulls name from Vehicle Shop.
+* No longer needing a vehicle_names.lua file. New system pulls name from Advanced Vehicle Shop.
 * Vehicles are stored in a Class basses. Example: If you buy a Super Car it will show up under the Super Car Class in Garage.
 * WILL NOT WORK WITH esx_vehicleshop & WILL ONLY WORK WITH esx_advancedvehicleshop
 * Now supports LegacyFuel
@@ -22,10 +21,11 @@ Advanced Garage System for ESX Legacy - Made by Human Tree92 ([Velociti Entertai
 # Requirements:
 * Required:
   * [ESX Legacy]( https://github.com/esx-framework/esx-legacy )
-  * [esx_property]( https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_property )
   * [esx_advancedvehicleshop]( https://github.com/HumanTree92/esx_advancedvehicleshop )
 * Optional:
+  * [esx_property]( https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_property )
   * [esx_mechanicjob]( https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_mechanicjob )
+  * [esx_taxijob]( https://github.com/esx-framework/esx-legacy/tree/main/%5Besx_addons%5D/esx_taxijob )
 
 # Download & Installation:
 1) Download Master or Release & Extract the .zip or Open the .zip.
@@ -69,12 +69,13 @@ Scripts that will no longer be Maintained.
 * [Forums]( http://velocitientertainment.com/forum )
 * [About Us]( http://velocitientertainment.com/pc-gaming/ )
 * [Donate]( http://velocitientertainment.com/donations/ )
+* [Patreon] ( https://www.patreon.com/VelocitiEntertainment?fan_landing=true )
 * [Steam Group]( http://steamcommunity.com/groups/velocitientertainment )
 * [Facebook]( http://facebook.com/VelocitiEntertainment )
 * [Twitter]( http://twitter.com/VelocitiEnt )
 * [YouTube]( http://youtube.com/user/HumanTree92 )
 * [Twitch]( http://twitch.tv/humantree92 )
-* [eBay]( http://ebay.com/usr/humantree92 )
+* [GitHub]( https://github.com/HumanTree92 )
 
 # Legal
 ### License

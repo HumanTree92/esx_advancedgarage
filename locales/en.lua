@@ -9,9 +9,12 @@ Locales['en'] = {
 	['blip_police_impound'] = 'Garage | Police Impound',
 	['blip_mechanic_garage'] = 'Garage | Mechanic Garage',
 	['blip_mechanic_impound'] = 'Garage | Mechanic Impound',
+	['blip_taxi_garage'] = 'Garage | Taxi Garage',
+	['blip_taxi_impound'] = 'Garage | Taxi Impound',
 
 	-- Menus
-	['garage_menu'] = 'Pick Vehicle Category',
+	['garage_menu'] = 'Garage | Pick Vehicle Category',
+	['impound_menu'] = 'Impound | Pick Vehicle Category',
 	['veh_plate'] = 'Vehicle Plate',
 	['veh_name'] = 'Vehicle Name',
 	['impound_fee'] = 'Fee',
@@ -30,8 +33,8 @@ Locales['en'] = {
 	['damaged_vehicle'] = 'Vehicle Damaged',
 
 	-- Categories
-	['large_trucks'] = 'Large Trucks',
 	['cars'] = 'Cars',
+	['aircrafts'] = 'Aircrafts',
 	['helis'] = 'Helicopters',
 	['planes'] = 'Planes',
 	['boats'] = 'Boats',
@@ -60,12 +63,13 @@ Locales['en'] = {
 	['press_to_impound'] = 'Press ~INPUT_PICKUP~ to access the Impound.',
 	['garage_no'] = 'You don\'t own any %s!',
 	['garage_no_veh'] = 'You don\'t own any Vehicles for this Garage!',
-	['impound_no'] = 'You don\'t have any Vehicles at the Impound!',
+	['impound_no_veh'] = 'You don\'t have any Vehicles at the Impound!',
 	['veh_not_here'] = 'That Vehicle isn\'t Here!',
 	['veh_out_world'] = 'That Vehicle is Currently out in the World!',
 	['must_ambulance'] = 'Must be Ambulance Job to Access this!',
 	['must_police'] = 'Must be Police Job to Access this!',
 	['must_mechanic'] = 'Must be Mechanic Job to Access this!',
+	['must_taxi'] = 'Must be Taxi Job to Access this!',
 	['you_paid'] = 'You paid $',
 	['not_enough_money'] = 'You do not have enough money!',
 	['cant_in_veh'] = 'Must be out of this Vehicle to Access this!',
@@ -78,6 +82,5 @@ Locales['en'] = {
 	['veh_rename_empty'] = 'Vehicle Name must be Between %s & %s Characters!',
 	['veh_rename_no'] = 'Vehicle Renaming is Currently turned Off.',
 	['get_properties'] = '~y~Getting Private Garages!',
-	['large_trucks_no'] = 'Truck Dealership isn\'t being used on this Server!',
 	['spawnpoint_blocked'] = 'Vehicle spawn point is ~r~blocked~s~!',
 }

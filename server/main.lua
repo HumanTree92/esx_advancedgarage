@@ -122,6 +122,22 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehicles', function(sourc
 				cb(ownedMechanicCars)
 			end)
 		end
+	elseif job == 'taxi' then
+		if type == 'cars' then
+			local ownedTaxiCars = {}
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND category = @category', {
+				['@owner'] = xPlayer.identifier,
+				['@Type'] = 'car',
+				['@job'] = 'taxi',
+				['@category'] = 'cars'
+			}, function(data)
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(ownedTaxiCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel, stored = v.stored})
+				end
+				cb(ownedTaxiCars)
+			end)
+		end
 	elseif job == 'civ' then
 		if type == 'helis' then
 			local ownedHelis = {}
@@ -409,7 +425,7 @@ end)
 -- End of Garage Fetch Vehicles
 
 -- Start of Impound Fetch Vehicles
-ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(source, cb, job, type)
+ESX.RegisterServerCallback('esx_advancedgarage:getOwnedVehiclesOut', function(source, cb, job, type)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if job == 'ambulance' then
@@ -487,10 +503,25 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 				cb(outMechanicCars)
 			end)
 		end
+	elseif job == 'taxi' then
+		if type == 'cars' then
+			local outTaxiCars = {}
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND job = @job AND `stored` = @stored', {
+				['@owner'] = xPlayer.identifier,
+				['@job'] = 'taxi',
+				['@stored'] = false
+			}, function(data) 
+				for _,v in pairs(data) do
+					local vehicle = json.decode(v.vehicle)
+					table.insert(outTaxiCars, {vehicle = vehicle, plate = v.plate, vehName = v.name, fuel = v.fuel})
+				end
+				cb(outTaxiCars)
+			end)
+		end
 	elseif job == 'civ' then
 		if type == 'aircrafts' then
 			local outCivAircrafts = {}
-			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'aircraft',
 				['@job'] = 'civ',
@@ -504,7 +535,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			end)
 		elseif type == 'boats' then
 			local outCivBoats = {}
-			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'boat',
 				['@job'] = 'civ',
@@ -518,7 +549,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:getOutOwnedVehicles', function(so
 			end)
 		elseif type == 'cars' then
 			local outCivCars = {}
-			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', { -- job = NULL
+			MySQL.Async.fetchAll('SELECT * FROM owned_vehicles WHERE owner = @owner AND Type = @Type AND job = @job AND `stored` = @stored', {
 				['@owner'] = xPlayer.identifier,
 				['@Type'] = 'car',
 				['@job'] = 'civ',
@@ -540,7 +571,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if job == 'ambulance' then
-		if type == 'both' then
+		if type == 'none' then
 			if attempt == 'check' then
 				if xPlayer.getMoney() >= Config.Ambulance.PoundP then
 					cb(true)
@@ -555,11 +586,12 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Ambulance.PoundP)
 					end)
 				end
+
 				cb()
 			end
 		end
 	elseif job == 'police' then
-		if type == 'both' then
+		if type == 'none' then
 			if attempt == 'check' then
 				if xPlayer.getMoney() >= Config.Police.PoundP then
 					cb(true)
@@ -574,11 +606,12 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Police.PoundP)
 					end)
 				end
+
 				cb()
 			end
 		end
 	elseif job == 'mechanic' then
-		if type == 'both' then
+		if type == 'none' then
 			if attempt == 'check' then
 				if xPlayer.getMoney() >= Config.Mechanic.PoundP then
 					cb(true)
@@ -593,6 +626,27 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Mechanic.PoundP)
 					end)
 				end
+
+				cb()
+			end
+		end
+	elseif job == 'taxi' then
+		if type == 'none' then
+			if attempt == 'check' then
+				if xPlayer.getMoney() >= Config.Taxi.PoundP then
+					cb(true)
+				else
+					cb(false)
+				end
+			else
+				xPlayer.removeMoney(Config.Taxi.PoundP)
+				TriggerClientEvent('esx:showNotification', source, _U('you_paid') .. Config.Mechanic.PoundP)
+				if Config.Main.GiveSocMoney then
+					TriggerEvent('esx_addonaccount:getSharedAccount', 'society_mechanic', function(account)
+						account.addMoney(Config.Taxi.PoundP)
+					end)
+				end
+
 				cb()
 			end
 		end
@@ -612,6 +666,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Aircrafts.PoundP)
 					end)
 				end
+
 				cb()
 			end
 		elseif type == 'boats' then
@@ -629,6 +684,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Boats.PoundP)
 					end)
 				end
+
 				cb()
 			end
 		elseif type == 'cars' then
@@ -646,6 +702,7 @@ ESX.RegisterServerCallback('esx_advancedgarage:payImpound', function(source, cb,
 						account.addMoney(Config.Cars.PoundP)
 					end)
 				end
+
 				cb()
 			end
 		end

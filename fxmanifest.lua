@@ -26,6 +26,5 @@ client_scripts {
 }
 
 dependencies {
-	'es_extended',
-	'esx_property'
+	'es_extended'
 }
