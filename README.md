@@ -64,24 +64,24 @@ Scripts that will no longer be Maintained.
 * [esx_panicbutton]( https://github.com/HumanTree92/esx_panicbutton )
 
 # Visit Velociti Entertainment:
-* [Discord]( http://discord.velocitientertainment.com )
-* [Website]( http://velocitientertainment.com/ )
-* [Forums]( http://velocitientertainment.com/forum )
-* [About Us]( http://velocitientertainment.com/pc-gaming/ )
-* [Donate]( http://velocitientertainment.com/donations/ )
+* [Discord]( https://discord.velocitientertainment.com )
+* [Website]( https://velocitientertainment.com )
+* [Forums]( https://velocitientertainment.com/forum )
+* [About Us]( https://velocitientertainment.com/pc-gaming )
+* [Donate]( https://velocitientertainment.com/donations )
 * [Patreon] ( https://www.patreon.com/VelocitiEntertainment?fan_landing=true )
-* [Steam Group]( http://steamcommunity.com/groups/velocitientertainment )
-* [Facebook]( http://facebook.com/VelocitiEntertainment )
-* [Twitter]( http://twitter.com/VelocitiEnt )
-* [YouTube]( http://youtube.com/user/HumanTree92 )
-* [Twitch]( http://twitch.tv/humantree92 )
+* [Steam Group]( https://steamcommunity.com/groups/velocitientertainment )
+* [Facebook]( https://facebook.com/VelocitiEntertainment )
+* [Twitter]( https://twitter.com/VelocitiEnt )
+* [YouTube]( https://youtube.com/user/HumanTree92 )
+* [Twitch]( https://twitch.tv/humantree92 )
 * [GitHub]( https://github.com/HumanTree92 )
 
 # Legal
 ### License
 esx_advancedgarage - Advanced Garage for ESX Legacy
 
-Copyright (C) 2011-2021 Velociti Entertainment
+Copyright (C) 2022 Velociti Entertainment
 
 This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
 
