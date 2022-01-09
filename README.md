@@ -69,7 +69,7 @@ Scripts that will no longer be Maintained.
 * [Forums]( https://velocitientertainment.com/forum )
 * [About Us]( https://velocitientertainment.com/pc-gaming )
 * [Donate]( https://velocitientertainment.com/donations )
-* [Patreon] ( https://www.patreon.com/VelocitiEntertainment?fan_landing=true )
+* [Patreon]( https://www.patreon.com/VelocitiEntertainment?fan_landing=true )
 * [Steam Group]( https://steamcommunity.com/groups/velocitientertainment )
 * [Facebook]( https://facebook.com/VelocitiEntertainment )
 * [Twitter]( https://twitter.com/VelocitiEnt )
